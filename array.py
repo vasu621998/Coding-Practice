@@ -45,4 +45,7 @@ class Solution:
             nums1.append(nums2[i])
             nums1.remove(0) 
         nums1.sort()
-                
+    def removeElement(self, nums: List[int], val: int) -> int:
+        for i in range(nums.count(val)):
+            nums.remove(val)
+        return len(nums)                
