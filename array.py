@@ -17,3 +17,10 @@ class Solution:
             sq.append(nums[i]*nums[i])
             sq.sort()
         return sq
+    def findNumbers(self, nums: List[int]) -> int:
+        count=0
+        for i in nums:
+            digit = math.floor(math.log10(i)+1)                
+            if( digit % 2 == 0):
+                count +=1
+        return count   
