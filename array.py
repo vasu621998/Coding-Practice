@@ -11,3 +11,9 @@ class Solution:
                 count = 0
         ans = max(ans, count)
         return ans
+    def sortedSquares(self, nums: List[int]) -> List[int]:
+        sq = []
+        for i in range(len(nums)):
+            sq.append(nums[i]*nums[i])
+            sq.sort()
+        return sq
