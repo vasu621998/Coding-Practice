@@ -49,3 +49,11 @@ class Solution:
         for i in range(nums.count(val)):
             nums.remove(val)
         return len(nums)                
+    def removeDuplicates(self, nums: List[int]) -> int:
+        i=0
+        for l in range(1, len(nums)):
+            if nums[l] == nums[i]:
+                continue
+            nums[i+1], nums[l] = nums[l], nums[i+1]
+            i = i+1
+        return i+1
