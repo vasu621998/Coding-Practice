@@ -65,3 +65,17 @@ class Solution:
             if (i != 0) & (i * 2 in arr):
                 return True
         return count > 1
+    def validMountainArray(self, arr: List[int]) -> bool:
+        n = len(arr)
+        climbed = peakReached = False
+        
+        for i in range(1,n):
+            prevNum, num = arr[i-1], arr[i]
+            if num == prevNum: return False
+            elif not peakReached:
+                if num > prevNum: climbed = True
+                elif prevNum > num: peakReached = True
+            else:
+                if num > prevNum: return False
+        
+        return climbed and peakReached
