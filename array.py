@@ -57,3 +57,11 @@ class Solution:
             nums[i+1], nums[l] = nums[l], nums[i+1]
             i = i+1
         return i+1
+    def checkIfExist(self, arr: List[int]) -> bool:
+        count = 0
+        for i in arr:
+            if i == 0:
+                count += 1
+            if (i != 0) & (i * 2 in arr):
+                return True
+        return count > 1
