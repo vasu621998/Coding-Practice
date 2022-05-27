@@ -107,3 +107,19 @@ class Solution:
             elif nums[j]%2 != 0:
                 j-=1
         return nums
+    def heightChecker(self, heights: List[int]) -> int:
+        temp = []
+        
+        # A copy of heights list
+        for i in heights:
+            temp.append(i)
+        
+        # Sorting heights list
+        heights.sort()
+        
+        count = 0
+        for i in range(len(heights)):
+            if temp[i] != heights[i]:
+                count += 1
+        
+        return count
