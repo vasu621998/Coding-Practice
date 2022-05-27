@@ -123,3 +123,9 @@ class Solution:
                 count += 1
         
         return count
+    def thirdMax(self, nums: List[int]) -> int:
+        nums = set(nums)
+        if len(nums) < 3:
+            return max(nums)
+        
+        return sorted(list(nums))[-3]  
