@@ -163,3 +163,14 @@ class Solution:
         if m >= 2*g:
             return a
         return -1
+    def plusOne(self, digits: List[int]) -> List[int]:
+        s = ""
+        for i in digits:
+            s += str(i)
+        
+        s = int(s) + 1
+        
+        a = []
+        for i in str(s):
+            a.append(int(i))
+        return (a)
