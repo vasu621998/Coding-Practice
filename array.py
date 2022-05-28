@@ -150,3 +150,16 @@ class Solution:
                 return i
             s1+=nums[i]
         return -1
+    def dominantIndex(self, nums: List[int]) -> int:
+        m=max(nums)
+        a=nums.index(m)
+        arr=[]
+        g=0
+        for i in nums:
+            if i!=m:
+                arr.append(i)
+        if len(arr)!=0:
+            g = max(arr)
+        if m >= 2*g:
+            return a
+        return -1
