@@ -176,20 +176,23 @@ class Solution:
             a.append(int(i))
         return (a)
     def findDiagonalOrder(self, mat: List[List[int]]) -> List[int]:
+        if not mat or not mat[0]:
+            return []
         m = len(mat)
         n = len(mat[0])
-        diagonal_values = defaultdict(list)
+        diagonal_values = [[] for _ in range(m+n-1)]
         res = []
         for i in range(m):
             for j in range(n):
                 diagonal_values[i + j].append(mat[i][j])
         
-        for i, values in diagonal_values.items():
+        res = diagonal_values[0]
+        for i in range(1,len(diagonal_values)):
             if i % 2 == 0:
-                res.extend(values[::-1])
+                res.extend(diagonal_values[i][::-1])
                 
             else:
-                res.extend(values)
+                res.extend(diagonal_values[i])
         return res
     def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
         res =[]
