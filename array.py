@@ -1,3 +1,4 @@
+from collections import defaultdict
 class Solution:
     def findMaxConsecutiveOnes(self, nums: List[int]) -> int:
         ans =0 
@@ -174,3 +175,19 @@ class Solution:
         for i in str(s):
             a.append(int(i))
         return (a)
+    def findDiagonalOrder(self, mat: List[List[int]]) -> List[int]:
+        m = len(mat)
+        n = len(mat[0])
+        diagonal_values = defaultdict(list)
+        res = []
+        for i in range(m):
+            for j in range(n):
+                diagonal_values[i + j].append(mat[i][j])
+        
+        for i, values in diagonal_values.items():
+            if i % 2 == 0:
+                res.extend(values[::-1])
+                
+            else:
+                res.extend(values)
+        return res
