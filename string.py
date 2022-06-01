@@ -59,3 +59,17 @@ class Solution:
             sums += nums[i]
         
         return sums
+    def twoSum(self, numbers: List[int], target: int) -> List[int]:
+        res =[]
+        ptr1 = 0
+        ptr2 = len(numbers) - 1
+        
+        while ptr1 < ptr2:
+            sums = numbers[ptr1] + numbers[ptr2]
+            
+            if sums > target:
+                ptr2 -=1
+            elif sums < target:
+                ptr1 +=1
+            else:
+                return [ptr1 + 1, ptr2 + 1]
