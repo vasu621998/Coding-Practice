@@ -52,3 +52,10 @@ class Solution:
             s[ptr1], s[ptr2] = s[ptr2], s[ptr1]
             ptr1 += 1
             ptr2 -= 1
+    def arrayPairSum(self, nums: List[int]) -> int:
+        nums.sort()
+        sums = 0
+        for i in range(0,len(nums), 2):
+            sums += nums[i]
+        
+        return sums
