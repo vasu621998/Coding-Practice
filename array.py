@@ -235,3 +235,14 @@ class Solution:
                 row.append(temp[j] + temp[j+1])
             res.append(row)
         return res
+    def minSubArrayLen(self, target: int, nums: List[int]) -> int:
+        lptr, total = 0,0
+        res = 99999
+        for rptr in range(len(nums)):
+            total += nums[rptr]
+            while total >= target:
+                res = min(rptr - lptr + 1, res)
+                total -= nums[lptr]
+                lptr += 1
+        
+        return 0 if res == 99999 else  res
