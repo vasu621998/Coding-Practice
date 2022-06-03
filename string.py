@@ -75,4 +75,5 @@ class Solution:
                 return [ptr1 + 1, ptr2 + 1]
     def reverseWords(self, s: str) -> str:
         return ' '.join(s.strip().split()[::-1])
-    
+    def reverseWords(self, s: str) -> str:
+        return ' '.join(a[::-1] for a in s.split())
