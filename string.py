@@ -73,3 +73,6 @@ class Solution:
                 ptr1 +=1
             else:
                 return [ptr1 + 1, ptr2 + 1]
+    def reverseWords(self, s: str) -> str:
+        return ' '.join(s.strip().split()[::-1])
+    
