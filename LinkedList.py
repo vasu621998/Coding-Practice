@@ -150,3 +150,24 @@ class Solution:
             
             curr = temp
         return dummy.next
+    def oddEvenList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head or not head.next or not head.next.next:
+            return head
+        
+        oddList = curr = head
+        evenList = evenhead = head.next
+        i = 1
+        while curr:
+            if i > 2 and  i % 2 != 0:                
+                oddList.next = curr
+                oddList = oddList.next
+            elif i > 2 and  i % 2 == 0:
+                evenList.next = curr
+                evenList = evenList.next                
+            curr = curr.next
+            i += 1
+            
+        evenList.next = None
+        oddList.next = evenhead
+        
+        return head
