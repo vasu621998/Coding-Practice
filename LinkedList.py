@@ -411,3 +411,26 @@ class DoublyLinkedList:
             l2 = l2.next if l2 else None
             
         return dummy.next
+    def flatten(self, head: 'Optional[Node]') -> 'Optional[Node]':
+        if head != None: self.myfunc(head)
+        return head
+        
+    def myfunc(self, head):
+        curr,tail = head, head
+        while curr != None:
+            child = curr.child
+            temp = curr.next
+            if child != None:
+                _tail = self.myfunc(child)
+                _tail.next  = temp
+                if temp != None:
+                    temp.prev = _tail
+                curr.next = child
+                child.prev = curr
+                curr.child = None
+                curr = _tail
+            else:
+                curr = temp
+            if curr != None:
+                tail = curr
+        return tail
