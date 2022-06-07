@@ -434,3 +434,21 @@ class DoublyLinkedList:
             if curr != None:
                 tail = curr
         return tail
+    def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
+        
+        myHashMap = {None : None}
+        
+        curr = head
+        
+        while curr:
+            copy = Node(curr.val)
+            myHashMap[curr] = copy
+            curr = curr.next
+            
+        curr = head    
+        while curr:
+            copy = myHashMap[curr]
+            copy.next = myHashMap[curr.next]
+            copy.random = myHashMap[curr.random]
+            curr = curr.next
+        return myHashMap[head]
