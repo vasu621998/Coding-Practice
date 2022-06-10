@@ -60,3 +60,14 @@ def Solution(A):
     diff = abs(2*k - s)
     minDiff = min(minDiff, diff)
    return minDiff
+
+
+# Frog River One
+def solution(X, A):
+    leaves = {}
+    for second in range(0, len(A)):
+        leaves[A[second]] = True
+        condition = len(leaves)
+        if len(leaves) == X:
+            return second
+    return -1
