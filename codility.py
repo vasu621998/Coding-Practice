@@ -69,7 +69,7 @@ def solution(X, A):
         leaves[A[second]] = True
         condition = len(leaves)
         if len(leaves) == X:
-            return second
+          return second         
     return -1
 
 # Max counters
@@ -78,13 +78,16 @@ def solution(N, A):
     m = 0
     b = 0
     for i in range(0, len(A)):
-      if A[i] <= N:
+      if A[i] <= N :
         R[A[i] - 1] = max(b, R[A[i] - 1]) + 1
         m = max(m, R[A[i] - 1)
+             
       else:
          b = m
+                     
     for i in range(0, len(R)):
         if (R[i] < b):
+                     
            R[i] = b   
          
 # Missing Positive integer       
@@ -113,6 +116,17 @@ def Solution(A,B,K):
                      
                    
 # Genomic Range Query
-def Solution(S, P, Q):
-  R = []
-  return c
+def solution(S, P, Q):
+    # write your code in Python 3.6
+    ans = []
+    for (p, q) in zip(P,Q):
+        if 'A' in S[p:q+1]:
+            ans.append(1)
+        elif 'C' in S[p:q+1]:
+            ans.append(2)
+        elif 'G' in S[p:q+1]:
+            ans.append(3)
+        else:
+            ans.append(4)
+            
+    return ans
