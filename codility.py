@@ -38,7 +38,7 @@ def Solution(X, Y, D):
     return v+1
  
    
-# Frog Jump
+# Perm Missing Element
 def Solution(A):
   if len(A) == 0:
     return 1
@@ -48,5 +48,15 @@ def Solution(A):
       return i+1
    return (len(A)+1)
 
-    
-    
+# tape equilibrium
+def Solution(A):
+  if len(A) < 2:
+    return 0
+  s = Sum(A)
+  minDiff = 2000
+  k = 0
+  for i in range(0, len(A)-1):
+    k += A[i]
+    diff = abs(2*k - s)
+    minDiff = min(minDiff, diff)
+   return minDiff
