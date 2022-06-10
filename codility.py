@@ -87,4 +87,34 @@ def solution(N, A):
         if (R[i] < b):
            R[i] = b   
          
-        
+# Missing Positive integer       
+def solution(A):
+    A.sort()
+    if(A[len(A) - 1] <= 0):
+        return 0
+    iso = false
+    for i in range(0, len(A)):
+        if A[i] == 1:
+           iso = true
+    if iso == false:
+        return 1
+                     
+    for i in range(0, len(A - 1)):
+         if A[i] > 0 and (A[i+1] - A[i]) > 1:
+            return A[i] + 1
+    return A[len(A) - 1] + 1
+
+# Binray Gap
+def Solution(N):
+  n = bin(N) [2:]
+  b = 0
+  count = 0
+  
+  for i in N:
+    if int(i) == 0:
+      b += 1
+     elif int(i) == 1:
+      count = max(b, count)
+      b = 0
+  return count                     
+                   
