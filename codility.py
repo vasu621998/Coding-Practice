@@ -112,3 +112,7 @@ def Solution(A,B,K):
   return c
                      
                    
+# Genomic Range Query
+def Solution(S, P, Q):
+  R = []
+  return c
