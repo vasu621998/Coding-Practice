@@ -105,3 +105,18 @@ class Node:
             
             return dp[(index, total)]
         return backtrack(0,0)
+    def decodeString(self, s: str) -> str:
+        stack = []
+        for ch in s:
+            if ch == "]" and stack:
+                el = ""
+                while stack and not el.startswith("["):
+                    el = stack.pop() + el
+                while stack and stack[-1].isdigit():
+                    el = stack.pop() + el
+
+                num, el = el.strip("]").split("[")
+                ch = el * int(num)
+
+            stack.append(ch)
+        return "".join(stack)
