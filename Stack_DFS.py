@@ -120,3 +120,18 @@ class Node:
 
             stack.append(ch)
         return "".join(stack)
+    def floodFill(self, image: List[List[int]], sr: int, sc: int, newColor: int) -> List[List[int]]:
+        curr = image[sr][sc]
+        h = len(image)
+        w = len(image[0])
+        
+        def dfs(sr,sc):
+            if 0 <= sr < h and 0 <= sc < w and image[sr][sc] == curr and image[sr][sc] != newColor:
+                image[sr][sc] = newColor
+                dfs(sr+1, sc)
+                dfs(sr-1, sc)
+                dfs(sr, sc+1)
+                dfs(sr, sc-1)
+        
+        dfs(sr,sc)
+        return image
