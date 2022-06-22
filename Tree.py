@@ -24,3 +24,18 @@ class Solution:
         root.right = self.buildTree(inorder[mid+1:], postorder)
         root.left = self.buildTree(inorder[:mid], postorder)
         return root
+    def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
+        cur, nxt = root, root.left if root else None
+        
+        while cur and nxt:
+            cur.left.next = cur.right
+            if cur.next:
+                cur.right.next = cur.next.left
+                
+            cur = cur.next
+            
+            if not cur:
+                cur = nxt
+                nxt = cur.left
+                
+        return root
