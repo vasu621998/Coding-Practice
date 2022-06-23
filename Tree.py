@@ -60,3 +60,19 @@ class Solution:
                 curr = curr.left
             else:
                 return curr
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        
+        if root is None:
+            return None
+        if root.val == p.val or root.val == q.val:
+            return root
+
+        left = self.lowestCommonAncestor( root.left, p, q )
+        right = self.lowestCommonAncestor( root.right, p, q )
+                
+        if left and right:
+            return root
+        if left:
+            return left
+        else:
+            return right
