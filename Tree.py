@@ -104,3 +104,16 @@ class Solution:
             return node
         
         return dfs()
+    def searchBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
+        def helper(root, val):
+            
+            if not root:
+                return None
+            elif root.val == val:
+                return root
+            elif root.val < val:
+                return helper(root.right, val)
+            elif root.val > val:
+                return helper(root.left, val)
+            
+        return helper(root, val)  
