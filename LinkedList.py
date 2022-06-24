@@ -516,3 +516,21 @@ class DoublyLinkedList:
         elif list2:
             tail.next = list2
         return dummy.next
+    def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        dummy = ListNode(0,head)
+        prev, curr = dummy, head
+        
+        while curr and curr.next:
+            # saving ptr
+            nextpair = curr.next.next
+            second = curr.next
+            
+            # reverse pair
+            second.next = curr
+            curr.next = nextpair
+            prev.next = second
+            
+            #update pair
+            prev = curr
+            curr = nextpair
+        return dummy.next
