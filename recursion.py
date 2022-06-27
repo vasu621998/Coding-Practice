@@ -59,3 +59,23 @@ class Solution:
             
         else:
             return (self.kthGrammar(n-1,k-mid)^1)            
+    def generateTrees(self, n: int) -> List[Optional[TreeNode]]:
+        def build(l, r):
+            trees = []
+            if l > r:
+                trees.append(None)                  # when 1 > 0, 1 as a root has no children
+                                                    # when l == r, it is a leaf node   
+            for n in range(l, r + 1):
+                                                    # left and right are unique as we only traverse each range once
+                left = build(l, n - 1)  
+                right = build(n + 1, r)
+                
+                for _l in left:                     # left and right are presented as arrays
+                    for _r in right:
+                        root = TreeNode(n)          # build root based on different combo of left and right
+                        root.left = _l
+                        root.right = _r
+                        trees.append(root)          # append the unique tree
+            return trees
+        
+        return build(1, n)   
