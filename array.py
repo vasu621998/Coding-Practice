@@ -308,3 +308,23 @@ class Solution:
             res[i] *= postfix
             postfix *= nums[i]
         return res
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        l = []
+        while matrix:
+            l.extend(matrix.pop(0))
+            
+        l = sorted(l)
+        
+        low = 0
+        high = len(l)
+        while low < high:
+            mid = (low + high) // 2
+            
+            if l[mid] == target:
+                return True
+            elif l[mid] < target:
+                low = mid + 1
+            else:
+                high = mid
+                
+        return False
