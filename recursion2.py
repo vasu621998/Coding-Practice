@@ -89,3 +89,47 @@ class Solution:
         
         return res                
         
+    def solveSudoku(self, board: List[List[str]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        rows = [set() for _ in range(9)]
+        cols = [set() for _ in range(9)]
+        boxes = [set() for _ in range(9)]
+        for i in range(9):
+            for j in range(9):
+                num = board[i][j]
+                rows[i].add(num)
+                cols[j].add(num)
+                boxID = (i//3)*3+j//3
+                boxes[boxID].add(num)
+
+        def fill(r, c):
+            if c == 9:
+                if r == 8:
+                    return True
+                else:
+                    c = 0
+                    r += 1
+            if board[r][c] == '.': # we should fill in number
+                for num in range(1, 10): # choose the number from 1 to 9
+                    num = str(num)
+                    if num in rows[r] or num in cols[c] or num in boxes[r//3*3+c//3]: continue
+                    # num is valid for current cell, we can try further
+                    rows[r].add(num)
+                    cols[c].add(num)
+                    boxes[r//3*3+c//3].add(num)
+                    board[r][c] = num
+                    if fill(r, c+1):
+                        return True
+                    # fail to fill, need to backtrack
+                    rows[r].remove(num)
+                    cols[c].remove(num)
+                    boxes[r//3*3+c//3].remove(num)
+                    board[r][c] = '.'
+                return False
+            else:
+                return fill(r, c+1)
+            
+        fill(0,0)
+        
