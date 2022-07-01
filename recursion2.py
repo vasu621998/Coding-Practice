@@ -140,3 +140,27 @@ class Solution:
             return False
         
         return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
+    def generateParenthesis(self, n: int) -> List[str]:
+        # Add Open parenthesis if openN < n
+        # Add Closed parenthesis if closedN < openN
+        # Valid if openN == closedN == n
+        stack = []
+        res = []
+        
+        def backtrack(openN, closedN):
+            if openN == closedN == n:
+                res.append("".join(stack))
+                return
+            
+            if openN < n:
+                stack.append("(")
+                backtrack(openN + 1, closedN)
+                stack.pop()
+            
+            if closedN < openN:
+                stack.append(")")
+                backtrack(openN, closedN + 1)
+                stack.pop()
+            
+        backtrack(0,0)
+        return res
