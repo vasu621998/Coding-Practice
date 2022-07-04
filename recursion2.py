@@ -246,3 +246,17 @@ class Solution:
                     res.append([e[0],-heapq.nsmallest(1, q)[0]])
             
         return res      
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        res = []
+        temp = 0
+        if len(nums) == 1:
+            return [nums[:]]
+
+        for _ in range(len(nums)):
+            temp = nums.pop(0)
+            p = self.permute(nums)
+            for j in p:
+                j.append(temp)
+            res.extend(p)
+            nums.append(temp)
+        return res
