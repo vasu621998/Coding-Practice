@@ -50,3 +50,11 @@ class Solution:
         for n in nums:
             res = n ^ res
         return res
+    def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        res = []
+        
+        for x in nums1:
+            for y in nums2:
+                if x == y:
+                    res.append(x)
+        return set(res)
