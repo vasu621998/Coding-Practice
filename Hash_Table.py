@@ -118,3 +118,14 @@ class Solution:
                     res.append(list2[j])
         
         return res
+    def firstUniqChar(self, s: str) -> int:
+        import collections
+        
+        c = collections.Counter(list(s))
+        
+        for i in range(len(s)):
+            
+            if c.get(s[i]) == 1:
+                return i
+        
+        return -1
