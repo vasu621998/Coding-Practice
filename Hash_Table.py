@@ -144,3 +144,13 @@ class Solution:
                 i += 1
                 j += 1
         return arr
+    def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:
+        prevMap = {}#val|index
+        
+        
+        for i,n in enumerate(nums):
+            if nums[i] in prevMap:
+                if k >= abs(i-prevMap[n]):
+                    return True       
+            prevMap[n] = i
+        return False 
