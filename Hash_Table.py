@@ -183,3 +183,10 @@ class Solution:
                 rows[r].add(board[r][c])
                 squares[(r//3, c//3)].add(board[r][c])
         return True
+    def numJewelsInStones(self, jewels: str, stones: str) -> int:
+        jewels=[ord(x) for x in jewels]
+        res=0
+        for x in stones:
+            if(ord(x) in jewels):
+                res+=1
+        return res
