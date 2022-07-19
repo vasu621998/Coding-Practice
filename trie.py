@@ -73,3 +73,35 @@ class Solution:
                     if not trie[board[i][j]]: trie.pop(board[i][j])
                 if len(words) == len(out): return out
         return out     
+class Trie:
+    def __init__(self):
+        self.root = {}
+    def insert(self, num):
+        cur = self.root
+        for j in range(31, -1, -1):
+            tmp_bit = num & (1 << j)
+            c = 1 if tmp_bit else 0
+            if c not in cur:
+                cur[c] = {}
+            cur = cur[c]
+
+class Solution:
+    def findMaximumXOR(self, nums: List[int]) -> int:
+        trie = Trie()
+        for num in nums:
+            trie.insert(num)
+        #if the higher bit is geater, the greater is the number
+        res = 0
+        for num in nums:
+            cur = trie.root
+            tmpval = 0
+            for j in range(31,-1,-1):
+                tmp_bit = num & 1 << j
+                c = 0 if tmp_bit else 1
+                if c in cur:
+                    cur = cur[c]
+                    tmpval += 1 << j
+                else:
+                    cur = cur[not c]
+            res = max(res, tmpval)
+        return res        
