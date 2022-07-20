@@ -372,3 +372,21 @@ class Solution:
         for i in range(1, len(nums)):
             nums[i] += nums[i - 1]
         return nums
+    def shuffle(self, nums: List[int], n: int) -> List[int]:
+        # ptr = 0
+        # res = []
+        
+        # b = len(nums) // 2
+        
+        # for i in range(b):
+            # res.append(nums[i])
+            # res.append(nums[n])
+            # n += 1
+        # return res
+        i = 0
+        out = []
+        while i < len(nums)/ 2:
+            out.append(nums[i])
+            out.append(nums[i+n])
+            i += 1
+        return out
