@@ -410,3 +410,7 @@ class Solution:
             else:
                 r = mid - 1
         return l
+    def getConcatenation(self, nums: List[int]) -> List[int]:
+        nums = nums * 2
+        
+        return nums
