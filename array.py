@@ -390,3 +390,10 @@ class Solution:
             out.append(nums[i+n])
             i += 1
         return out
+    def mySqrt(self, x: int) -> int:
+        num = 0
+        while True:
+            if num * num > x:
+                return num-1
+                break
+            num += 1
