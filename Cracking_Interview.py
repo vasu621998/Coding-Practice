@@ -152,3 +152,24 @@ class Solution:
     
 # T: O(NlogK)
 # S: O(K)
+class SparseVector:
+  def __init(self, nums: List[int]):      
+          self.nums = []
+          for i, num in enumerate(nums):
+              self.nums.append((i,num))
+  def dotproduct(self, vec: SparseVector):      
+          target = 0
+          i,j = 0,0
+          for i < len(nums) and j < len(vec):
+              i_idx, i_num = self.nums[i]
+              j_idx, j_num = self.vec[j]
+              
+              if i_idx == j_idx:
+                  target += (i_num * j_num)
+                  i += 1
+                  j += 1
+              elif i_idx < j_idx:
+                  i += 1
+              else:
+                  j += 1
+          return target
