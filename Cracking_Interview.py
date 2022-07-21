@@ -64,3 +64,27 @@ class Solution:
     # DFS
     # T: O(N)
     # S: O(N)
+    def leftSideView(self, root: Optional[TreeNode]) -> List[int]:
+        if not root:
+            return []
+        
+        queue = collections.deque([root])
+        res = []
+        
+        while queue:
+            length = len(queue)
+            for i in range(length):
+                node = queue.popleft()
+
+                
+                if node.left:
+                    queue.append(node.left)
+                
+                if node.right:
+                    queue.append(node.right)
+                
+                
+                if i == 0:
+                    res.append(node.val)
+                    
+        return res
