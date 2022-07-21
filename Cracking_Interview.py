@@ -136,5 +136,19 @@ class Solution:
                 mystr += c.lower()
         return mystr == mystr[::-1]
             
-# T: O(N)
-# S: O(N)
+# T: O(Nlogn)
+# S: O(1)
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        heap = []
+        
+        for num in nums:
+            if len(heap) <= k:
+                heapq.heappush(heap, num)
+            else:
+                if heap[0] < num:
+                    heapq.heappop(heap)
+                    heapq.heappush(heap, num)
+        return heap[0]
+    
+# T: O(NlogK)
+# S: O(K)
