@@ -129,3 +129,12 @@ class Solution:
         return True
 # T: O(N)
 # S: O(1)
+    def isPalindrome(self, s: str) -> bool:
+        mystr = ""
+        for c in s:
+            if c.isalnum():
+                mystr += c.lower()
+        return mystr == mystr[::-1]
+            
+# T: O(N)
+# S: O(N)
