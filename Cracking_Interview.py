@@ -88,3 +88,23 @@ class Solution:
                     res.append(node.val)
                     
         return res
+    # DFS
+    # T: O(N)
+    # S: O(N)
+    def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        self.res = []
+        def dfs(node, level):
+            if not node:
+                return
+            
+            if len(self.res) <= level:
+                self.res.append([node.val])
+            else:
+                self.res[level].append(node.val)
+            dfs(node.left, level+1)
+            dfs(node.right, level+1)
+        dfs(root,0)
+        return self.res
+    # DFS
+    # T: O(N)
+    # S: O(N)
