@@ -173,3 +173,42 @@ class SparseVector:
               else:
                   j += 1
           return target
+    def minRemoveToMakeValid(self, s: str) -> str:
+        l, r =0,0
+        res= []
+        for i in s:
+            if i == "(":
+                l +=1
+                res.append(i)
+            elif i == ")":
+                if l > r:
+                    r +=1
+                    res.append(i)
+            else:
+                res.append(i)
+            
+        if l == r:
+            return "".join(res)
+        else:
+            output = []
+            for i in range(len(res) - 1, -1, -1):
+                curr = res[i]
+                if curr == "(":
+                    if l <= r:
+                        output.append(curr)
+                    else:
+                        l -= 1
+                elif curr == ")":
+                    output.append(curr)
+                else:
+                    output.append(curr)
+            
+            return "".join(reversed(output))
+
+# Input: s = "lee(t(c)o)de)"
+# Output: "lee(t(c)o)de"
+# Explanation: "lee(t(co)de)" , "lee(t(c)ode)" would also be accepted.        
+        
+        
+# T: O(2 * N) --> O(N)        
+# S: O(N)
