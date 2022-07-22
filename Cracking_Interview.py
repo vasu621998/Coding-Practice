@@ -108,6 +108,42 @@ class Solution:
     # DFS
     # T: O(N)
     # S: O(N)
+    def zigzagLevelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        if not root:
+            return []
+        
+        res = []
+        going_right = True
+        queue = collections.deque([root])
+        
+        while queue:
+            list_values = []
+            for _ in range(len(queue)):                                
+                if going_right:
+                    top = queue.popleft()
+                    list_values.append(top.val)
+                    if top.left:
+                        queue.append(top.left)
+                    
+                    if top.right:
+                        queue.append(top.right)
+                else:
+                    top = queue.pop()
+                    list_values.append(top.val)
+                    if top.right:
+                        queue.appendleft(top.right)                    
+                    if top.left:
+                        queue.appendleft(top.left)
+
+            res.append(list_values)
+            going_right = not going_right
+        return res
+
+# Input: root = [3,9,20,null,null,15,7]
+# Output: [[3],[20,9],[15,7]]
+    
+# T: O(N)
+# S: O(N)
     def isPalindrome(self, s: str) -> bool:
         l, r = 0, len(s) - 1
 
