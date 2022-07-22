@@ -290,3 +290,50 @@ class SparseVector:
         
 # T: O(N) * O(K) -> K = Longest string length
 # S: O(NK)
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        
+        if root is None:
+            return None
+        if root.val == p.val or root.val == q.val:
+            return root
+
+        left = self.lowestCommonAncestor( root.left, p, q )
+        right = self.lowestCommonAncestor( root.right, p, q )
+                
+        if left and right:
+            return root
+        if left:
+            return left
+        else:
+            return right
+          
+# Input: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4
+# Output: 5
+# Explanation: The LCA of nodes 5 and 4 is 5, since a node can be a descendant of itself according to the LCA definition.
+#T: O(N)
+#S: O(1)
+    def lowestCommonAncestor(self, p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        
+        seen = set()
+        
+        while p:
+            seen.add(p)
+            p = p.parent()
+        while q:
+            if q in seen:
+              return q
+            q = q.parent()
+#T: O(N)
+#S: O(N)
+    def lowestCommonAncestor(self, p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        
+        p_copy, q_copy = p,q
+        
+        while p_copy != q_copy:
+          p_copy = p.parent() if p else q
+          q_copy = q.parent() if q else p 
+          
+        return p_copy
+
+#T: O(N)
+#S: O(1)
