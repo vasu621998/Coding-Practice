@@ -185,6 +185,48 @@ class Solution:
 #Output: [[4],[2],[1,5,6],[3],[7]]    
 # T: O(N)            
 # S: O(N)
+    def rangeSumBST(self, root: Optional[TreeNode], low: int, high: int) -> int:
+        if not root:
+            return 0
+        ans = 0
+        
+        stack = [root]
+        
+        while stack:
+            node = stack.pop()
+            if node:  
+                if low <= node.val <= high:
+                    ans += node.val
+            
+                if node.val > low:
+                    stack.append(node.left)
+
+                if node.val < high:
+                    stack.append(node.right)
+        return ans
+# Input: root = [10,5,15,3,7,13,18,1,null,6], low = 6, high = 10
+#Output: 23    
+# T: O(N)
+# S: O(N)
+    def rangeSumBST(self, root: Optional[TreeNode], low: int, high: int) -> int:
+        if not root:
+            return 0
+        ans = 0
+        self.range_sum = 0
+        self.dfs(root, low,high)
+        return self.range_sum
+    def dfs(self, node, low, high):
+        if node:
+            if low <= node.val <= high:
+                self.range_sum += node.val
+            if node.val > low:
+                self.dfs(node.left, low, high)
+            if node.val < high:
+                self.dfs(node.right, low, high)           
+# Input: root = [10,5,15,3,7,13,18,1,null,6], low = 6, high = 10
+#Output: 23    
+# T: O(N)
+# S: O(N)
     def isPalindrome(self, s: str) -> bool:
         l, r = 0, len(s) - 1
 
@@ -378,26 +420,3 @@ class SparseVector:
 
 #T: O(N)
 #S: O(1)
-    def rangeSumBST(self, root: Optional[TreeNode], low: int, high: int) -> int:
-        if not root:
-            return 0
-        ans = 0
-        
-        stack = [root]
-        
-        while stack:
-            node = stack.pop()
-            if node:  
-                if low <= node.val <= high:
-                    ans += node.val
-            
-                if node.val > low:
-                    stack.append(node.left)
-
-                if node.val < high:
-                    stack.append(node.right)
-        return ans
-# Input: root = [10,5,15,3,7,13,18,1,null,6], low = 6, high = 10
-#Output: 23    
-# T: O(N)
-# S: O(N)
