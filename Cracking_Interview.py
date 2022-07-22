@@ -144,6 +144,47 @@ class Solution:
     
 # T: O(N)
 # S: O(N)
+
+    def verticalTraversal(self, root: Optional[TreeNode]) -> List[List[int]]:
+        if not root:
+            return []
+        
+        column = collections.defaultdict(list)
+        queue = collections.deque([(0,root)])
+        
+        res = []
+        
+        min_x = float('inf')
+        max_x = float('-inf')
+        
+
+        
+        while queue:
+            
+            
+            x, node = queue.popleft()
+            
+            column[x].append(node.val)
+            
+            min_x = min(min_x, x)
+            max_x = max(max_x, x)
+            
+            if node.left:
+                queue.append((x-1, node.left))
+        
+            if node.right:
+                queue.append((x+1, node.right))        
+                            
+        
+        for i in range(min_x, max_x +1):
+            res.append(column[i])
+        return res
+
+    
+# Input: root = [1,2,3,4,5,6,7]
+#Output: [[4],[2],[1,5,6],[3],[7]]    
+# T: O(N)            
+# S: O(N)
     def isPalindrome(self, s: str) -> bool:
         l, r = 0, len(s) - 1
 
