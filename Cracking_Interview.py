@@ -521,3 +521,21 @@ class SparseVector:
 # Output: ["ad","ae","af","bd","be","bf","cd","ce","cf"]    
 # T: O(4^N * N)
 # S: O(N)
+    def customSortString(self, order: str, s: str) -> str:
+        s_count = collections.Counter(s)
+        res = []
+        for char in order:
+            if char in s_count:
+                res.extend(char * s_count[char])
+                
+                del s_count[char]
+                
+        for i in s_count:
+            res.extend(i * s_count[i])
+        
+        return "".join(res)
+
+# Input: order = "cba", s = "abcd"
+# Output: "cbad"    
+# T: O(M + N) -> O(N)
+# S: O(M + N) -> O(N)
