@@ -420,6 +420,53 @@ class SparseVector:
 
 #T: O(N)
 #S: O(1)
+    def lowestCommonAncestor(self, p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        
+        self.p_visited, self.q_visited = False, False
+        ans = self.dfs(root)
+        return ans if p_visited and q_visited else None
+        
+    def dfs(self, node, p,q):
+        if not node:
+            return None
+        l = self.dfs(node.left)
+        r = self.dfs(node.right)
+        
+        if node == p or node == q:
+            if node == p:
+                self.p_visited = True
+            else:
+                self.q_visited = True
+            
+            return node
+          
+        if l and r:
+            return node
+        return l or r
+      
+#T: O(N)
+#S: O(N) if couting stack frames else O(1)
+    def lowestCommonAncestor(self, root: 'TreeNode', nodes: 'TreeNode') -> 'TreeNode':
+        nodes = set(nodes)
+        
+        def dfs(node):
+            if not node:
+                return None
+            if node in nodes:
+                return node
+            l = dfs(node.left)
+            r = dfs(node.right)
+            
+            if l and r:
+                return node
+             else:
+                return l or r
+         return dfs(root)
+      
+      
+#T: O(N) + O(N) -> O(N)
+#S: O(N) + O(N) --> O(N) if couting stack frames else O(1)
+
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
         dummy = ListNode()
         curr = dummy
