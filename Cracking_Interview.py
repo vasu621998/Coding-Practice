@@ -539,3 +539,40 @@ class SparseVector:
 # Output: "cbad"    
 # T: O(M + N) -> O(N)
 # S: O(M + N) -> O(N)
+    def shipWithinDays(self, weights: List[int], days: int) -> int:
+        l = max(weights)
+        r = sum(weights)
+        
+        while l < r:
+            mid = (l + r) // 2
+            
+            if self.can_ship(mid, weights, days):
+                r = mid
+            else:
+                l = mid + 1
+            
+        return r
+        
+    def can_ship(self, candidates, weights, days):
+        days_taken = 1
+        curr_weight = 0
+        
+        for w in weights:
+            curr_weight += w
+            if curr_weight > candidates:
+                days_taken += 1
+                curr_weight = w
+        
+        return days_taken <= days
+    
+#Input: weights = [1,2,3,4,5,6,7,8,9,10], days = 5
+#Output: 15
+#Explanation: A ship capacity of 15 is the minimum to ship all the packages in 5 days #like this:
+#1st day: 1, 2, 3, 4, 5
+#2nd day: 6, 7
+#3rd day: 8
+#4th day: 9
+#5th day: 10 
+
+# T: O(NLOGN)
+# S: O(1)
