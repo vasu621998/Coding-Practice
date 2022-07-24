@@ -735,4 +735,25 @@ class SparseVector:
         
 #T: O(N) + O(N) + O(N) --> O(N)
 #S: O(N)
-
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        if len(intervals) <= 1:
+            return intervals
+        
+        
+        
+        intervals.sort()
+        
+        res = [intervals[0]]
+        
+        for start, end in intervals[1:]:
+            if start <= res[-1][1]:
+                res[-1][1] = max(end, res[-1][1])
+            else:
+                res.append([start, end])
+        return res
+    
+# Input: intervals = [[1,3],[2,6],[8,10],[15,18]]
+# Output: [[1,6],[8,10],[15,18]]
+# Explanation: Since intervals [1,3] and [2,6] overlap, merge them into [1,6].
+#T: O(NlogN) + O(N) -> O(NlogN)
+#S: O(N)
