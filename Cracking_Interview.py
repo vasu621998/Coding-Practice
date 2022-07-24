@@ -265,6 +265,39 @@ class Solution:
 # Explanation: The optimal path is 15 -> 20 -> 7 with a path sum of 15 + 20 + 7 = 42.
 # T: O(N)
 # S: O(1) If not counting recursive stack space, else O(N) if counting recursive stack space
+
+    def goodNodes(self, root: TreeNode) -> int:
+        if not root:
+            return 0
+        
+        self.good_nodes = 0
+        self.dfs(root,root.val)
+        
+        return self.good_nodes
+    
+    
+    def dfs(self, node, max_val):
+        if not node:
+            return 
+        
+        if node.val >= max_val:
+            self.good_nodes += 1
+            
+            max_val = node.val
+            
+        self.dfs(node.left, max_val)
+        self.dfs(node.right, max_val)
+            
+#Input: root = [3,1,4,3,null,1,5]
+#Output: 4
+#Explanation: Nodes in blue are good.
+#Root Node (3) is always a good node.
+#Node 4 -> (3,4) is the maximum value in the path starting from the root.
+#Node 5 -> (3,4,5) is the maximum value in the path
+#Node 3 -> (3,1,3) is the maximum value in the path.
+
+#T: O(N)
+#S: O(1) if not counting recursive stack frames otherwise O(N)
     def isPalindrome(self, s: str) -> bool:
         l, r = 0, len(s) - 1
 
