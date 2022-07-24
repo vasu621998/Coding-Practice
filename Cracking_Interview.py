@@ -227,6 +227,44 @@ class Solution:
 #Output: 23    
 # T: O(N)
 # S: O(N)
+    def maxPathSum(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+        
+        self.max_path = root.val
+        
+        self.dfs(root)
+        
+        return self.max_path
+    
+    def dfs(self, node):
+        if not node:
+            return 0
+        
+        #Checking for leaf node
+        if not node.left and not node.right:
+            self.max_path = max(node.val, self.max_path)
+            return node.val
+    
+        left = self.dfs(node.left)
+        right = self.dfs(node.right)
+        
+        self.max_path = max(self.max_path, 
+                            node.val + left + right,
+                            node.val + left,
+                            node.val + right,
+                            node.val)
+        
+        return max(node.val, 
+                   node.val + left, 
+                   node.val + right, 
+                   0)
+    
+# Input: root = [-10,9,20,null,null,15,7]
+# Output: 42
+# Explanation: The optimal path is 15 -> 20 -> 7 with a path sum of 15 + 20 + 7 = 42.
+# T: O(N)
+# S: O(1) If not counting recursive stack space, else O(N) if counting recursive stack space
     def isPalindrome(self, s: str) -> bool:
         l, r = 0, len(s) - 1
 
