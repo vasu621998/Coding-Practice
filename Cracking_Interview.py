@@ -669,3 +669,23 @@ class SparseVector:
 #Another way it to delete one 'b' and one 'c' resulting in the good string "aaabbc".    
 # T: O(N) + O(N) -> O(N)
 # S: O(1) + O(N) -> O(N)
+    def simplifyPath(self, path: str) -> str:
+        path_items =  path.split("/")
+        stack = []
+        
+        for item in path_items:
+            if item == "." or not item:
+                continue
+            elif item == "..":
+                if stack:
+                    stack.pop()
+            else:
+                stack.append(item)
+        return "/" + "/".join(stack)
+                
+#Input: path = "/home/"
+#Output: "/home"
+#Explanation: Note that there is no trailing slash after the last directory name.
+        
+# T: O(N) + O(N) + O(N) -> O(N)
+# S: O(N) (Need to maintain a stack)
