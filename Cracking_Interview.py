@@ -689,3 +689,21 @@ class SparseVector:
         
 # T: O(N) + O(N) + O(N) -> O(N)
 # S: O(N) (Need to maintain a stack)
+    def removeDuplicates(self, s: str) -> str:
+        stack = []
+        
+        for i in s:
+            if not stack:
+                stack.append(i)
+            else:
+                if i == stack[-1]:
+                    stack.pop()
+                else:
+                    stack.append(i)
+        
+        return "".join(stack)
+                
+# Input: s = "azxxzy"
+# Output: "ay"
+#T : O(N)
+#S: O(N)
