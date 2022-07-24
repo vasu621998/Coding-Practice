@@ -647,3 +647,25 @@ class SparseVector:
 
 # T: O(NLOGN)
 # S: O(1)
+
+    def minDeletions(self, s: str) -> int:
+        
+        
+        deletion = 0
+        myset = collections.Counter(s)
+        freqset = set()
+        
+        for i, count in myset.items():
+            while count > 0 and count in freqset:
+                count -= 1
+                deletion += 1
+            
+            freqset.add(count)
+            
+        return deletion
+# Input: s = "aaabbbcc"
+# Output: 2
+#Explanation: You can delete two 'b's resulting in the good string "aaabcc".
+#Another way it to delete one 'b' and one 'c' resulting in the good string "aaabbc".    
+# T: O(N) + O(N) -> O(N)
+# S: O(1) + O(N) -> O(N)
