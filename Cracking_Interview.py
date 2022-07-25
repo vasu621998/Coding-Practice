@@ -867,3 +867,28 @@ class SparseVector:
                     
 #T: O(N)
 #S: O(1)
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        queue = collections.deque([s])
+        
+        visited = set()
+        
+        while queue:
+            word = queue.popleft()
+            
+            if word in visited :
+                continue
+            else:
+                if not word:
+                    return True
+                visited.add(word)
+                
+                for start_word in wordDict:
+                    if word.startswith(start_word):
+                        queue.append(word[len(start_word):])
+        return False
+                        
+# Input: s = "leetcode", wordDict = ["leet","code"]
+# Output: true
+# Explanation: Return true because "leetcode" can be segmented as "leet code".        
+# T: O(N) * O(N) * O(N) -> O(N^3)
+# S: O(N)
