@@ -849,3 +849,21 @@ class SparseVector:
     
 # T: O(N) + O(NlogN) + O(N)
 # S: O(1) if overriding inputs otherwise O(N) 
+    def minAddToMakeValid(self, s: str) -> int:
+        l_count = r_count = added = 0
+        
+        for char in s:
+            if char == "(":
+                l_count +=1 
+            else:
+                if l_count > r_count:
+                    r_count += 1
+                else:
+                    added += 1
+                
+        added += l_count - r_count
+        
+        return added
+                    
+#T: O(N)
+#S: O(1)
