@@ -827,3 +827,25 @@ class SparseVector:
 #Explanation: The longest increasing path is [1, 2, 6, 9].
 # T: O(R * C)                
 # S: O(R * C)  
+    def findMinDifference(self, timePoints: List[str]) -> int:
+        for i, time in enumerate(timePoints):
+            hours, minutes = time.split(":")
+            
+            min_past_midnight = int(hours) * 60 + int(minutes)
+            
+            timePoints[i] = min_past_midnight
+            
+        timePoints.sort()
+        
+        res = 1440 + timePoints[0] - timePoints[-1]
+        
+        for i in range(1, len(timePoints)):
+            res = min(res, timePoints[i] - timePoints[i-1])
+        
+        return res
+    
+# Input: timePoints = ["23:59","00:00"]
+# Output: 1
+    
+# T: O(N) + O(NlogN) + O(N)
+# S: O(1) if overriding inputs otherwise O(N) 
