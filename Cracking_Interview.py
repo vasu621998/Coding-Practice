@@ -757,3 +757,40 @@ class SparseVector:
 # Explanation: Since intervals [1,3] and [2,6] overlap, merge them into [1,6].
 #T: O(NlogN) + O(N) -> O(NlogN)
 #S: O(N)
+    def myAtoi(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        i=0
+        ans=0
+        sign = 1
+        MAX_ANS = 2 ** 31 - 1
+        MIN_ANS = -2**31 
+        
+        
+        while(i < len(s) and s[i] == ' '):
+            i += 1
+            
+        if(i < len(s) and s[i] == '-'):
+            i += 1
+            sign = -1
+            
+        elif( i<len(s) and s[i] == '+'):
+            i += 1
+
+       
+        digits = set('0123456789')
+        while(i<len(s) and s[i] in digits):
+            ans = ans * 10 + int(s[i])
+            i+=1
+            
+        ans = sign*ans    
+        if( ans < 0):
+            return max(ans, MIN_ANS)
+        return min(ans, MAX_ANS)
+#Input: s = "4193 with words"
+#Output: 4193    
+    
+#T : O(N)
+#S : O(1)
