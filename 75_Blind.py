@@ -180,3 +180,19 @@ class Solution:
             n = n >> 1
 
         return res
+    def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
+        res = [0] * len(temperatures)
+        stack = []
+        
+        for i,t in enumerate(temperatures):
+            while stack and t > stack[-1][0]:
+                stackT, stackI = stack.pop()
+                res[stackI] = ( i - stackI)
+            stack.append([t, i])
+            
+        return res
+#Input: temperatures = [73,74,75,71,69,72,76,73]
+#Output: [1,1,4,2,1,1,0,0]
+
+#T: O(N)
+#S: O(N)
