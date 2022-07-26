@@ -986,3 +986,31 @@ class SparseVector:
 
 #T: O(N*logK)
 #S: O(N)
+    def exist(self, board: List[List[str]], word: str) -> bool:
+        for row in range(len(board)):
+            for col in range(len(board[0])):
+                if board[row][col] == word[0]:
+                    if self.dfs(board, row, col, word):
+                        return True
+        return False
+    
+    def dfs(self, board, row, col, word):
+        if not word:
+            return True
+        
+        if (0 <= row < len(board)) and (0 <= col < len(board[0])) and board[row][col] != "#" and board[row][col] == word[0]:
+            placeholder = board[row][col]
+            board[row][col] = "#"
+            
+            for inc_row, inc_col in [(0,1), (0,-1), (1,0), (-1,0)]:
+                if self.dfs(board, row + inc_row, col + inc_col, word[1:]):
+                    return True
+            
+            board[row][col] = placeholder
+            return False
+# Input: board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCCED"
+# Output: true 
+# N: Rows * Col
+# L: Length of Word
+# T: O(N*3L)
+# S: O(N)
