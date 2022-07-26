@@ -953,3 +953,36 @@ class SparseVector:
 
 #T: O(N)
 #S: O(N)
+    def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
+        if len(points) <= k:
+            return points
+        
+        
+        points_euc_dist = []
+        
+        for x,y in points:
+            euc_dist = self.euc(x,y)
+            points_euc_dist.append((euc_dist, (x,y)))
+        
+        heap = []
+        
+        for euc_dist, point in points_euc_dist:
+            if len(heap) < k:
+                heapq.heappush(heap, (-euc_dist,point))
+            else:
+                if -euc_dist > heap[0][0]:
+                    heapq.heappop(heap)
+                    heapq.heappush(heap, (-euc_dist, point))
+                    
+        
+        return [point for _dist, point in heap]
+        
+    def euc(self, x, y):
+        return (math.sqrt(x**2 + y**2))
+    
+#Input: points = [[3,3],[5,-1],[-2,4]], k = 2
+#Output: [[3,3],[-2,4]]
+#Explanation: The answer [[-2,4],[3,3]] would also be accepted.    
+
+#T: O(N*logK)
+#S: O(N)
