@@ -298,6 +298,51 @@ class Solution:
 
 #T: O(N)
 #S: O(1) if not counting recursive stack frames otherwise O(N)
+    def distanceK(self, root: TreeNode, target: TreeNode, k: int) -> List[int]:
+        if not k:
+            return [target.val]
+        
+        queue = collections.deque([root])
+        graph = collections.defaultdict(list)
+        
+        
+        while queue:
+            node = queue.popleft()
+            
+            if node.left:
+                graph[node].append(node.left)
+                graph[node.left].append(node)
+                
+                queue.append(node.left)
+                
+            if node.right:
+                graph[node].append(node.right)
+                graph[node.right].append(node)
+                
+                queue.append(node.right)
+                
+        
+        queue = collections.deque([(target, 0)])
+        visited = set([target])
+        res = []
+        
+        while queue:
+            node, distance = queue.popleft()
+            
+            if distance == k:
+                res.append(node.val)
+            else:
+                for edge in graph[node]:
+                    if edge not in visited:
+                        visited.add(edge)
+                        queue.append((edge, distance + 1))
+                        
+        return res
+#Input: root = [3,5,1,6,2,0,8,null,null,7,4], target = 5, k = 2
+#Output: [7,4,1]
+#Explanation: The nodes that are a distance 2 from the target node (with value 5) have values 7, 4, and 1.
+# T: O(N) + O(N) -> O(N)
+# S: O(N) + O(N) -> O(N)
     def isPalindrome(self, s: str) -> bool:
         l, r = 0, len(s) - 1
 
@@ -892,3 +937,19 @@ class SparseVector:
 # Explanation: Return true because "leetcode" can be segmented as "leet code".        
 # T: O(N) * O(N) * O(N) -> O(N^3)
 # S: O(N)
+    def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
+        res = [0] * len(temperatures)
+        stack = []
+        
+        for i,t in enumerate(temperatures):
+            while stack and t > stack[-1][0]:
+                stackT, stackI = stack.pop()
+                res[stackI] = ( i - stackI)
+            stack.append([t, i])
+            
+        return res
+#Input: temperatures = [73,74,75,71,69,72,76,73]
+#Output: [1,1,4,2,1,1,0,0]
+
+#T: O(N)
+#S: O(N)
