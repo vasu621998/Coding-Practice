@@ -1098,3 +1098,37 @@ class SparseVector:
     
 #T: O(N//2) -> O(N)
 #S: O(N)
+    def reorganizeString(self, s: str) -> str:
+        count = {}
+        
+        for sub in s:
+            count[sub] = 1 + count.get(sub, 0)
+        
+        
+        maxHeap = [[-cnt, char] for char, cnt in count.items()]
+        heapq.heapify(maxHeap) # O(n)
+        
+        prev = None
+        res = ""
+        
+        while maxHeap or prev:
+            if prev and not maxHeap:
+                return ""
+            
+            cnt, char = heapq.heappop(maxHeap)
+            res += char
+            cnt +=1 # its a min heap so we add, since the vals are negative, actually we want to subtract
+            
+            if prev:
+                heapq.heappush(maxHeap, prev)
+                prev = None
+            if cnt !=0:
+                prev = [cnt, char]
+                
+        return res
+# Input: s = "aab"
+# Output: "aba"
+
+# T: O(NlogN)
+# S: O(N)
+           
