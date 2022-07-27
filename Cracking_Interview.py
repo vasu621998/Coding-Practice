@@ -1204,3 +1204,27 @@ def count_substring(string,sub_string):
 # Output: 1024.00000  
 # T : O(logN)    
 # S : O(1)
+    def getMaxLen(self, nums: List[int]) -> int:
+        ans, pos, neg = 0, 0, 0
+        
+        for num in nums:
+            if num > 0:
+                pos = 1 + pos
+                neg = 1 + neg if neg else 0
+                
+            if num < 0:
+                pos, neg = 1 + neg if neg else 0, 1 + pos
+                
+            if num == 0:
+                pos, neg = 0,0
+            
+            ans = max(ans, pos)
+            
+        return ans
+        
+# Input: nums = [1,-2,-3,4]
+# Output: 4
+# Explanation: The array nums already has a positive product of 24.    
+
+# T: O(N)
+# S: O(1)
