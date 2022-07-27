@@ -1131,4 +1131,20 @@ class SparseVector:
 
 # T: O(NlogN)
 # S: O(N)
-           
+    def findDuplicates(self, nums: List[int]) -> List[int]:
+        res = []
+        
+        for num in nums:
+            at_index = nums[abs(num) - 1]
+            
+            if at_index < 0:
+                res.append(abs(num))
+                
+            else:
+                nums[abs(num) - 1] *= -1
+        return res
+    
+# Input: nums = [4,3,2,7,8,2,3,1]
+# Output: [2,3]    
+# T: O(N)
+# S: O(1)           
