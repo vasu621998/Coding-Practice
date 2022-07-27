@@ -1248,3 +1248,8 @@ def count_substring(string,sub_string):
 # Output: 4
 # T: O(N^2)
 # S: O(N)
+    def reverseWords(self, s: str) -> str:
+        return ' '.join(s.strip().split()[::-1])
+        
+# T: O(N)
+# S: O(1)
