@@ -1148,3 +1148,44 @@ class SparseVector:
 # Output: [2,3]    
 # T: O(N)
 # S: O(1)           
+def count_substring(string,sub_string):
+    len1 = len(string)
+    len2 = len(sub_string)
+    j =0
+    counter = 0
+    while(j < len1):
+        if(string[j] == sub_string[0]):
+            if(string[j:j+len2] == sub_string):
+                counter += 1
+        j += 1
+
+    return counter
+# Input string = "ABCDCDC" substring = "CDC"
+# Output 2
+
+# T: O(N)
+# S: O(1)
+    def findMaxLength(self, nums: List[int]) -> int:
+        seen_at = {}
+        seen_at[0] = -1
+        
+        
+        count = ans = 0 
+        
+        for i, num in enumerate(nums):
+            count += 1 if num else -1
+            
+            if count in seen_at:
+                ans = max(ans, i - seen_at[count])
+                
+            else:
+                seen_at[count] = i
+                
+        return ans
+    
+# Input: nums = [0,1]
+# Output: 2
+# Explanation: [0, 1] is the longest contiguous subarray with an equal number of 0 and 1.    
+
+# T: O(N)        
+# S: O(N)
