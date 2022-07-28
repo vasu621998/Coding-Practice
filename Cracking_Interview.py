@@ -1284,3 +1284,26 @@ def count_substring(string,sub_string):
 
 # T: O(N)    
 # S: O(1)
+    def longestPalindrome(self, s: str) -> int:
+        hMap = {}
+        count = 0
+        
+        for i in s:
+            if i in hMap:
+                hMap[i]  += 1
+                if hMap[i] == 2:
+                    count += 2
+                    hMap[i] = 0
+            else:
+                hMap[i] = 1
+            
+        if 1 in hMap.values():
+            return count + 1
+        else:
+            return count
+# Input: s = "abccccdd"
+# Output: 7
+# Explanation: One longest palindrome that can be built is "dccaccd", whose length is 7.        
+
+# T: O(N)
+# S: O(1)
