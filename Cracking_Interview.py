@@ -1253,3 +1253,17 @@ def count_substring(string,sub_string):
         
 # T: O(N)
 # S: O(1)
+    def maxProfit(self, prices: List[int]) -> int:
+        minprof = float("inf")
+        maxprof = 0
+        
+        for i in prices:
+            if i < minprof:
+                minprof = i
+            elif i - minprof > maxprof:
+                maxprof = i - minprof
+            
+        return maxprof
+            
+# T: O(N)
+# S: O(1)
