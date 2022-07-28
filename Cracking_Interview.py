@@ -343,6 +343,29 @@ class Solution:
 #Explanation: The nodes that are a distance 2 from the target node (with value 5) have values 7, 4, and 1.
 # T: O(N) + O(N) -> O(N)
 # S: O(N) + O(N) -> O(N)
+
+    def preorder(self, root: 'Node') -> List[int]:
+        
+        if not root:
+            return []
+        
+        res = [root.val]
+        
+        self.preorder_helper(root.children, res)
+        
+        return res
+    
+    def preorder_helper(self, root, res):
+        
+        for i in root:
+            res.append(i.val)
+            self.preorder_helper(i.children, res)
+        
+#Input: root = [1,null,3,2,4,null,5,6]
+#Output: [1,3,5,6,2,4]
+
+# T: O(N)
+# S: O(1)
     def isPalindrome(self, s: str) -> bool:
         l, r = 0, len(s) - 1
 
