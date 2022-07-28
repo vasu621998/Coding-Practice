@@ -77,3 +77,17 @@ class Solution:
         return ' '.join(s.strip().split()[::-1])
     def reverseWords(self, s: str) -> str:
         return ' '.join(a[::-1] for a in s.split())
+    def isSubsequence(self, s: str, t: str) -> bool:
+        i,j = 0,0
+        while i < len(s) and j < len(t):
+            if s[i] == t[j]:
+                i += 1
+                
+            j += 1
+            
+        return True if i == len(s) else False
+    
+# Input: s = "abc", t = "ahbgdc"
+# Output: true            
+# T : O(N)                
+# S : O(1)
