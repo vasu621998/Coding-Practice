@@ -160,3 +160,17 @@ class Solution:
     
 # T: O(N)
 # S: O(1)
+    def mostWordsFound(self, sentences: List[str]) -> int:
+        res = 0
+        for sentence in sentences:
+            
+            res = max(res, len(sentence.split()))
+        
+        return res
+#Input: sentences = ["please wait", "continue to fight", "continue to win"]
+#Output: 3
+#Explanation: It is possible that multiple sentences contain the same number of words. 
+#In this example, the second and third sentences (underlined) have the same number of words.
+    
+# T: O(N)
+# S: O(1)
