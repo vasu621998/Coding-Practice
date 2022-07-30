@@ -119,3 +119,8 @@ class Solution:
     
 # T: O(N * M)
 # S: O(N + M)
+    def toLowerCase(self, s: str) -> str:
+        return s.lower()
+    
+# T :O(N)
+# S: O(1)
