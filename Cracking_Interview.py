@@ -1441,3 +1441,19 @@ def count_substring(string,sub_string):
     
 # T: O(N)
 # S: O(1)
+    def wordSubsets(self, words1: List[str], words2: List[str]) -> List[str]:
+        res = []
+        tempDict = Counter()
+        for w in words2:
+            tempDict |= Counter(w)
+    
+        
+        for w in words1:
+            if not tempDict - Counter(w):
+                res.append(w)
+        return res
+       
+#Input: words1 = ["amazon","apple","facebook","google","leetcode"], words2 = ["e","o"]
+# Output: ["facebook","google","leetcode"]
+# T: O(N + M)
+# S: O(N + M)
