@@ -1465,3 +1465,12 @@ def count_substring(string,sub_string):
         
 # T: O(N)
 # S: O(N)
+    def countSegments(self, s: str) -> int:
+        return len(s.split())
+
+#Input: s = "Hello, my name is John"
+#Output: 5
+##Explanation: The five segments are ["Hello,", "my", "name", "is", "John"]
+    
+# T: O(N)
+# S: O(1)
