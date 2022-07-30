@@ -1474,3 +1474,20 @@ def count_substring(string,sub_string):
     
 # T: O(N)
 # S: O(1)
+    def convertToTitle(self, columnNumber: int) -> str:
+        string = "" 
+        while columnNumber > 0:
+            columnNumber -= 1
+            string = chr(columnNumber%26 + 65) + string
+            columnNumber = columnNumber // 26
+        
+        
+        return string
+# Input: columnNumber = 28
+# Output: "AB"    
+
+# Input: columnNumber = 1
+# Output: "A"
+
+# T: O(N)
+# S: O(N)
