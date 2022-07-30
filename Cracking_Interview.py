@@ -1457,3 +1457,11 @@ def count_substring(string,sub_string):
 # Output: ["facebook","google","leetcode"]
 # T: O(N + M)
 # S: O(N + M)
+    def isAnagram(self, s: str, t: str) -> bool:
+        return Counter(s) == Counter(t)
+                
+# Input: s = "anagram", t = "nagaram"
+# Output: true
+        
+# T: O(N)
+# S: O(N)
