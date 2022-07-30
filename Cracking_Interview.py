@@ -1500,3 +1500,26 @@ def count_substring(string,sub_string):
         
 # T: O(N)        
 # S: O(N)
+    def postorder(self, root: 'Node') -> List[int]:
+        
+        if not root:
+            return []
+        
+        res = []
+        
+        self.postorder_helper(root.children, res)
+        res.append(root.val)
+        return res
+    
+    def postorder_helper(self, root, res):
+        
+        for i in root:
+            
+            self.postorder_helper(i.children, res)
+            res.append(i.val)
+        
+# Input: root = [1,null,3,2,4,null,5,6]
+# Output: [5,6,3,2,4,1]
+
+# T: O(N)
+# S: O(1) 
