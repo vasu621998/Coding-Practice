@@ -174,3 +174,27 @@ class Solution:
     
 # T: O(N)
 # S: O(1)
+    def interpret(self, command: str) -> str:
+        res = ""
+        for i in range(len(command)):
+            if command[i] == "(" and command[i+1] ==")":
+                res += "o"
+            elif command[i] == "(" or command[i] == ")":
+                continue
+            elif command[i] == "G":
+                res += "G"
+            else:
+                res += command[i]
+                
+        return res
+    
+# Input: command = "G()(al)"
+# Output: "Goal"
+# Explanation: The Goal Parser interprets the command as follows:
+# G -> G
+# () -> o
+# (al) -> al
+# The final concatenated result is "Goal".
+    
+# T : O(N)
+# S : O(1)
