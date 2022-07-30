@@ -1491,3 +1491,12 @@ def count_substring(string,sub_string):
 
 # T: O(N)
 # S: O(N)
+    def repeatedCharacter(self, s: str) -> str:
+        hasmap = set()
+        for char in s:
+            if char in hasmap:
+                return char
+            hasmap.add(char)
+        
+# T: O(N)        
+# S: O(N)
