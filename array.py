@@ -536,3 +536,19 @@ class Solution:
     
 # T:O(N)
 # S:O(N)
+    def flipAndInvertImage(self, image: List[List[int]]) -> List[List[int]]:
+        for ind, r in enumerate(image):
+            image[ind] = r[ : : -1]
+
+        for r in image:
+            for ind, num in enumerate(r):
+                if (num == 0):
+                    r[ind] = 1
+                else:
+                    r[ind] = 0
+
+        return image
+    
+    
+# T: O(N^2)
+# T: O(N)
