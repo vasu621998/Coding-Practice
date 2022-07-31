@@ -472,3 +472,25 @@ class Solution:
     
 # T:O(N)
 # S:O(1)
+    def numIdenticalPairs(self, nums: List[int]) -> int:
+        ans = 0
+        
+        
+        seen = {}
+        
+        
+        for i,n in enumerate(nums):
+            
+            if n in seen:
+                ans+= seen[n]
+            
+            seen[n] = seen.get(n,0)+1
+            
+        return ans        
+
+#Input: nums = [1,2,3,1,1,3]
+#Output: 4
+#Explanation: There are 4 good pairs (0,3), (0,4), (3,4), (2,5) 0-indexed.    
+    
+# T: O(N)
+# S: O(N)
