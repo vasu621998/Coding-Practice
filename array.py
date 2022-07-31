@@ -494,3 +494,27 @@ class Solution:
     
 # T: O(N)
 # S: O(N)
+    def kidsWithCandies(self, candies: List[int], extraCandies: int) -> List[bool]:
+        max_candy = max(candies)
+        res = []
+        
+        for candy in candies:
+            
+            if candy + extraCandies >= max_candy :
+                res.append(True)
+            else:
+                res.append(False)
+            
+        return res
+    
+# Input: candies = [2,3,5,1,3], extraCandies = 3
+# Output: [true,true,true,false,true] 
+# Explanation: If you give all extraCandies to:
+# - Kid 1, they will have 2 + 3 = 5 candies, which is the greatest among the kids.
+# - Kid 2, they will have 3 + 3 = 6 candies, which is the greatest among the kids.
+# - Kid 3, they will have 5 + 3 = 8 candies, which is the greatest among the kids.
+# - Kid 4, they will have 1 + 3 = 4 candies, which is not the greatest among the kids.
+# - Kid 5, they will have 3 + 3 = 6 candies, which is the greatest among the kids.    
+
+# T: O(N) + O(N)
+# S: O(N)
