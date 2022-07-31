@@ -456,3 +456,19 @@ class Solution:
     
 # T: O(N)
 # S: O(1)
+    def maximumWealth(self, accounts: List[List[int]]) -> int:
+        max_health = 0
+        for i in accounts:
+            max_health = max(max_health, sum(i))
+        
+        return max_health
+
+# Input: accounts = [[1,2,3],[3,2,1]]
+# Output: 6
+# Explanation:
+# 1st customer has wealth = 1 + 2 + 3 = 6
+# 2nd customer has wealth = 3 + 2 + 1 = 6
+# Both customers are considered the richest with a wealth of 6 each, so return 6.
+    
+# T:O(N)
+# S:O(1)
