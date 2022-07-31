@@ -552,3 +552,12 @@ class Solution:
     
 # T: O(N^2)
 # T: O(N)
+    def isPowerOfTwo(self, n: int) -> bool:
+        if n<=0:
+            return 0
+        return int(log2(n))==log2(n)
+    
+# Input: n = 1
+# Output: true
+# Explanation: 20 = 1
+
