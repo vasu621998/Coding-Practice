@@ -580,3 +580,24 @@ class Solution:
     
 #T: O(M+N)
 #S: O(N)
+    def divide(self, dividend: int, divisor: int) -> int:
+        check = False
+    
+        if dividend < 0 or divisor < 0:
+            check = True
+        
+        if dividend < 0 and divisor < 0:
+            check = False
+        
+        
+        res = abs(dividend) // abs(divisor)
+    
+    
+    
+        if check:
+            res = -res
+        return min(max(-2147483648,res),2147483647);
+    
+# Input: dividend = 7, divisor = -3
+# Output: -2
+# Explanation: 7/-3 = -2.33333.. which is truncated to -2.
