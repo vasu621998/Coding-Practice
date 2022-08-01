@@ -1539,3 +1539,17 @@ def count_substring(string,sub_string):
     
 # T: O(N)
 # S: O(1)
+    def isPowerOfThree(self, n: int) -> bool:
+        if n < 1: return False # if the number is zero or in negative.
+        if n == 1: return True # 1 could be a power of any number. 
+        
+        while n > 1: # now will check for the number greater then 1.
+            if n % 3 != 0: # if the provided number is not a perfect division of 3, then its can be a power of 3.
+                return False # if not
+            
+            n /= 3 #n = n / 3 # to update n for further division. This loop will run 3 times in case  of perfect division & n value will be updated 3 times(9,3,0.43)
+        return True
+    
+    
+# Input: n = 27
+# Output: true
