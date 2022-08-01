@@ -1523,3 +1523,19 @@ def count_substring(string,sub_string):
 
 # T: O(N)
 # S: O(1) 
+    def minDepth(self, root: Optional[TreeNode]) -> int:
+        if root is None:
+            return 0
+        left=self.minDepth(root.left)
+        right=self.minDepth(root.right)
+        if left and right:
+            return 1+min(left,right)
+        elif left:
+            return 1+left
+        return 1+right
+# Input: root = [3,9,20,null,null,15,7]
+# Output: 2
+
+    
+# T: O(N)
+# S: O(1)
