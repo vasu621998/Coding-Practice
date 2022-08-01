@@ -1567,3 +1567,17 @@ def count_substring(string,sub_string):
         
 # Input: n = 16
 # Output: true
+    def addDigits(self, num: int) -> int:
+        if num == 0 : return 0
+        if num % 9 == 0 : return 9
+        else : return (num % 9)
+            
+            
+# Input: num = 38
+# Output: 2
+# Explanation: The process is
+# 38 --> 3 + 8 --> 11
+# 11 --> 1 + 1 --> 2 
+# Since 2 has only one digit, return it.            
+# T: O(1)
+# S: O(1)
