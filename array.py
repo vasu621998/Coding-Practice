@@ -601,3 +601,17 @@ class Solution:
 # Input: dividend = 7, divisor = -3
 # Output: -2
 # Explanation: 7/-3 = -2.33333.. which is truncated to -2.
+    def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
+        temp = []
+        
+        for row in matrix:
+            temp.extend(row)
+        temp.sort()
+        return temp[k-1]
+    
+#Input: matrix = [[1,5,9],[10,11,13],[12,13,15]], k = 8
+#Output: 13
+#Explanation: The elements in the matrix are [1,5,9,10,11,12,13,13,15], and the 8th smallest number is 13
+
+# T: O(NlogN * MlogM)
+# S: O(N)
