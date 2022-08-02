@@ -1592,3 +1592,22 @@ def count_substring(string,sub_string):
 # Input: head = [4,5,1,9], node = 1
 # Output: [4,5,9]
 # Explanation: You are given the third node with value 1, the linked list should become 4 -> 5 -> 9 after calling your function.
+    def subtractProductAndSum(self, n: int) -> int:
+        nums = [int(i) for i in str(n)]
+        
+        pr = 1
+        sum_digit = 0
+        for num in nums:
+            pr = pr * num
+            sum_digit = sum_digit + num
+        return pr - sum_digit
+            
+# Input: n = 234
+# Output: 15 
+# Explanation: 
+# Product of digits = 2 * 3 * 4 = 24 
+# Sum of digits = 2 + 3 + 4 = 9 
+# Result = 24 - 9 = 15
+
+# T: O(N)
+# S: O(N)
