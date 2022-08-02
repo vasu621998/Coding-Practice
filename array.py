@@ -615,3 +615,15 @@ class Solution:
 
 # T: O(NlogN * MlogM)
 # S: O(N)
+    def findLHS(self, nums: List[int]) -> int:
+        res = 0
+        counter = Counter(nums)
+        for c in counter:
+            if c+1 in counter:
+                res = max(res, counter[c] + counter[c+1])
+        return res
+# Input: nums = [1,3,2,2,5,2,3,7]
+# Output: 5
+# Explanation: The longest harmonious subsequence is [3,2,2,2,3].
+# T: O(N)
+# S: O(N)
