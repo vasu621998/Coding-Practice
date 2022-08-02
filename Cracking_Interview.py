@@ -1581,3 +1581,14 @@ def count_substring(string,sub_string):
 # Since 2 has only one digit, return it.            
 # T: O(1)
 # S: O(1)
+    def deleteNode(self, node):
+        """
+        :type node: ListNode
+        :rtype: void Do not return anything, modify node in-place instead.
+        """
+        node.val = node.next.val #set value of given node as next node's value.
+        node.next = node.next.next #set next of give node as next of next node.
+
+# Input: head = [4,5,1,9], node = 1
+# Output: [4,5,9]
+# Explanation: You are given the third node with value 1, the linked list should become 4 -> 5 -> 9 after calling your function.
