@@ -127,3 +127,22 @@ class Solution:
             return valid(node.left, left, node.val) and valid(node.right, node.val, right)
         
         return valid(root, float("-inf"), float("inf"))
+    def deepestLeavesSum(self, root: Optional[TreeNode]) -> int:
+        queue = [root]
+        while queue:
+            curr = 0
+            for i in range(len(queue)):
+                node = queue.pop(0)
+                curr = curr + node.val
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+        return curr
+
+# BFS
+#Input: root = [1,2,3,4,5,null,6,7,null,null,null,null,8]
+#Output: 15
+
+# T: O(N)
+# S: O(N)
