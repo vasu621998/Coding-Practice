@@ -241,3 +241,23 @@ class Solution:
 #A   L S  I G
 #Y A   H R
 #P     I
+    def balancedStringSplit(self, s: str) -> int:
+        ans = 0
+        r_count = l_count = 0
+        for char in s:
+            if char == 'R':
+                r_count += 1
+            elif char == 'L':
+                l_count += 1
+            if r_count == l_count:
+                ans += 1
+                r_count = l_count = 0
+            continue
+        return ans
+
+# Input: s = "RLRRLLRLRL"
+# Output: 4
+# Explanation: s can be split into "RL", "RRLL", "RL", "RL", each substring contains same number of 'L' and 'R'.
+    
+# T: O(N)
+# S: O(1)
