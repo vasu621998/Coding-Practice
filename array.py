@@ -627,3 +627,10 @@ class Solution:
 # Explanation: The longest harmonious subsequence is [3,2,2,2,3].
 # T: O(N)
 # S: O(N)
+    def majorityElement(self, nums: List[int]) -> int:
+        count = {}
+        for num in nums:
+            count[num] = count.get(num, 0) + 1
+        return max(count, key= count.get)
+# T: O(N)
+# S: O(N)    
