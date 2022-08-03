@@ -214,3 +214,30 @@ class Solution:
 
 # T : O(N)
 # S : O(1)
+    def convert(self, s: str, numRows: int) -> str:
+        if numRows == 1:
+            return s
+        string = ""
+        step = (numRows - 1)*2
+        down = 0 
+        for i in range(numRows):
+            if i < len(s):
+                string += s[i]
+            j = i
+            while j < len(s):
+                j += step
+                if(step and j < len(s)): 
+                    string += s[j]
+                j += down
+                if(down and j <len(s)):
+                    string += s[j]
+            step -= 2
+            down += 2
+        return string   
+#Input: s = "PAYPALISHIRING", numRows = 4
+#Output: "PINALSIGYAHRPI"
+#Explanation:
+#P     I    N
+#A   L S  I G
+#Y A   H R
+#P     I
