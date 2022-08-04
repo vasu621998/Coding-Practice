@@ -261,3 +261,23 @@ class Solution:
     
 # T: O(N)
 # S: O(1)
+    def sortSentence(self, s: str) -> str:
+        s = s.split()
+        output = ""
+        obj = {}
+        for i in s:
+            rank = i[-1]
+            p = i[:-1]
+            obj[rank] = p
+        obj = sorted(obj.items())
+        for j in obj:
+            output +=j[1]
+            output +=" "
+        return output.strip()
+    
+# Input: s = "is2 sentence4 This1 a3"
+# Output: "This is a sentence"
+# Explanation: Sort the words in s to their original positions "This1 is2 a3 sentence4", then remove the numbers.
+
+# T: O(N)
+# S: O(N)
