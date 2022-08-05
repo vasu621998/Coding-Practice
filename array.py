@@ -655,3 +655,55 @@ class Solution:
 #(2, 2)
 #(3, 1)
 #Note that different sequences are counted as different combinations.
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        low = 0
+        high = len(nums)-1
+        left,right = 0,0
+        while low <= high:
+			# find midpoint
+            mid = low + ( high - low ) // 2
+            
+			# THE ONLY IMPORTANT PART
+			# When midpoint matches the target we'll find the range
+            if nums[mid] == target:
+                left, right = mid,mid
+				
+				# Can we go left?
+                if nums[mid-1] == target: 
+                    left = mid - 1
+				
+				# Can we go right and not out of bounds?
+                if mid + 1 < len(nums) and nums[mid+1] == target: 
+                    right = mid + 1
+				
+				# mid is at index 0 so we don't have any left
+                if left < 0: 
+                    left = 0
+					
+				 # mid is at last index so we don't have any right
+                if right >= len(nums) - 1:
+                    right = len(nums) - 1
+				
+				# If we can go left, keep going left
+                while left > 0 and nums[left-1] == target: 
+                    left -= 1
+					
+				# If we can go right, keep going right
+                while right < len(nums)-1 and nums[right+1] == target: #
+                    right += 1
+                    
+                return [left,right]
+            
+			# Adjust bound (just like any other Binary Search problem)
+            if target > nums[mid]:
+                low = mid + 1
+            else:
+                high = mid - 1
+                
+        return [-1,-1]   
+    
+#Input: nums = [5,7,7,8,8,10], target = 8
+#Output: [3,4]    
+
+# T: O(logN)
+# S: O(1)
