@@ -634,3 +634,24 @@ class Solution:
         return max(count, key= count.get)
 # T: O(N)
 # S: O(N)    
+    def combinationSum4(self, nums: List[int], target: int) -> int:
+        @lru_cache(None)
+        def helper(target):
+            if target == 0: return 1
+            elif target < 0: return 0
+            else: return sum([helper(target - num) for num in nums])
+            
+        return helper(target)       
+    
+#Input: nums = [1,2,3], target = 4
+#Output: 7
+#Explanation:
+#The possible combination ways are:
+#(1, 1, 1, 1)
+#(1, 1, 2)
+#(1, 2, 1)
+#(1, 3)
+#(2, 1, 1)
+#(2, 2)
+#(3, 1)
+#Note that different sequences are counted as different combinations.
