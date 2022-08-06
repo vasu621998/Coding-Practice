@@ -291,4 +291,28 @@ class Solution:
             
 # T : O(N)
 # S: O(1)
+    def wordPattern(self, pattern: str, s: str) -> bool:
+        mapping1 = {}
+        mapping2 = {}
+        words = s.split()
+        if len(pattern) != len(words):
+            return False
         
+        i = 0
+        while i < len(words):
+            is_familiar1 = words[i] in mapping1.keys()
+            is_familiar2 = pattern[i] in mapping2.keys()
+            state = [is_familiar1, is_familiar2]
+            match state:
+                case [True, False] | [False, True]:
+                    return False            
+                
+                case [False, False]:
+                    mapping1[words[i]] = pattern[i]
+                    mapping2[pattern[i]] = words[i]
+
+                case [True, True]:
+                    if mapping1[words[i]] != pattern[i]:
+                        return False
+            i += 1        
+        return True          
