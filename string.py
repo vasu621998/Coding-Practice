@@ -316,3 +316,5 @@ class Solution:
                         return False
             i += 1        
         return True          
+    def canWinNim(self, n: int) -> bool:
+        return n % 4
