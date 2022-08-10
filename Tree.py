@@ -181,3 +181,22 @@ class Solution:
             node.right = traversal(index+1, right)
             return node
         return traversal(0, len(nums) - 1)   
+    def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
+        res = [0]
+        
+        def dfs(root):
+            if not root:
+                return -1
+            l = dfs(root.left)
+            r = dfs(root.right)
+            
+            res[0] = max(res[0], l + r + 2)
+            
+            
+            return 1 + max(l, r)
+        
+        dfs(root)
+        return res[0]
+    
+# T: O(N)
+# S: O(1)
