@@ -171,3 +171,13 @@ class Solution:
     
 # T: O(N)
 # S: O(N)
+    def sortedArrayToBST(self, nums: List[int]) -> Optional[TreeNode]:
+        def traversal(left, right):
+            if left > right: # If left greater than right, it means that added all subtree values
+                return
+            index = (left + right) // 2 # Getting the middle value for the subtree root value
+            node = TreeNode(nums[index])
+            node.left = traversal(left, index-1)
+            node.right = traversal(index+1, right)
+            return node
+        return traversal(0, len(nums) - 1)   
