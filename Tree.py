@@ -200,3 +200,7 @@ class Solution:
     
 # T: O(N)
 # S: O(1)
+    def checkTree(self, root: Optional[TreeNode]) -> bool:
+        return root.val == root.left.val + root.right.val 
+# T: O(N)
+# S: O(1)
