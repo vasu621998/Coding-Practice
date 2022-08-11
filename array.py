@@ -707,3 +707,29 @@ class Solution:
 
 # T: O(logN)
 # S: O(1)
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        
+        path = []
+        answer = []
+        def dp(idx, total):
+            if total == target:
+                answer.append(path[:])
+                return
+            if total > target:
+                return
+            
+            for i in range(idx, len(candidates)):
+                path.append(candidates[i])
+                dp(i, total + candidates[i])
+                path.pop()
+        
+        dp(0, 0)
+        return answer
+# Input: candidates = [2,3,6,7], target = 7
+#Output: [[2,2,3],[7]]
+#Explanation:
+#2 and 3 are candidates, and 2 + 2 + 3 = 7. Note that 2 can be used multiple times.
+#7 is a candidate, and 7 = 7.
+#These are the only two combinations.
+# T: O(N)
+# S: O(1)
