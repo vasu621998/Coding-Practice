@@ -549,3 +549,35 @@ class DoublyLinkedList:
 
 # T: O(N)
 #S: O(1)
+    def mergeNodes(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head:
+            None
+            
+        current = head.next
+        res = ListNode(0, None)
+        new_head = res 
+        total = 0
+        
+        while current:
+            if(current.val != 0):
+                total += current.val
+            else:
+                res.next = ListNode(total, None) 
+                res = res.next
+                total = 0
+                
+            current = current.next
+        
+        new_head = new_head.next
+        
+        return new_head
+
+# Input: head = [0,3,1,0,4,5,2,0]
+# Output: [4,11]
+# Explanation: 
+# The above figure represents the given linked list. The modified list contains
+# - The sum of the nodes marked in green: 3 + 1 = 4.
+# - The sum of the nodes marked in red: 4 + 5 + 2 = 11.
+    
+# T: O(N)
+# S: O(1)
