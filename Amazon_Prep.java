@@ -366,3 +366,21 @@ while(!q.isEmpty())
 
 return minD;
 }
+
+
+
+public static List chooseFleets(List wheels) {
+List result = new ArrayList<>();
+if(!wheels.equals(null) & wheels.size()>0){
+for(int n : wheels){
+if(n%2!=0){
+result.add(0);
+}
+else{
+result.add(n/4+1);
+}
+
+            }
+        }
+        return result;
+}
