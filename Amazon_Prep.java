@@ -782,3 +782,25 @@ def appealSum(self, s: str) -> int:
         ans+=(i-a[x])*(len(s)-i)
         a[x]=i
     return ans
+
+		
+public int numberOfSegments(int[] A, int limit) {
+        Deque<Integer> maxdq = new LinkedList<>();
+        Deque<Integer> mindq = new LinkedList<>();
+        int i = 0, j;
+        int count = 0;
+        for (j = 0; j < A.length; ++j) {
+            while (!maxdq.isEmpty() && A[j] > maxdq.peekLast()) maxdq.pollLast();
+            while (!mindq.isEmpty() && A[j] < mindq.peekLast()) mindq.pollLast();
+            maxdq.add(A[j]);
+            mindq.add(A[j]);
+            if (maxdq.peek() - mindq.peek() > limit) {
+                if (maxdq.peek() == A[i]) maxdq.poll();
+                if (mindq.peek() == A[i]) mindq.poll();
+                ++i;
+            }else{
+                count+=(j-i+1);
+            }
+        }
+        return count;
+    }
