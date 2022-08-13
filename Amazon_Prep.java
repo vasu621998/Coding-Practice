@@ -1022,3 +1022,19 @@ Result maxResult = null;
         return rootResult;
 }
 }
+
+	
+// Q2 Given a encoded string and decode it
+def decodeStr(s, m):        # Q2: two pointers O(N)
+                            #     assuming m is number of rows
+    A, n = [], len(s) // m
+    for j in range(n):
+        for i in range(m):
+            if j == n:      break
+            k = i * n + j
+            if s[k] == "-": A += " "
+            else:           A += s[k]
+            j += 1
+    return "".join(A).rstrip()
+		   
+		   
