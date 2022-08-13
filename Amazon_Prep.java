@@ -1221,3 +1221,30 @@ def pairSum(head: Optional[ListNode]) -> int:
             }
         }
     }
+
+// A user is uploading a big file to server.....
+def merge_byte_range(chunks):
+    prev = [chunks[0]]
+    res = [prev]
+    for s, e in chunks[1:]:
+        curr = []
+        for idx, (prev_s, prev_e) in enumerate(prev):
+
+            if e + 1 < prev_s:
+                curr.append([s, e])
+                curr.extend(prev[idx:])
+                break
+            elif prev_e + 1 < s:
+                curr.append([prev_s, prev_e])
+                if idx == len(prev) - 1:
+                    curr.append([s, e])
+            else:
+                s = min(s, prev_s)
+                e = max(e, prev_e)
+
+                if idx == len(prev) - 1:
+                    curr.append([s, e])
+
+        res.append(curr)
+        prev = curr
+    return res
