@@ -277,25 +277,28 @@ class HelloWorld {
 }
 
 
-
-def minGroups(movies, k):
-    movies.sort()
-    
-    ret = []
-    # left pointer of subarray
-    l = 0
-    for r in range(len(movies)):        
-        # max difference in subarray > k
-        # array is sorted so rightmost value will always be largest
-        # leftmost is always smallest
-        if (movies[r] - movies[l]) > k:
-            # add group to listofGroups
-            # use r not r+1 so we don't include the value that caused
-            # group to be invalid
-            ret.append(movies[l:r])
-            # move left pointer to current value, start of new subarray
-            l = r
-    
-    # append last group if there was any at the end of the for loop
-    ret.append(movies[l:r+1])   
-    return ret
+    public static int minGroups(int[] movies, int diff) {
+        
+        Arrays.sort(movies);
+        // dp[i] -> min groups when we have i .. movies.length-1 movies available
+        int[] dp = new int[movies.length+1];
+        dp[movies.length] = 0;
+        
+        for(int idx=movies.length-1; idx>=0; idx--) {
+            
+            // taking only 1 in current group
+            dp[idx] = 1 + dp[idx+1];
+            
+            // trying to take more movies in group
+            for(int nextIdx=idx+1; nextIdx<movies.length-1; nextIdx++) {
+                
+                if(movies[nextIdx] > movies[idx] + diff) {
+                    break;
+                } else {
+                    dp[idx] = Math.min(dp[idx], 1 + dp[nextIdx+1]);
+                }
+            }
+        }
+        
+        return dp[0];
+    }
