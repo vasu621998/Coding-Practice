@@ -683,3 +683,32 @@ public static int numberOfConnections(List<List<Integer>> gridOfNodes)
 
         return answer;
     }
+
+	
+def  sumSubarrayMin(arr) : 
+    stack = []
+    arr.append(-1) 
+    res=0  
+    
+    for i in range(len(arr))  :  
+        while stack and  arr[i] <  arr[stack[-1]] : 
+            idx = stack.pop() 
+            res+=  arr[idx] *  (i-idx ) *  (idx -  (stack[-1] if stack else -1 ))
+        stack.append(i) 
+    return res % (10 **9  +7) 
+
+def  sumSubarrayMax(arr) : 
+    stack = []
+    arr.append(float('inf')) 
+    res=0  
+    
+    for i in range(len(arr))  :  
+        while stack and  arr[i] >  arr[stack[-1]] : 
+            idx = stack.pop() 
+            res+=  arr[idx] *  (i-idx ) *  (idx -  (stack[-1] if stack else -1 ))
+        stack.append(i) 
+    return res % (10 **9  + 7 )
+
+minn = sumSubarrayMin([2,4,3,5])
+maxx= sumSubarrayMax([2,4,3,5])
+print(maxx -minn)
