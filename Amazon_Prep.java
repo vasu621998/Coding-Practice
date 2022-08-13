@@ -159,3 +159,46 @@ public class Solution {
         return count;
     }
 }
+
+
+public class Solution {
+    public List<int[]> optimizeMemoryUsage(int[] foregroundTasks, int[] backgroundTasks, int K) {
+		List<int[]> result = new ArrayList();
+		TreeMap<Integer, List<Integer>> foregroundMemToIds = new TreeMap();
+		
+		for (int i = 0; i < foregroundTasks.length; ++i) {
+		    int mem = foregroundTasks[i];
+		    if (mem > K)
+		        continue;
+		    foregroundMemToIds.putIfAbsent(mem, new ArrayList());
+		    foregroundMemToIds.get(mem).add(i);
+		}
+		foregroundMemToIds.put(0, new ArrayList());
+		foregroundMemToIds.get(0).add(-1);
+		
+		int maxMem = foregroundMemToIds.lastKey();
+		for (int foregroundId : foregroundMemToIds.get(maxMem)) {
+		    result.add(new int[] { foregroundId,  -1 });
+		}
+		
+		for (int i = 0; i < backgroundTasks.length; ++i) {
+		    int backgroundMem = backgroundTasks[i];
+		    Integer foregroundMem = foregroundMemToIds.floorKey(K - backgroundMem);
+		    if (foregroundMem == null) 
+		        continue;
+		    int sumMem = foregroundMem + backgroundMem;
+		    if (sumMem > K || sumMem < maxMem) 
+		        continue;
+		        
+		    if (sumMem > maxMem) {
+		        result = new ArrayList();
+		        maxMem = sumMem;
+		    }
+		    
+		    for (int foregroundId : foregroundMemToIds.get(foregroundMem))
+		        result.add(new int[] { foregroundId,  i });
+		}
+
+		return result;
+    }
+}
