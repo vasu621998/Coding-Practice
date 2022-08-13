@@ -935,3 +935,14 @@ def MaxBoundedArray(n, low, up):
 			q.appendleft(ele)
 			if len(q) == n:
 				return list(q)
+
+					
+private static void findTime(String s, int[] count) {
+    String s1 = s.replaceAll("01", "10");
+    if (!s1.equals(s)) {
+        int c = count[0];
+        count[0] = ++c;
+        findTime(s1, count);
+    }
+
+}
