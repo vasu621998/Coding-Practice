@@ -202,3 +202,21 @@ public class Solution {
 		return result;
     }
 }
+
+
+public class M13
+{
+    public int Packaging(int[] arr)
+    {
+            Array.Sort(arr);
+            int[] dp = new int[arr.Length];
+            dp[0] = 1;
+            for (int i = 1; i < arr.Length; i++)
+            {
+                int required = dp[i - 1];
+                dp[i] = Math.Max(required, Math.Min(required + 1, arr[i]));
+            }
+
+            return dp[arr.Length - 1];
+        }
+}
