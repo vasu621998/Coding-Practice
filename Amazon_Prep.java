@@ -533,3 +533,45 @@ public static int [] test(int [] nums, int d)
 return result;
 }
 
+public static int findSubscriberGroups(List<String> arrayList) {
+    if (null == arrayList || arrayList.isEmpty()) {
+        return 0;
+    }
+    int count = 0;
+    int[][] isConnected = new int[arrayList.size()][arrayList.size()];
+
+    for (int i = 0; i < arrayList.size(); i++) {
+
+        String row = arrayList.get(i);
+
+        for (int j = 0; j < row.length(); j++) {
+
+            // isConnected[i][j] = (row.charAt(j) - '0'); //Working
+            isConnected[i][j] = Integer.parseInt(Character.toString(row.charAt(j)));
+        }
+
+    }
+
+    boolean[] isReached = new boolean[isConnected.length];
+    for (int i = 0; i < isConnected.length; i++) {
+        if (!isReached[i]) {
+            alignedGroups(isConnected, isReached, i);
+            count++;
+
+        }
+
+    }
+    return count;
+
+}
+
+private static void alignedGroups(int[][] isConnected, boolean[] isReached, int v) {
+    isReached[v] = true;
+
+    for (int i = 0; i < isConnected.length; i++) {
+        if (isConnected[v][i] == 1 && !isReached[i])
+            alignedGroups(isConnected, isReached, i);
+
+    }
+
+}
