@@ -804,3 +804,63 @@ public int numberOfSegments(int[] A, int limit) {
         }
         return count;
     }
+
+
+    public static int[] getTimes(int[] time, int[] direction) {
+        Queue<Integer> enters = new LinkedList<Integer>();
+        Queue<Integer> exits = new LinkedList<Integer>();
+        int n = time.length;
+        for(int i = 0; i < n; i++) {
+            Queue<Integer> q = direction[i] == 1 ? exits : enters;
+            q.offer(i);
+        }
+
+        int[] result = new int[n];
+        int lastTime = -2;
+        Queue<Integer> lastQ = exits;
+        while(enters.size() > 0 && exits.size() > 0) {
+            int currentTime = lastTime + 1;
+            int peekEnterTime = time[enters.peek()];
+            int peekExitTime = time[exits.peek()];
+            Queue<Integer> q;
+            if (currentTime < peekEnterTime && currentTime < peekExitTime) {
+                // The turnstile was not used
+                // Take whoever has the earliest time or
+                // if enter == exit, take exit
+                q = (peekEnterTime < peekExitTime) ? enters : exits;
+                int personIdx = q.poll();
+                result[personIdx] = time[personIdx];
+                lastTime = time[personIdx]; // time
+                lastQ = q;
+            } else {
+                // Turnstile was used last second
+                if (currentTime >= peekEnterTime && currentTime >= peekExitTime) {
+                    // Have people waiting at both ends
+                    // Prioritize last direction
+                    q = lastQ;
+                } else {
+                    // current >= enters.peek() || current >= exits.peek()
+                    q = currentTime >= peekEnterTime ? enters : exits; // take whatever that's queuing
+                }
+                int personIdx = q.poll();
+                result[personIdx] = currentTime;
+                lastTime = currentTime; // time
+                lastQ = q;
+            }
+        }
+
+        Queue<Integer> q = enters.size() > 0 ? enters : exits;
+        while(q.size() > 0) {
+            int currentTime = lastTime + 1;
+            int personIdx = q.poll();
+            if (currentTime < time[personIdx]) {
+                // The turnstile was not used
+                currentTime = time[personIdx];
+            }
+
+            result[personIdx] = currentTime;
+            lastTime = currentTime; // time
+        }
+
+        return result;
+    }
