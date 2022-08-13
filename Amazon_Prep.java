@@ -741,3 +741,21 @@ print(maxx -minn)
         }
         return count;
     }
+
+	
+public long findMaxProducts(List<Integer> products) {
+        int l = products.size();
+        long max = 0;
+        for(int i=l-1;i>=0;--i) {
+            if(i!=l-1 && products.get(i) < products.get(i+1)) continue;
+            long localMax = products.get(i);
+            long prev = localMax;
+            for(int j=i-1;j>=0;--j) {
+                prev = Math.min(prev-1, products.get(j));
+                localMax+=prev;
+                if(prev==1) break;
+            }
+            max = Math.max(localMax,max);
+        }
+        return max;
+    }
