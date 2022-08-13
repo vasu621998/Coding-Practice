@@ -966,13 +966,25 @@ def password(word):
       consonent=0
   return res
 
-def countMovesToLeft(nums, target):
-	count = 0
-	last = 0
-	for i in range(len(nums)):
-		if nums[i] == target:
-			count += i - last
-			last += 1
-	return count
-        
-return min(countMovesToLeft(nums, 1), countMovesToLeft(nums, 0))
+    public static int countMinimumOperations(String s) {
+		int count = 0;
+		for (int i = 0; i < s.length(); i++) {
+			int j = i;
+			boolean Vcount = false;
+			boolean Ccount = false;
+			while (j < s.length()) {
+				if("aeiou".indexOf(s.charAt(j)) != -1)
+					Vcount = true;
+				else
+					Ccount = true;
+				if (Vcount && Ccount) {
+					count++;
+					i = j++;
+					break;
+				}
+				j++;
+
+			}
+		}
+		return count;
+    }
