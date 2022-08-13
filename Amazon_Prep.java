@@ -1161,3 +1161,33 @@ def pairSum(head: Optional[ListNode]) -> int:
             max_pages = max(max_pages, first.val+second.val)
             first, second = first.next, second.next
         return max_pages
+
+// Find the all numbers in maximum intersections for given intervals.
+//Ex:[[1,5],[5,10],[5,5]]:
+//the maximum intersection is [5,5] and there's only 1 number in it so answer is 1.
+    public static int maximumIntersection(int[][] arr){
+        Arrays.sort(arr,(a,b)->(a[0]-b[0]));
+        
+        int count = 0 ; 
+        
+        int max = 0 ; 
+        
+        int no = 0 ;
+        
+        for(int i=1 ; i<arr.length ; i++){
+           
+            if(arr[i-1][1]==arr[i][0]){
+                
+                count+=1; 
+                max = Math.max(count,max);
+                no = arr[i][0];
+            }
+            else{
+                
+                count = 0 ; 
+            }   
+            
+        }
+        
+        return no ; 
+    }		    
