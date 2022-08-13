@@ -247,3 +247,31 @@ private int noOfDistancesLessThan(int dist,int[] nums){
     return count;
 }
 }
+
+
+
+
+class HelloWorld {
+    public static int solve(String s, int k) {
+        int[] prefix = new int[26];
+        int[] suffix = new int[26];
+        for(char c : s.toCharArray()) {
+            suffix[c-'a']+=1;
+        }
+        int categories = 0;
+        int ans = 0;
+        for(int i = 0; i < s.length(); i++) {
+            char cur = s.charAt(i);
+            int idx = cur - 'a';
+            suffix[idx]--;
+            prefix[idx]++;
+            if(suffix[idx] > 0 && prefix[idx] > 0) {
+                categories++;
+            } else {
+                categories--;
+            }
+            if(categories>k) ans++;
+        }
+        return ans;
+    }
+}
