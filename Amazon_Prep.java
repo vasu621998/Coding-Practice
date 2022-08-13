@@ -771,3 +771,14 @@ public int minSwapsRequired(String s) {
  if(s.length()%2==0 && swap%2==1) return -1;
  return (swap+1)/2; 
 }
+
+	
+def appealSum(self, s: str) -> int:
+    a=dict()
+    for x in 'abcdefghijklmnoppqrstuvwxyz':
+        a[x]=-1
+    ans=0
+    for i,x in enumerate(s):
+        ans+=(i-a[x])*(len(s)-i)
+        a[x]=i
+    return ans
