@@ -946,3 +946,33 @@ private static void findTime(String s, int[] count) {
     }
 
 }
+
+	
+// Find the password strength.
+// For each substring of the password which contains at least one vowel and one consonant, its strength goes up by 1.
+// vowels={'a', 'e', 'i', 'o', 'u'}, and rest of letters are all consonant.
+password = "thisisbeautiful"
+vowels = {'a', 'e', 'i', 'o', 'u'}
+count = 0
+
+v_found, c_found = False, False        
+for p in password:
+	if p in vowels:
+		c_found = True
+	else:
+		v_found = True
+	if v_found and c_found:
+		count += 1
+		v_found, c_found = False, False
+print(count)
+
+def countMovesToLeft(nums, target):
+	count = 0
+	last = 0
+	for i in range(len(nums)):
+		if nums[i] == target:
+			count += i - last
+			last += 1
+	return count
+        
+return min(countMovesToLeft(nums, 1), countMovesToLeft(nums, 0))
