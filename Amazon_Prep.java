@@ -1191,3 +1191,33 @@ def pairSum(head: Optional[ListNode]) -> int:
         
         return no ; 
     }		    
+
+	
+    public static int shoppingOption(int[][] prices, int budget) {
+        int[] rslt = new int[1];
+        for(int[] row:prices){
+            Arrays.sort(row);
+        }
+        bt(prices, 0, budget, rslt);
+        return rslt[0];
+    }
+
+    private static void bt(int[][] prices, int r, int remain, int[] rslt) {
+        if (r < prices.length) {
+            int[] p = prices[r];
+            for (int i = 0; i < p.length; i++) {
+                int rem = remain - p[i];
+                if (rem < 0) {
+                    return;
+                }
+                if (r < prices.length - 1) {
+                    if (rem == 0) {
+                        return;
+                    }
+                    bt(prices, r + 1, rem, rslt);
+                } else {
+                    rslt[0] = rslt[0] + 1;
+                }
+            }
+        }
+    }
