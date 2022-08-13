@@ -275,3 +275,27 @@ class HelloWorld {
         return ans;
     }
 }
+
+
+
+def minGroups(movies, k):
+    movies.sort()
+    
+    ret = []
+    # left pointer of subarray
+    l = 0
+    for r in range(len(movies)):        
+        # max difference in subarray > k
+        # array is sorted so rightmost value will always be largest
+        # leftmost is always smallest
+        if (movies[r] - movies[l]) > k:
+            # add group to listofGroups
+            # use r not r+1 so we don't include the value that caused
+            # group to be invalid
+            ret.append(movies[l:r])
+            # move left pointer to current value, start of new subarray
+            l = r
+    
+    # append last group if there was any at the end of the for loop
+    ret.append(movies[l:r+1])   
+    return ret
