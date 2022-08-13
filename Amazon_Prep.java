@@ -712,3 +712,32 @@ def  sumSubarrayMax(arr) :
 minn = sumSubarrayMin([2,4,3,5])
 maxx= sumSubarrayMax([2,4,3,5])
 print(maxx -minn)
+
+		    
+    public int numOfOtions(List<Integer> jeans, List<Integer> top, List<Integer> skirt, List<Integer> shoes, int budget) {
+        
+        int count = 0;
+        Map<Integer,Integer> map = new HashMap<Integer, Integer>();
+        
+        if(budget == 0) {
+            return count;
+        }
+        for(int i1: jeans) {
+            for(int i2: top) {
+                int sum = i1+i2;
+                map.put(sum,map.getOrDefault(sum,0)+1);
+            }
+        }
+        
+        for(int i3: skirt) {
+            for(int i4: shoes) {
+                int sum = budget-(i3+i4);
+                for(Map.Entry<Integer,Integer> entry: map.entrySet()) {
+                    if(entry.getKey() <=sum) {
+                        count+=entry.getValue();
+                    }
+                }
+            }
+        }
+        return count;
+    }
