@@ -302,3 +302,26 @@ class HelloWorld {
         
         return dp[0];
     }
+
+
+    public int[] arrayRankTransform(int[] arr) {
+        int nums[] = new int[arr.length];
+        int ans[] = new int[arr.length];
+        HashMap<Integer,Integer>hm=new HashMap<>();
+        for(int i=0;i<nums.length;i++) nums[i]=arr[i];
+        Arrays.sort(nums);
+        int index=1;
+        for(int i=0;i<nums.length;i++){
+            if(hm.containsKey(nums[i]))
+                continue;
+            else{
+            hm.put(nums[i],index);
+            index++;
+            }
+        }
+        for(int i=0;i<ans.length;i++){
+            ans[i]=hm.get(arr[i]);
+        }
+        return ans;
+    }
+}
