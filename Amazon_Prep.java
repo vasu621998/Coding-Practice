@@ -1248,3 +1248,60 @@ def merge_byte_range(chunks):
         res.append(curr)
         prev = curr
     return res
+
+// Two sum variation 
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        # hashmap = {nums[i]:i for i in range(len(nums))}\
+        # above code cannot handle case where nums = [3,3] and target = 6
+        n = len(nums)
+        hashmap = {nums[i]: [[], 0] for i in range(n)} # stores the indexes and frequency count
+        
+        for i in range(n):
+            hashmap[nums[i]][0].append(i)
+            hashmap[nums[i]][1] += 1
+            
+        for i in range(n):
+            difference = target - nums[i]
+            if difference != nums[i]:
+                try:
+                    another = hashmap[difference][0][0]
+                except KeyError:
+                    continue
+                else:
+                    return [i, another]
+            else:
+                if hashmap[nums[i]][1] != 1:
+                    return hashmap[nums[i]][0][-2:]
+                else:
+                    continue
+			 
+    private List<int[]> getPairs(List<int[]> a, List<int[]> b, int target) {
+        Collections.sort(a, (i,j) -> i[1] - j[1]);
+        Collections.sort(b, (i,j) -> i[1] - j[1]);
+        List<int[]> result = new ArrayList<>();
+        int max = Integer.MIN_VALUE;
+        int m = a.size();
+        int n = b.size();
+        int i =0;
+        int j =n-1;
+        while(i<m && j >= 0) {
+            int sum = a.get(i)[1] + b.get(j)[1];
+            if(sum > target) {
+                 --j;
+            } else {
+                if(max <= sum) {
+                    if(max < sum) {
+                        max = sum;
+                        result.clear();
+                    }
+                    result.add(new int[]{a.get(i)[0], b.get(j)[0]});
+                    int index = j-1;
+                    while(index >=0 && b.get(index)[1] == b.get(index+1)[1]) {
+                         result.add(new int[]{a.get(i)[0], b.get(index--)[0]});
+                    }
+                }
+                ++i;
+            }
+        }
+        return result;
+    } 
