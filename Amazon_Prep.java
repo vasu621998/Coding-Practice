@@ -1113,3 +1113,51 @@ print(maxx -minn)
             this.value = value;
         }
     }
+
+	
+// In order to ensure Account security
+from collections import defaultdict
+
+
+def solution(password):
+
+    count = 0
+
+    for i in range(len(password)):
+        c, start = defaultdict(int), 0
+        k = i + 1  # length of substring
+        for j in range(len(password)):
+            c[password[j]] += 1 
+            if j - k + 1 >= 0: # if we have enough characters for the length of the substring we are considering
+                count += len(c) # increment all the distinct characters essentially the size of our dictionary
+                c[password[j - k + 1]] -= 1 # decrement the character that will be excluded from our sliding window
+                if c[password[j - k + 1]] == 0: # if that character has a count of 0 we remove it since it doesn't exist in our sliding window
+                    del c[password[j - k + 1]]
+
+    return count
+
+// Amazon Sellers sometimes provide a link
+def pairSum(head: Optional[ListNode]) -> int:
+        
+        def reverse(start):
+            prev = None
+            while start:
+                temp = start.next
+                start.next = prev
+                prev = start
+                start = temp
+            
+            return prev
+        
+        max_pages = 0
+        fast, slow = head, head
+        while fast and fast.next:
+            fast = fast.next.next
+            slow = slow.next
+        
+        first, second = head, reverse(slow)
+        
+        while first and second:
+            max_pages = max(max_pages, first.val+second.val)
+            first, second = first.next, second.next
+        return max_pages
