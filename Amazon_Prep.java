@@ -864,3 +864,23 @@ public int numberOfSegments(int[] A, int limit) {
 
         return result;
     }
+
+	
+from collections import defaultdict
+
+def findMaxmumGreyness(arr):
+	row_1 = defaultdict(int)
+	col_1 = defaultdict(int)
+
+	for i in range(len(arr)):
+		for j in range(len(arr[i])):
+			if arr[i][j] == 1:
+				row_1[i] += 1
+				col_1[j] += 1
+	maxG = float('-inf')
+	m = len(arr)
+	n = len(arr[0])
+	for i in range(len(arr)):
+		for j in range(len(arr[i])):
+			maxG = max(maxG, row_1[i] + col_1[j] - (n - row_1[i]) - (m - col_1[j]))
+	return maxG
