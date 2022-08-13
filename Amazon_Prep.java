@@ -759,3 +759,15 @@ public long findMaxProducts(List<Integer> products) {
         }
         return max;
     }
+
+	
+public int minSwapsRequired(String s) {
+ int l = 0, r = s.length()-1, swap = 0;
+ while(l<r) {
+  if(s.charAt(l)!=s.charAt(r)) swap++;
+  l++;
+  r--;
+ }
+ if(s.length()%2==0 && swap%2==1) return -1;
+ return (swap+1)/2; 
+}
