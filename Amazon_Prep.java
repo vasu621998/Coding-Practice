@@ -884,3 +884,31 @@ def findMaxmumGreyness(arr):
 		for j in range(len(arr[i])):
 			maxG = max(maxG, row_1[i] + col_1[j] - (n - row_1[i]) - (m - col_1[j]))
 	return maxG
+
+				
+				
+public class Solution {
+public int ConnectSticks(int[] sticks) {
+if (sticks.Length ==1)
+{
+return 0;
+}
+SortedSet<(int,int)> sSet = new SortedSet<(int,int)>();
+int i = 0;
+foreach(var stick in sticks)
+{
+sSet.Add((stick,i++));
+}
+int cost=0;
+while(sSet.Count > 1)
+{
+var temp = sSet.Min.Item1;
+sSet.Remove(sSet.Min);
+temp+= sSet.Min.Item1;
+sSet.Remove(sSet.Min);
+sSet.Add((temp,i++));
+cost += temp;
+}
+return cost;
+}
+}
