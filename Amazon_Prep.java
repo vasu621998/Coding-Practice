@@ -1066,3 +1066,50 @@ def  sumSubarrayMax(arr) :
 minn = sumSubarrayMin([2,4,3,5])
 maxx= sumSubarrayMax([2,4,3,5])
 print(maxx -minn)
+
+		    
+    
+    private static int totalPrice(String[][] products, String[][] discounts) {
+        HashMap<String, Discount> dic = new HashMap();
+        for(String[] discount:discounts){
+            int type = Integer.parseInt(discount[1]);
+            int value = Integer.parseInt(discount[2]);
+            dic.put(discount[0],new Discount(discount[0],type,value));
+        }
+        int res=0;
+        for(String[] product:products){
+            int price = Integer.parseInt(product[0]);
+            int min = price;
+            for(int i = 1;i<product.length;i++){
+                int curprice = price;
+                String index= product[i];
+                if(!index.equals("EMPTY")){
+                    Discount dis= dic.get(index);
+                    if(dis.type==0){
+                        curprice = dis.value;
+                    }
+                    else if(dis.type==1){
+                        curprice = curprice*(1-dis.value/100);
+                    }
+                    else if(dis.type==2){
+                        curprice-=dis.value;
+                    }
+                    min=Math.min(min, curprice);
+                }
+            }
+            res+=min;
+        }
+        return res;
+    }
+    
+    static class Discount{
+        String index;
+        int type;
+        int value;
+        
+        Discount(String index, int type, int value) {
+            this.index = index;
+            this.type = type;
+            this.value = value;
+        }
+    }
