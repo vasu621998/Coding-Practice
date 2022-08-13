@@ -635,3 +635,51 @@ public List<Integer> numberOfItems(String s, List<Integer> startIndices, List<In
             if prev >= curr:
                 res+=1
         return res   
+
+			
+			
+public static int numberOfConnections(List<List<Integer>> gridOfNodes)
+    {
+        int n = gridOfNodes.size();
+        int m = gridOfNodes.get(0).size();
+
+        // array for storing number of 1's in each row
+        int rowCounts[] = new int[n];
+
+        int i = 0;
+        for(List<Integer> x: gridOfNodes)
+        {
+            int count = 0;
+            for(int y: x)
+            {
+                if(y == 1)
+                    count++;
+            }
+            rowCounts[i++] = count;
+        }
+
+        int prev = -1, answer = 0;
+
+        // finding the first non-zero number in rowCounts
+        for(i = 0;i < n;i++)
+        {
+            if(rowCounts[i] != 0)
+            {
+                prev = rowCounts[i];
+                break;
+            }
+        }
+
+        i++;
+        // multiplying every non-zero rowCounts with previous non-zero rowCounts
+        for(;i < n;i++)
+        {
+            if(rowCounts[i] != 0)
+            {
+                answer += prev * rowCounts[i];
+                prev = rowCounts[i];
+            }
+        }
+
+        return answer;
+    }
