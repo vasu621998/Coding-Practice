@@ -318,3 +318,15 @@ class Solution:
         return True          
     def canWinNim(self, n: int) -> bool:
         return n % 4
+    def firstUniqChar(self, s: str) -> int:
+        
+        
+        c = collections.Counter(list(s))
+        
+        for i in range(len(s)):
+            
+            if c.get(s[i]) == 1:
+                return i
+        
+        return -1   
+   # T: O(N)
