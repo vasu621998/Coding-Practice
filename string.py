@@ -330,3 +330,17 @@ class Solution:
         
         return -1   
    # T: O(N)
+    def uniqueMorseRepresentations(self, words: List[str]) -> int:
+        coded = [".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",\
+                 ".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",\
+                 ".--","-..-","-.--","--.."]
+        res = set()
+        for i in words:
+            code = ''
+            for j in i :
+                code += coded[ord(j)-97]
+            res.add(code)
+            
+        return len(res) 
+# T: O(N)
+# S: O(1)
