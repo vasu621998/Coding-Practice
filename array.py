@@ -845,3 +845,30 @@ class Solution:
             l += 1
 # T: O(N^2)
 # S: O(1)
+    def permuteUnique(self, nums: List[int]) -> List[List[int]]:
+        output = []  # This is where the permutations shall get appended
+        def recurse(num, count, taken):  # A backtracking recursive function that will do the job
+            """
+            num: our temporary list for the current permutation being constructed
+            count: length of the current permutation
+            taken: list indicating whether or not a specific element has been included in the current permutation
+            """
+            
+            # Base case: Case when we have created a permutation of the length we want after recursion 
+            if count == len(nums):  
+                if num not in output:
+                    output.append(num)
+                return
+            
+            # Otherwise, pick an element from the remaining elements and place it at the end of current list
+            # Perform this operation recursively to obtain all possible permutations
+            else:
+                for i in range(len(nums)):
+                    if taken[i] is not True:
+                        recurse(num+[nums[i]], count+1, taken[:i]+[True]+taken[i+1:])
+        
+        # Call the recursive function starting from an empty permutation with no count and nothing taken at first
+        recurse([], 0, [False]*len(nums))
+        
+        # The above function modifies the global output list which contains our desired output
+        return output
