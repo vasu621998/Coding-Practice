@@ -893,3 +893,23 @@ class Solution:
                             res = max(res, colSum - colSums[idx])
                     insort(colSums, colSum)
         return res
+    def numIslands(self, grid: List[List[str]]) -> int:
+      m = len(grid)
+      n = len(grid[0])
+      
+      def traverseLand(i,j):
+        if(i>=0 and i<m and j>=0 and j<n and grid[i][j]=='1'):
+          grid[i][j]='0'
+          traverseLand(i+1,j)
+          traverseLand(i,j+1)
+          traverseLand(i-1,j)
+          traverseLand(i,j-1)
+        
+      op=0
+      for i in range(m):
+        for j in range(n):
+          if(grid[i][j]=='1'):
+            op+=1
+            traverseLand(i,j)
+      
+      return op 
