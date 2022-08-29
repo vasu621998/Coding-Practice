@@ -352,3 +352,19 @@ class Solution:
                 magazine.remove(i)
             else:return False
         return True  
+    def countAndSay(self, n: int) -> str:
+        res = '1'
+        count = 0
+        for i in range(1, n):
+            temp = ''
+            l = 0
+            count = 0
+            for r in range(len(res) + 1):
+                if (r < len(res) and res[l] != res[r]) or r == len(res):
+                    count = r - l
+                    temp += str(count) + res[r - 1]
+                    l = r
+            
+            res = temp
+            
+        return res
