@@ -232,3 +232,27 @@ class Solution:
         return res 
 #T: O(N)
 #S: O(1)
+    def findTilt(self, root: Optional[TreeNode]) -> int:
+        res = [0]
+        def tilt_helper(root,res):
+            if not root: 
+                return 0
+                
+            left = tilt_helper(root.left,res)
+            right = tilt_helper(root.right,res)
+
+            res[0] += abs(left-right)
+
+            return left + right + root.val
+
+        tilt_helper(root,res)
+        return res[0]
+# T: O(N)
+# S: O(1)
+#Input: root = [1,2,3]
+#Output: 1
+#Explanation: 
+#Tilt of node 2 : |0-0| = 0 (no children)
+#Tilt of node 3 : |0-0| = 0 (no children)
+#Tilt of node 1 : |2-3| = 1 (left subtree is just left child, so sum is 2; right #subtree is just right child, so sum is 3)
+#Sum of every tilt : 0 + 0 + 1 = 1
