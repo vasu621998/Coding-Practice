@@ -941,3 +941,19 @@ class Solution:
             ans_ind = hashh[ans_ind]
         out.append(nums[ans_ind])
         return(out)
+    def arithmeticTriplets(self, nums: List[int], diff: int) -> int:
+        seen = dict()
+        count = 0
+        for x in nums:
+            if x - diff in seen and x - 2 * diff in seen:
+                count += 1
+            seen[x] = True
+        return count
+# T: O(N)
+# S: O(N)
+
+#Input: nums = [0,1,4,6,7,10], diff = 3
+#Output: 2
+#Explanation:
+#(1, 2, 4) is an arithmetic triplet because both 7 - 4 == 3 and 4 - 1 == 3.
+#(2, 4, 5) is an arithmetic triplet because both 10 - 7 == 3 and 7 - 4 == 3. 
