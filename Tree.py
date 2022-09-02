@@ -256,3 +256,22 @@ class Solution:
 #Tilt of node 3 : |0-0| = 0 (no children)
 #Tilt of node 1 : |2-3| = 1 (left subtree is just left child, so sum is 2; right #subtree is just right child, so sum is 3)
 #Sum of every tilt : 0 + 0 + 1 = 1
+    def averageOfLevels(self, root: Optional[TreeNode]) -> List[float]:
+        res = defaultdict(int)
+        cnt = defaultdict(int)
+        def dfs(root, level):
+            if not root: return
+            res[level] += root.val
+            cnt[level] += 1
+            dfs(root.left, level + 1)
+            dfs(root.right, level + 1)
+        dfs(root, 0)
+        return [res[i]/cnt[i] for i in res]
+    
+# T: O(N)
+# S: O(1)
+
+#Input: root = [3,9,20,null,null,15,7]
+#Output: [3.00000,14.50000,11.00000]
+#Explanation: The average value of nodes on level 0 is 3, on level 1 is 14.5, and on #level 2 is 11.
+#Hence return [3, 14.5, 11].
