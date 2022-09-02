@@ -275,3 +275,39 @@ class Solution:
 #Output: [3.00000,14.50000,11.00000]
 #Explanation: The average value of nodes on level 0 is 3, on level 1 is 14.5, and on #level 2 is 11.
 #Hence return [3, 14.5, 11].
+	def averageOfSubtree(self, root: Optional[TreeNode]) -> int:
+		tot_sum, tot_nodes, op = self.averageOfSubtree_helper(root)
+		return op
+
+	def averageOfSubtree_helper(self, root: Optional[TreeNode]) -> int:
+		 # Base cases
+		 
+		if root == None:
+			return 0, 0, 0
+		
+		# If the node is a leaf
+		if root.left == None and root.right == None:
+			return root.val,1,1
+		
+		# Recursively calling the left and right subtrees 
+		lst_sum, lst_nodes, lst_op = self.averageOfSubtree_helper(root.left)
+		rst_sum, rst_nodes , rst_op = self.averageOfSubtree_helper(root.right)
+		
+		# If the subtree sum == node's value, we add that node to the final output, else we wont 
+		if (lst_sum + rst_sum + root.val)//(lst_nodes + rst_nodes + 1) == root.val:
+
+			return lst_sum + rst_sum + root.val, lst_nodes + rst_nodes + 1, lst_op + rst_op + 1
+		
+		
+		else:
+
+			return lst_sum + rst_sum + root.val, lst_nodes + rst_nodes + 1, lst_op + rst_op
+  
+  
+  # Time Complexity analysis :- 
+  
+  #  For every node, we check if it's value is equal to the subtree avg and return 3 values, which is a constant work, say k1 
+  #  In that way, we check for the entire 'n' no.of nodes, so total work = n*k1, so
+  
+  # T: O(n)
+  # S: O(1)
