@@ -311,3 +311,32 @@ class Solution:
   
   # T: O(n)
   # S: O(1)
+    def sumEvenGrandparent(self, root: TreeNode) -> int:
+        
+        ans = []
+        def helper(node):
+            if not node:
+                return 
+            if node.val%2==0:
+                if node.left :
+                    if node.left.left:
+                        ans.append(node.left.left.val)
+                    if node.left.right:
+                        ans.append(node.left.right.val)
+                if node.right:
+                    if node.right.left:
+                        ans.append(node.right.left.val)
+                    if node.right.right:
+                        ans.append(node.right.right.val)
+                        
+            helper(node.left)
+            helper(node.right)
+        helper(root)
+        return sum(ans)        
+
+# T: O(N)
+# S: O(1)
+
+#Input: root = [6,7,8,2,7,1,3,9,null,1,4,null,null,null,5]
+#Output: 18
+#Explanation: The red nodes are the nodes with even-value grandparent while the blue nodes are the even-value grandparents.
