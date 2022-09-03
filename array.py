@@ -957,3 +957,27 @@ class Solution:
 #Explanation:
 #(1, 2, 4) is an arithmetic triplet because both 7 - 4 == 3 and 4 - 1 == 3.
 #(2, 4, 5) is an arithmetic triplet because both 10 - 7 == 3 and 7 - 4 == 3. 
+        result = []
+        # Use backtracking to gather all possible results
+        def backtracking(current_list):
+            nonlocal n, result
+            # If length already matches, then record this result
+            if len(current_list) == n:
+                result.append("".join(current_list))
+                return
+            # Get the last digit and calculate the next valid digit
+            last_digit = int(current_list[-1])
+            # Positive difference, goto next layer of backtracking if next digit is valid
+            if last_digit + k < 10:
+                current_list.append(str(last_digit + k))
+                backtracking(current_list)
+                current_list.pop()
+            # Negative difference, notice that we put k != 0 here to avoid getting duplicate answers
+            if last_digit - k >= 0 and k != 0:
+                current_list.append(str(last_digit - k))
+                backtracking(current_list)
+                current_list.pop()        
+        # Try all leading digits from [1-9], notice that leading 0 is invalid
+        for i in range(1,10):
+            backtracking([str(i)])
+        return result 
