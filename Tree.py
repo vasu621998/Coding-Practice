@@ -340,3 +340,13 @@ class Solution:
 #Input: root = [6,7,8,2,7,1,3,9,null,1,4,null,null,null,5]
 #Output: 18
 #Explanation: The red nodes are the nodes with even-value grandparent while the blue nodes are the even-value grandparents.
+        if not root: return None
+        root.left, root.right = self.pruneTree(root.left), self.pruneTree(root.right)
+        return root if (root.left or root.right or root.val == 1) else None
+# T: O(N)
+
+#Input: root = [1,null,0,0,1]
+#Output: [1,null,0,null,1]
+#Explanation: 
+#Only the red nodes satisfy the property "every subtree not containing a 1".
+#The diagram on the right represents the answer.
