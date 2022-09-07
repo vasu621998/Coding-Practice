@@ -350,3 +350,23 @@ class Solution:
 #Explanation: 
 #Only the red nodes satisfy the property "every subtree not containing a 1".
 #The diagram on the right represents the answer.
+    def tree2str(self, root: Optional[TreeNode]) -> str:
+        result=[]
+        def createString(root):
+            if not root:
+                return
+            result.append('(')
+            result.append(str(root.val))
+            createString(root.left)
+            if not root.left and root.right:
+                    result.append('()')
+            createString(root.right)
+            result.append(')')
+        createString(root)
+        return ''.join(result)[1:-1]   
+# T: O(N)
+# S: O(1)
+
+#Input: root = [1,2,3,4]
+#Output: "1(2(4))(3)"
+#Explanation: Originally, it needs to be "1(2(4)())(3()())", but you need to omit all the unnecessary empty parenthesis pairs. And it will be "1(2(4))(3)"
