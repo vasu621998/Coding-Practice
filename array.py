@@ -981,3 +981,23 @@ class Solution:
         for i in range(1,10):
             backtracking([str(i)])
         return result 
+    def bagOfTokensScore(self, tokens: List[int], power: int) -> int:
+        tokens.sort()
+        n = len(tokens)
+        i, j = 0, n
+        while i < j:
+            if tokens[i] <= power:
+                power -= tokens[i]
+                i += 1
+            elif i - (n - j) and j > i + 1:
+                j -= 1
+                power += tokens[j]
+            else: break
+        return i - (n - j)        
+    
+# T: O(NlogN)
+# S: O(1)
+
+#Input: tokens = [100], power = 50
+#Output: 0
+#Explanation: Playing the only token in the bag is impossible because you either have too little power or too little score.
