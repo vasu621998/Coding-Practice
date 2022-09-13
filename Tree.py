@@ -370,3 +370,20 @@ class Solution:
 #Input: root = [1,2,3,4]
 #Output: "1(2(4))(3)"
 #Explanation: Originally, it needs to be "1(2(4)())(3()())", but you need to omit all the unnecessary empty parenthesis pairs. And it will be "1(2(4))(3)"
+    def bstToGst(self, root: TreeNode) -> TreeNode:
+        def solve(root, currSum):
+            if root:
+                solve(root.right, currSum)
+                currSum[0] += root.val
+                root.val = currSum[0]
+                solve(root.left, currSum)
+        
+        currSum = [0]
+        solve(root, currSum)
+        return root
+
+# T: O(N)
+# S: O(1)
+
+# Input: root = [4,1,6,0,2,5,7,null,null,null,3,null,null,null,8]
+# Output: [30,36,21,36,35,26,15,null,null,null,33,null,null,null,8]
