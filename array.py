@@ -1001,3 +1001,27 @@ class Solution:
 #Input: tokens = [100], power = 50
 #Output: 0
 #Explanation: Playing the only token in the bag is impossible because you either have too little power or too little score.
+    def trap(self, height: List[int]) -> int:
+        length = len(height)
+        left = maxi = 0
+        right = length - 1
+        left_max = right_max = 0
+        ans = 0
+        while left <= right:
+            if left_max <= right_max:
+                if left_max < height[left]:
+                    left_max = height[left]
+                else:
+                    ans += left_max - height[left]
+                left += 1
+            else:
+                if right_max < height[right]:
+                    right_max = height[right]
+                else:
+                    ans += right_max - height[right]
+                right -= 1
+
+        return ans       
+
+# T: O(N)
+# S: O(1)
