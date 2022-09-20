@@ -1047,3 +1047,31 @@ class Solution:
             else:
                 strmax = strmax[1:]
         return ans 
+    def solveNQueens(self, n: int) -> List[List[str]]:
+        colset = set()
+        negdiag = set()
+        posdiag = set()
+        board = [["."] * n for i in range(n)]
+        res = []
+        
+        def backtracking(r):
+            if r ==  n :
+                copy = ["".join(row) for row in board]
+                res.append(copy)
+                return 
+            for c in range(n):
+                if c in colset or (r+ c) in posdiag or (r - c) in negdiag:
+                    continue
+                    
+                colset.add(c)
+                negdiag.add(r -c)
+                posdiag.add(r + c)
+                board[r][c] = "Q"
+                
+                backtracking(r + 1)
+                colset.remove(c)
+                negdiag.remove(r-c)
+                posdiag.remove(r + c)
+                board[r][c] = "."
+        backtracking(0)
+        return res 
