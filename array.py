@@ -1164,3 +1164,18 @@ class Solution:
 
 # Input: n = 3
 # Output: [[1,2,3],[8,9,4],[7,6,5]]
+    def sumEvenAfterQueries(self, nums: List[int], queries: List[List[int]]) -> List[int]:
+        cur = preSum = sum([num for num in nums if num % 2 == 0])
+        res = []
+        
+        for i, pair in enumerate(queries):
+            index = pair[1]
+            value = pair[0]
+            if nums[index] % 2 == 0:
+                cur += value if value % 2 == 0 else -nums[index]
+            else:
+                cur += nums[index] + value if value % 2 != 0 else 0        
+            nums[index] += value
+            res.append(cur)
+        
+        return res  
