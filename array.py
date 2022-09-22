@@ -1179,3 +1179,22 @@ class Solution:
             res.append(cur)
         
         return res  
+        rows = len(grid)
+        cols = len(grid[0])
+        dp = [[0]*cols for i in range(0, rows)]
+        dp[0][0] = grid[0][0]
+        
+        for i in range(0, rows):
+            for j in range(0, cols):
+                if i-1 >= 0 and j-1 >= 0:
+                    top = dp[i-1][j]
+                    left = dp[i][j-1]
+                    dp[i][j] = min(top + grid[i][j], left + grid[i][j])
+                elif i-1 >= 0:
+                    top = dp[i-1][j]
+                    dp[i][j] = top + grid[i][j]
+                elif j-1 >= 0:
+                    left = dp[i][j-1]
+                    dp[i][j] = left + grid[i][j]
+                    
+        return dp[rows-1][cols-1]
