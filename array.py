@@ -1198,3 +1198,31 @@ class Solution:
                     dp[i][j] = left + grid[i][j]
                     
         return dp[rows-1][cols-1]
+    def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
+        if root is None:
+            return
+        
+        ans = []
+        def dfs(node,count,path):
+            
+            if not node.left and not node.right:
+                if count+node.val == targetSum:
+                    path.append(node.val)
+                    ans.append(path[:])
+                    path.pop()
+                    
+                return
+
+            path.append(node.val)
+
+            if node.left :
+                dfs(node.left,count+node.val,path)
+            if node.right:
+                dfs(node.right,count+node.val,path)
+                
+            path.pop()
+            return
+        
+        
+        dfs(root,0,[])
+        return list(ans) 
