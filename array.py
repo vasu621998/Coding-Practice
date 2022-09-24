@@ -1334,3 +1334,33 @@ class Solution:
 
 # Input: matrix = [[1,1,1],[1,0,1],[1,1,1]]
 # Output: [[1,0,1],[0,0,0],[1,0,1]]
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        low, high = 0, len(matrix)-1
+        while low <= high:
+            mid = (low+high)//2
+            if target < matrix[mid][0]:
+                high = mid-1
+            elif target > matrix[mid][0]:
+                low = mid+1
+            else:
+                return True
+        
+        row = high
+        l, r = 0, len(matrix[0])-1
+        while l <= r:
+            mid = (l+r)//2
+            if target < matrix[row][mid]:
+                r = mid-1
+            elif target > matrix[row][mid]:
+                l = mid+1
+            else:
+                return True
+        
+        return False
+
+
+# T: O(log m + log n)    
+# S: O(1)
+
+# Input: matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 3
+# Output: true
