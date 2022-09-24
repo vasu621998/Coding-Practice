@@ -1307,3 +1307,30 @@ class Solution:
 # horse -> rorse (replace 'h' with 'r')
 # rorse -> rose (remove 'r')
 # rose -> ros (remove 'e')
+    def setZeroes(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+        n = len(matrix)
+        m = len(matrix[0])
+        col = True
+        
+        for i in range(n):
+            if matrix[i][0] == 0:
+                col = False
+            for j in range(1, m):
+                if matrix[i][j] == 0:
+                    matrix[i][0] = matrix[0][j] = 0  
+					
+        for i in range(n-1,-1,-1):
+            for j in range(1, m):
+                print(i,j)
+                if matrix[i][0] == 0 or matrix[0][j] == 0:
+                    matrix[i][j] = 0
+            if col == False:
+                matrix[i][0] = 0
+                
+# S: O(1)
+
+# Input: matrix = [[1,1,1],[1,0,1],[1,1,1]]
+# Output: [[1,0,1],[0,0,0],[1,0,1]]
