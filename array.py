@@ -1364,3 +1364,48 @@ class Solution:
 
 # Input: matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 3
 # Output: true
+    def equationsPossible(self, equations: List[str]) -> bool:
+        equals: dict[str, list[str]] = defaultdict(list)
+        non_equals: list[str] = []
+
+        for eq in equations:
+            if eq[1] == "!":
+                if eq[0] == eq[3]:
+                    return False
+                
+                non_equals.append(eq)
+                continue
+            
+            equals[eq[0]].append(eq[3])
+            equals[eq[3]].append(eq[0])
+        
+        var_to_group: dict[str, set[str]] = {}
+
+        for var in equals.keys():
+            if var in var_to_group:
+                continue
+            group: set[str] = set()
+            links: list[str] = [var]
+
+            while links:
+                link = links.pop()
+                
+                if link in group:
+                    continue
+                group.add(link)
+                var_to_group[link] = group
+                links.extend(equals[link])
+        
+        for ne in non_equals:
+            if ne[0] in var_to_group.get(ne[3], set()):
+                return False
+        
+        return True
+        
+# T : O(N)
+# S : O(1)
+
+# Input: equations = ["a==b","b!=a"]
+# Output: false
+# Explanation: If we assign say, a = 1 and b = 1, then the first equation is #satisfied, but not the second.
+#There is no way to assign the variables to satisfy both equations.
