@@ -451,3 +451,17 @@ class Solution:
                     stack.append((node.right, path))
 
         return count
+    def numTrees(self, n: int) -> int:
+        d = [0] * (n + 1)
+        d[0], d[1] = 1, 1
+        for i in range(2, n + 1):
+            for j in range(i):
+                d[i] += d[j] * d[i - j - 1]
+        return d[-1]
+    
+    
+# T : O(N)
+# S : O(1)
+
+# Input: n = 3
+# Output: 5
