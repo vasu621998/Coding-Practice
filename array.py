@@ -1434,3 +1434,32 @@ class Solution:
 # Output: 5, nums = [1,1,2,2,3,_]
 # Explanation: Your function should return k = 5, with the first five elements of nums # being 1, 1, 2, 2 and 3 respectively.
 # It does not matter what you leave beyond the returned k (hence they are underscores).
+    def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
+        nums.sort()
+        curr = []
+        result = []
+        
+        def dfs(i):
+            if i >= len(nums):
+                result.append(curr[:])
+                return
+            # include nums[i]
+            curr.append(nums[i])
+            dfs(i + 1)
+            # doesn't include nums[i]
+            curr.pop()
+            
+            # when next number is same we skip it to avoid duplicates
+            while i + 1 < len(nums) and nums[i] == nums[i + 1]:
+                i += 1
+            # now the list is like without duplicates
+            dfs(i + 1)
+        
+        dfs(0)
+        return result
+
+# T : O(N)
+# S : O(N)
+
+# Input: nums = [1,2,2]
+# Output: [[],[1],[1,2],[1,2,2],[2],[2,2]]
