@@ -1409,3 +1409,28 @@ class Solution:
 # Output: false
 # Explanation: If we assign say, a = 1 and b = 1, then the first equation is #satisfied, but not the second.
 #There is no way to assign the variables to satisfy both equations.
+    def removeDuplicates(self, nums: List[int]) -> int:
+        l = 0
+        for r in range(len(nums)):
+            if nums[l] == nums[r]:
+                if r - l + 1 > 2:
+                    nums[r] = None
+            else:
+                l = r
+
+        current_index = 0
+        for i in range(len(nums)):
+            nums[current_index] = nums[i]
+
+            if nums[i] is not None:
+                current_index += 1
+
+        return current_index
+    
+# T : O(N)
+# S : O(1)
+
+# Input: nums = [1,1,1,2,2,3]
+# Output: 5, nums = [1,1,2,2,3,_]
+# Explanation: Your function should return k = 5, with the first five elements of nums # being 1, 1, 2, 2 and 3 respectively.
+# It does not matter what you leave beyond the returned k (hence they are underscores).
