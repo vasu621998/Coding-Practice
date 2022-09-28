@@ -505,3 +505,49 @@ class Solution:
 # Input: root = [1,3,null,null,2]
 # Output: [3,1,null,null,2]
 # Explanation: 3 cannot be a left child of 1 because 3 > 1. Swapping 1 and 3 makes the BST valid.
+    def levelOrderBottom(self, root: Optional[TreeNode]) -> List[List[int]]:
+        result = []
+        
+        # if root is None return empty list
+        if root is None:
+            return result
+        
+        # let's create a queue
+        queue = []
+        # add root node to it
+        queue.append(root)
+        
+        # work until we have some in queue 
+        while queue:
+            
+            # calculate the count of nodes on queue
+            count = len(queue)
+            
+            # array to store nodes of a level
+            l = []
+            
+            # for each node in a level
+            while count > 0: 
+                
+                # pop and add to the level list
+                temp = queue.pop(0)
+                l.append(temp.val)
+                
+                # add if the node has left
+                if temp.left:
+                    queue.append(temp.left)
+                # add if the node has right
+                if temp.right:
+                    queue.append(temp.right)
+
+                count -= 1
+            # add nodes of level into the result
+            result.append(l)
+        
+        return list(reversed(result))
+    
+# T : O(N)
+# S : O(1)
+
+# Input: root = [3,9,20,null,null,15,7]
+# Output: [[15,7],[9,20],[3]]
