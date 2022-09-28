@@ -439,3 +439,29 @@ class Solution:
 
 # Input: s = "25525511135"
 # Output: ["255.255.11.135","255.255.111.35"]
+    def isInterleave(self, s1: str, s2: str, s3: str) -> bool:
+        s1_len, s2_len, s3_len = len(s1), len(s2), len(s3)
+        if s1_len + s2_len != s3_len:
+            return False
+
+        dp = [[False] * (s2_len + 1) for _ in range(s1_len + 1)]
+        dp[s1_len][s2_len] = True
+        for i in range(s1_len, -1, -1):
+            for j in range(s2_len, -1, -1):
+                if i < s1_len and s1[i] == s3[i + j] and dp[i + 1][j]:
+                    dp[i][j] = True
+                if j < s2_len and s2[j] == s3[i + j] and dp[i][j + 1]:
+                    dp[i][j] = True
+
+        return dp[0][0]
+    
+# T : O(mn)
+# S : O(mn)
+
+
+# Input: s1 = "aabcc", s2 = "dbbca", s3 = "aadbbcbcac"
+# Output: true
+# Explanation: One way to obtain s3 is:
+# Split s1 into s1 = "aa" + "bc" + "c", and s2 into s2 = "dbbc" + "a".
+# Interleaving the two splits, we get "aa" + "dbbc" + "bc" + "a" + "c" = "aadbbcbcac".
+# Since s3 can be obtained by interleaving s1 and s2, we return true.
