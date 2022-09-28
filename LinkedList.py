@@ -658,3 +658,35 @@ class DoublyLinkedList:
 
 #Input: head = [1,2,3,4,5]
 #Output: [1,5,2,4,3]
+    def partition(self, head: Optional[ListNode], x: int) -> Optional[ListNode]:
+        dummy1 = small = ListNode()
+        dummy2 = large = ListNode()
+        move = head
+        
+      # don't want to change the head pointer so I created a move pointer
+        while move:
+            # the number larger than x will become the next node of large linked list
+            # while that of smaller one will put as the next node of small linked list
+            if move.val >= x:
+                large.next = move
+                large = large.next
+            else:
+                small.next = move
+                small = small.next
+                
+            move = move.next
+            # ensure they don't have next node
+            large.next = None
+            small.next = None
+        
+        # small linked list connect with the large linked list
+        small.next = dummy2.next
+        
+        return dummy1.next
+    
+    
+# T : O(N)
+# S : O(1)
+
+# Input: head = [1,4,3,2,5,2], x = 3
+# Output: [1,2,2,4,3,5]
