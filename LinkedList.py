@@ -725,3 +725,36 @@ class DoublyLinkedList:
 
 # Input: head = [1,2,3,4,5], left = 2, right = 4
 # Output: [1,4,3,2,5]
+    def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        dummy = ListNode("sentinel", head)
+        prev = dummy
+        
+        curr = head
+        delete_self = None
+        
+        while curr and curr.next:
+            
+            if curr.val == curr.next.val:
+            
+                delete_self = curr
+                
+                while curr.next and curr.val == curr.next.val:
+                    curr.next = curr.next.next
+                    
+                prev.next = delete_self.next
+                delete_self = None
+                curr = prev.next
+                
+            else:                
+                prev.next = curr    
+                prev = curr
+                curr = curr.next
+            delete_self = None
+            
+        return dummy.next
+    
+# T : O(N)
+# S : O(1)
+
+# Input: head = [1,2,3,3,4,4,5]
+# Output: [1,2,5]
