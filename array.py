@@ -1599,3 +1599,25 @@ class Solution:
 # Output: 6
 # Explanation: Buy on day 4 (price = 0) and sell on day 6 (price = 3), profit = 3-0 = 3.
 # Then buy on day 7 (price = 1) and sell on day 8 (price = 4), profit = 4-1 = 3.
+    def longestConsecutive(self, nums: List[int]) -> int:
+        new = set(nums)
+        ans = 0
+        for num in nums:
+            count = 0
+            if num-1 not in new:
+                count += 1
+                temp = num
+                while temp+1 in new:
+                    count += 1
+                    temp += 1
+                    
+            ans = max(count,ans)
+            
+        return ans
+    
+# T : O(N)
+# S : O(1)
+
+# Input: nums = [100,4,200,1,3,2]
+# Output: 4
+# Explanation: The longest consecutive elements sequence is [1, 2, 3, 4]. Therefore its length is 4.
