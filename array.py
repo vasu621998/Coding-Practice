@@ -1578,3 +1578,24 @@ class Solution:
 # Explanation: Buy on day 2 (price = 1) and sell on day 3 (price = 5), profit = 5-1 = 4.
 # Then buy on day 4 (price = 3) and sell on day 5 (price = 6), profit = 6-3 = 3.
 # Total profit is 4 + 3 = 7.
+    def maxProfit(self, prices: List[int]) -> int:
+        profit = [0] * len(prices)
+        curr_max = curr_profit = -sys.maxsize
+        for i in range(len(prices) - 1, -1, -1):
+            curr_max = max(prices[i], curr_max)
+            curr_profit = max(curr_profit, curr_max - prices[i])
+            profit[i] = curr_profit
+        
+        curr_min, curr_profit = sys.maxsize, 0
+        for i in range(len(prices)):
+            curr_min = min(curr_min, prices[i])
+            curr_profit = max(curr_profit, prices[i] - curr_min + profit[i])
+        return curr_profit
+    
+# T : O(N)
+# S : O(N)
+
+# Input: prices = [3,3,5,0,0,3,1,4]
+# Output: 6
+# Explanation: Buy on day 4 (price = 0) and sell on day 6 (price = 3), profit = 3-0 = 3.
+# Then buy on day 7 (price = 1) and sell on day 8 (price = 4), profit = 4-1 = 3.
