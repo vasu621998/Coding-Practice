@@ -551,3 +551,22 @@ class Solution:
 
 # Input: root = [3,9,20,null,null,15,7]
 # Output: [[15,7],[9,20],[3]]
+    def sortedListToBST(self, head: Optional[ListNode]) -> Optional[TreeNode]:
+        def BSTCreation(start,end):
+            if start==end:
+                return None
+            slow = start
+            fast = start.next
+            while fast and fast.next and fast!=end and fast.next!=end:
+                slow = slow.next
+                fast = fast.next.next
+            return TreeNode(slow.val,BSTCreation(start,slow),BSTCreation(slow.next,end))
+        
+        return BSTCreation(head,None)
+    
+# T : O(N)
+# S : O(D)
+
+# Input: head = [-10,-3,0,5,9]
+# Output: [0,-3,9,-10,null,5]
+# Explanation: One possible answer is [0,-3,9,-10,null,5], which represents the shown height balanced BST.
