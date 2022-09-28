@@ -1532,3 +1532,31 @@ class Solution:
 
 # Input: nums = [2,5,6,0,0,1,2], target = 0
 # Output: true
+    def minimumTotal(self, triangle: List[List[int]]) -> int:
+        N = len(triangle)
+        if N == 1:
+            return triangle[0][0]
+        
+        for i in range(1, N):
+            for j in range(i+1):
+                if j == 0:
+                    triangle[i][j] = triangle[i-1][j]+triangle[i][j]
+                elif j == i:
+                    triangle[i][j] = triangle[i-1][j-1]+triangle[i][j]
+                else:
+                    triangle[i][j] = min(triangle[i-1][j]+triangle[i][j], 
+                                    triangle[i-1][j-1]+triangle[i][j])
+
+        return min(triangle[-1])        
+    
+# T : O(N)
+# S : O(1)
+
+# Input: triangle = [[2],[3,4],[6,5,7],[4,1,8,3]]
+# Output: 11
+# Explanation: The triangle looks like:
+#   2
+#  3 4
+# 6 5 7
+#4 1 8 3
+# The minimum path sum from top to bottom is 2 + 3 + 5 + 1 = 11 (underlined above).
