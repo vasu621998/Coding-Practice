@@ -409,3 +409,33 @@ class Solution:
 # Input: s = "ADOBECODEBANC", t = "ABC"
 # Output: "BANC"
 # Explanation: The minimum window substring "BANC" includes 'A', 'B', and 'C' from string t.
+    def restoreIpAddresses(self, s: str) -> List[str]:
+        result = []
+        
+        def valid(octet):
+            first = 0 < int(octet) <= 255 and octet[0] != "0"
+            second = 0 == int(octet) and len(octet) == 1
+            return first or second
+        
+        def backtrack(start = 0, segments = 4, current = []):
+            if segments == 0:
+                if start == len(s):
+                    result.append(".".join(current))
+                return
+
+            for i in range(start+1, min(len(s) + 1, start + 4)):
+                octet = s[start:i]
+                current.append(octet)
+                if valid(octet):
+                    backtrack(i, segments - 1, current)
+                current.pop()
+        
+        backtrack()
+        
+        return result
+    
+# T : O(1)
+# S : O(1)
+
+# Input: s = "25525511135"
+# Output: ["255.255.11.135","255.255.111.35"]
