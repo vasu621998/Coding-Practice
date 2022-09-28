@@ -592,3 +592,25 @@ class Solution:
 
 # Input: root = [1,2,5,3,4,null,6]
 # Output: [1,null,2,null,3,null,4,null,5,null,6]
+    def sumNumbers(self, root: Optional[TreeNode]) -> int:        
+        def dfs(node, current):
+            if node is None:
+                return 0
+            
+            current = current * 10 + node.val
+            if node.left is None and node.right is None:
+                return current
+            
+            return dfs(node.left, current) + dfs(node.right, current)
+            
+        return dfs(root, 0)
+
+# T : O(n)
+# S : O(h)
+
+# Input: root = [1,2,3]
+# Output: 25
+# Explanation:
+# The root-to-leaf path 1->2 represents the number 12.
+# The root-to-leaf path 1->3 represents the number 13.
+# Therefore, sum = 12 + 13 = 25.
