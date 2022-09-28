@@ -1505,3 +1505,30 @@ class Solution:
 # Input: matrix = [["1","0","1","0","0"],["1","0","1","1","1"],["1","1","1","1","1"],["1","0","0","1","0"]]
 # Output: 6
 # Explanation: The maximal rectangle is shown in the above picture.
+    def search(self, nums: List[int], target: int) -> bool:
+        s = 0
+        e = len(nums) - 1
+        while s <= e:
+            mid = (s + e) // 2
+            if nums[mid] == target or nums[s] == target or nums[e] == target:
+                return True
+            elif nums[mid] == nums[s] == nums[e]:
+                s += 1
+                e -= 1
+            elif nums[mid] >= nums[s]:
+                if nums[s] <= target <nums[mid]:
+                    e = mid - 1
+                else:
+                    s = mid + 1
+            else:
+                if nums[mid] < target <= nums[e]:
+                    s = mid + 1
+                else:
+                    e = mid - 1
+        return False
+    
+# T : O(NlogN)
+# S : O(1)
+
+# Input: nums = [2,5,6,0,0,1,2], target = 0
+# Output: true
