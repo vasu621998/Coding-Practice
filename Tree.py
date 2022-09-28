@@ -570,3 +570,25 @@ class Solution:
 # Input: head = [-10,-3,0,5,9]
 # Output: [0,-3,9,-10,null,5]
 # Explanation: One possible answer is [0,-3,9,-10,null,5], which represents the shown height balanced BST.
+    def flatten(self, root: Optional[TreeNode]) -> None:
+        """
+        Do not return anything, modify root in-place instead.
+        """
+        prev=None
+        def rec(root):
+            if root == None:
+                return
+            nonlocal prev
+            rec(root.right)
+            rec(root.left)
+
+            root . right = prev
+            root . left = None
+            prev = root
+        rec(root)
+        
+# T : O(N)
+# S : O(1)
+
+# Input: root = [1,2,5,3,4,null,6]
+# Output: [1,null,2,null,3,null,4,null,5,null,6]
