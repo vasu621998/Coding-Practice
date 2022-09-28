@@ -690,3 +690,38 @@ class DoublyLinkedList:
 
 # Input: head = [1,4,3,2,5,2], x = 3
 # Output: [1,2,2,4,3,5]
+    def reverseBetween(self, head: Optional[ListNode], left: int, right: int) -> Optional[ListNode]:
+        dummy = ListNode(0, head)
+        node_before_left = dummy # used for cases such that length is 1
+        
+        # skip the nodes before left
+        for i in range(left - 1):
+            node_before_left = node_before_left.next
+        
+        # start reversing
+        curr, prev = node_before_left.next, node_before_left
+        for i in range(right - left + 1):
+            temp = curr.next
+            curr.next = prev
+            prev = curr
+            curr = temp
+            
+        # connect reversed sub to both ends
+        # for eg. in last iteration: [1 <-> 2 <- 3 <- 4 5], 
+        # before_left is 1, curr is 5, prev is 4
+
+        # we want to connect 2 to 5, before left.next is 2
+        node_before_left.next.next = curr
+        # connect 1 to 4 
+        node_before_left.next = prev
+        
+        
+        # if left is the first node, before_left became dummy, e.g. [3, 5]
+        # so dummy.next is the reversed sublist's head, 5
+        return dummy.next
+    
+# T : O(N)
+# S : O(1)
+
+# Input: head = [1,2,3,4,5], left = 2, right = 4
+# Output: [1,4,3,2,5]
