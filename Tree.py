@@ -465,3 +465,43 @@ class Solution:
 
 # Input: n = 3
 # Output: 5
+    def recoverTree(self, root: Optional[TreeNode]) -> None:
+        """
+        Do not return anything, modify root in-place instead.
+        """
+        inorder, stack = [], []
+
+        while stack or root:
+            while root:
+                stack.append(root)
+                root = root.left
+            
+            node = stack.pop()
+            inorder.append(node)
+            if node.right:
+                node = node.right
+                while node:
+                    stack.append(node)
+                    node = node.left
+                    
+        left = None
+        for i in range(len(inorder) - 1):
+            print(inorder[i].val, inorder[i + 1].val)
+            if inorder[i].val > inorder[i + 1].val:
+                left = inorder[i]
+                break
+                
+        right = None
+        for i in range(len(inorder) - 1, 0, -1):
+            if inorder[i].val < inorder[i - 1].val:
+                right = inorder[i]
+                break
+
+        left.val, right.val = right.val, left.val
+        
+# T : O(N)
+# S : O(N)
+
+# Input: root = [1,3,null,null,2]
+# Output: [3,1,null,null,2]
+# Explanation: 3 cannot be a left child of 1 because 3 > 1. Swapping 1 and 3 makes the BST valid.
