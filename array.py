@@ -1560,3 +1560,21 @@ class Solution:
 # 6 5 7
 #4 1 8 3
 # The minimum path sum from top to bottom is 2 + 3 + 5 + 1 = 11 (underlined above).
+    def maxProfit(self, prices: List[int]) -> int:
+        profit = 0        
+        last = prices[0]
+        
+        for p in prices:
+            if p > last: profit += p - last
+            last = p
+        
+        return profit
+    
+# T : O(N)
+# S : O(1)
+
+# Input: prices = [7,1,5,3,6,4]
+# Output: 7
+# Explanation: Buy on day 2 (price = 1) and sell on day 3 (price = 5), profit = 5-1 = 4.
+# Then buy on day 4 (price = 3) and sell on day 5 (price = 6), profit = 6-3 = 3.
+# Total profit is 4 + 3 = 7.
