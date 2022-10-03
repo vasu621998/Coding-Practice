@@ -758,3 +758,38 @@ class DoublyLinkedList:
 
 # Input: head = [1,2,3,3,4,4,5]
 # Output: [1,2,5]
+    def insertionSortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        # make sure all nodes between this pointer is sorted
+        start_pointer =  ListNode(head.val)
+        end_pointer = start_pointer
+        head = head.next
+        
+        while head:
+            if head.val >= end_pointer.val: # adding value at end pointer
+                end_pointer.next = ListNode(head.val)
+                end_pointer = end_pointer.next
+                
+            elif head.val <= start_pointer.val: # adding value at start pointer
+                new_node = ListNode(head.val)
+                new_node.next = start_pointer
+                start_pointer = new_node
+            else:                           # adding value between start and end pointers
+                new_node = ListNode(head.val)
+                start = start_pointer
+                
+                while start.next and start.next.val < new_node.val:
+                    start = start.next
+                
+                next_pointers = start.next
+                start.next = new_node
+                new_node.next = next_pointers
+            
+            head = head.next
+            
+        return start_pointer
+    
+# T : O(N)
+# S : O(1)
+
+# Input: head = [4,2,1,3]
+# Output: [1,2,3,4]
