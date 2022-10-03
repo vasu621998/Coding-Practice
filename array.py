@@ -1621,3 +1621,26 @@ class Solution:
 # Input: nums = [100,4,200,1,3,2]
 # Output: 4
 # Explanation: The longest consecutive elements sequence is [1, 2, 3, 4]. Therefore its length is 4.
+    def minCost(self, colors: str, neededTime: List[int]) -> int:
+        ans = 0
+        for i in range(1, len(colors)):
+            # if the i-th balloon has the same color as (i - 1)th one
+            # e.g. aba[a]c and i = 3 (0-based)
+            if colors[i] == colors[i - 1]:
+                # then we remove the one with less time
+                # e.g. in above example, we remove the balloon at index 2 
+                # with neededTime[2] since neededTime[2] < neededTime[3] 
+                ans += min(neededTime[i], neededTime[i - 1])
+                # update the max neededTime inplace 
+                # or alternatively you can store it in a variable
+                neededTime[i] = max(neededTime[i], neededTime[i - 1])
+        return ans
+    
+# T : O(N)
+# S : O(1)
+
+#Input: colors = "abaac", neededTime = [1,2,3,4,5]
+#Output: 3
+#Explanation: In the above image, 'a' is blue, 'b' is red, and 'c' is green.
+#Bob can remove the blue balloon at index 2. This takes 3 seconds.
+#There are no longer two consecutive balloons of the same color. Total time = 3.
