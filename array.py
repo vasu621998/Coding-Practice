@@ -1644,3 +1644,5 @@ class Solution:
 #Explanation: In the above image, 'a' is blue, 'b' is red, and 'c' is green.
 #Bob can remove the blue balloon at index 2. This takes 3 seconds.
 #There are no longer two consecutive balloons of the same color. Total time = 3.
+    def findPeakElement(self, nums: List[int]) -> int:
+        return nums.index(max(nums))
