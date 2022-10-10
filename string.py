@@ -465,3 +465,11 @@ class Solution:
 # Split s1 into s1 = "aa" + "bc" + "c", and s2 into s2 = "dbbc" + "a".
 # Interleaving the two splits, we get "aa" + "dbbc" + "bc" + "a" + "c" = "aadbbcbcac".
 # Since s3 can be obtained by interleaving s1 and s2, we return true.
+    def breakPalindrome(self, palindrome: str) -> str:
+        n = len(palindrome)
+        if n == 1:
+            return ''
+        for i in range(n//2):
+            if palindrome[i] != 'a':
+                return palindrome[:i] + 'a' + palindrome[i+1:]
+        return palindrome[:-1] + 'b'    
