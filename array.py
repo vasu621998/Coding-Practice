@@ -1646,3 +1646,20 @@ class Solution:
 #There are no longer two consecutive balloons of the same color. Total time = 3.
     def findPeakElement(self, nums: List[int]) -> int:
         return nums.index(max(nums))
+    def increasingTriplet(self, nums: List[int]) -> bool:
+        first=second=float('inf')
+        for i in nums:
+            if i<=first:
+                first=i
+            elif i<=second:
+                second=i
+            else:
+                return True
+        return False
+    
+# T : O(N)
+# S : O(1)
+
+#Input: nums = [1,2,3,4,5]
+#Output: true
+#Explanation: Any triplet where i < j < k is valid.
