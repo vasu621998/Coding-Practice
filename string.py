@@ -494,3 +494,19 @@ class Solution:
 
 #Input: s = "AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT"
 #Output: ["AAAAACCCCC","CCCCCAAAAA"]
+    def checkIfPangram(self, sentence: str) -> bool:
+        letters_dict = {}
+	    # we keep track of what letters have appeared with letters_dict
+        for letter in sentence:
+            if letter not in letters_dict:
+                letters_dict[letter] = 1
+    
+        # there are 26 english characters, if  letters_dict has at least 26 keys, then its good
+        return len(letters_dict) >= 26        
+    
+# T : O(N)
+# S : O(1)
+
+#A pangram is a sentence where every letter of the English alphabet appears at least once.
+
+#Given a string sentence containing only lowercase English letters, return true if sentence is a pangram, or false otherwise.
