@@ -614,3 +614,24 @@ class Solution:
 # The root-to-leaf path 1->2 represents the number 12.
 # The root-to-leaf path 1->3 represents the number 13.
 # Therefore, sum = 12 + 13 = 25.
+    def countNodes(self, root: Optional[TreeNode]) -> int:
+        leftHeight, rightHeight = 0, 0
+        cur = root
+        while cur:
+            cur = cur.left
+            leftHeight += 1
+        cur = root
+        while cur:
+            cur = cur.right
+            rightHeight += 1
+        if leftHeight == rightHeight: return (1 << rightHeight) - 1
+        return 1 + self.countNodes(root.left) + self.countNodes(root.right)        
+    
+# T : O(logN * logN)
+# S : O(1)
+
+#Given the root of a complete binary tree, return the number of the nodes in the tree.
+
+#According to Wikipedia, every level, except possibly the last, is completely filled in a complete binary tree, and all nodes in the last level are as far left as possible. It can have between 1 and 2h nodes inclusive at the last level h.
+
+#Design an algorithm that runs in less than O(n) time complexity.
