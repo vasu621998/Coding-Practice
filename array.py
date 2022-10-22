@@ -1697,3 +1697,28 @@ class Solution:
 #[0,2] --> "0->2"
 #[4,5] --> "4->5"
 #[7,7] --> "7"
+    def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
+        ans = 0
+        cnt = 0
+        
+        def inorder(root):
+            if not root:
+                return None
+            
+            inorder(root.left)
+            
+            nonlocal cnt, ans
+            cnt += 1
+            if cnt == k:
+                ans = root.val
+                return
+            inorder(root.right)
+        
+        inorder(root)
+        return ans
+    
+# T : O(logN)
+# S : O(1)
+
+#Input: root = [3,1,4,null,2], k = 1
+#Output: 1
