@@ -1663,3 +1663,37 @@ class Solution:
 #Input: nums = [1,2,3,4,5]
 #Output: true
 #Explanation: Any triplet where i < j < k is valid.
+    def summaryRanges(self, nums: List[int]) -> List[str]:
+        if not nums:
+            return []
+        start=nums[0]
+        end=nums[0]
+        arr=[]
+        for i in range(len(nums)-1):
+            if nums[i+1]-1==nums[i]: 
+                end=nums[i+1]
+            else:
+                end=nums[i]
+                if start==end:
+                    arr.append(str(start))
+                else:
+                    arr.append(str(start)+"->"+str(end))
+                start=nums[i+1]
+        print(start,end)
+        if start==end:
+                    arr.append(str(start))
+        elif start<end:
+                    arr.append(str(start)+"->"+str(end))
+        else:
+            arr.append(str(start))
+        return arr
+    
+# T : O(N)
+# S : O(N)
+
+#Input: nums = [0,1,2,4,5,7]
+#Output: ["0->2","4->5","7"]
+#Explanation: The ranges are:
+#[0,2] --> "0->2"
+#[4,5] --> "4->5"
+#[7,7] --> "7"
