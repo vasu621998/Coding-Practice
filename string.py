@@ -540,3 +540,57 @@ class Solution:
 # S : O(N)
 #Input: s = "1 + 1"
 #Output: 2
+	def calculate(self, s: str) -> int:
+		s_len = len(s)
+		stack_nums = list()
+		stack_ops = list()
+		curr_num = 0
+
+		for i in range(s_len):
+			if s[i] == ' ':
+				continue 
+			elif s[i] == '+' or s[i] == '-' or s[i] == '*' or s[i] == '/':
+				stack_nums.append(curr_num)
+				stack_ops.append(s[i])
+				curr_num = 0
+			else: 
+				curr_num = curr_num*10 + int(s[i]) 
+
+		stack_nums.append(curr_num)
+		# print(stack_nums)
+		# print(stack_ops)
+
+		i = 0 
+		while i<len(stack_ops):
+			if stack_ops[i] == '*': 
+				first = stack_nums.pop(i) 
+				second = stack_nums.pop(i) 
+				res = first*second
+				stack_nums.insert(i, res)
+				stack_ops.pop(i)
+			elif stack_ops[i] == '/': 
+				first = stack_nums.pop(i) 
+				second = stack_nums.pop(i)
+				res = first//second
+				stack_nums.insert(i, res) 
+				stack_ops.pop(i)
+			else: 
+				i += 1 
+				continue
+		# print(stack_nums)
+		# print(stack_ops)
+		res = stack_nums[0] 
+		num_items = len(stack_nums)
+		num_ops = len(stack_ops)
+		for i in range(num_ops):
+			if stack_ops[i] == '+': 
+				res += stack_nums[i+1]
+			elif stack_ops[i] == '-':
+				res -= stack_nums[i+1]
+		return res 
+    
+# T : O(N)
+# S : O(N)
+
+#Input: s = "3+2*2"
+#Output: 7
