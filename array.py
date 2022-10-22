@@ -1732,3 +1732,50 @@ class Solution:
 
 #Input: nums = [3,2,3]
 #Output: [3]
+    def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
+        A = nums
+        N = len(nums)
+        q = deque()
+
+        N = len(A)
+        ans = []
+
+        for i in range(k):
+            cur_ele = A[i]
+            while q and cur_ele > q[-1]: 
+                q.pop()
+            q.append(cur_ele) 
+            
+        for i in range(N-k):
+            out_gn = A[i]
+            if out_gn == q[0]:
+                ele = q.popleft()
+                ans.append(ele)
+            else:
+                ans.append(q[0])
+
+            in_cmg = A[i+k]
+            while q and in_cmg > q[-1]:
+                q.pop()
+
+            q.append(in_cmg)
+
+        if q: 
+            ans.append(q.popleft())   
+        
+        return ans
+    
+# T : O(N)
+# S : O(N)
+
+#Input: nums = [1,3,-1,-3,5,3,6,7], k = 3
+#Output: [3,3,5,5,6,7]
+#Explanation: 
+#Window position                Max
+#---------------               -----
+#[1  3  -1] -3  5  3  6  7       3
+ #1 [3  -1  -3] 5  3  6  7       3
+ #1  3 [-1  -3  5] 3  6  7       5
+ #1  3  -1 [-3  5  3] 6  7       5
+ #1  3  -1  -3 [5  3  6] 7       6
+ #1  3  -1  -3  5 [3  6  7]      7
