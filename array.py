@@ -1722,3 +1722,13 @@ class Solution:
 
 #Input: root = [3,1,4,null,2], k = 1
 #Output: 1
+    def majorityElement(self, nums: List[int]) -> List[int]:
+        D = Counter(nums)
+        x = len(nums)//3
+        return [i for i in D if D[i] > x]
+
+# T : O(N)
+# S : O(1)
+
+#Input: nums = [3,2,3]
+#Output: [3]
