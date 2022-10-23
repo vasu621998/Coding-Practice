@@ -1779,3 +1779,27 @@ class Solution:
  #1  3  -1 [-3  5  3] 6  7       5
  #1  3  -1  -3 [5  3  6] 7       6
  #1  3  -1  -3  5 [3  6  7]      7
+    def findErrorNums(self, nums: List[int]) -> List[int]:
+        n_set = set()
+        
+        result = []
+        # find a dup one
+        for i in nums:
+            if i in n_set:
+                result.append(i)                
+            n_set.add(i)
+        
+        n = len(nums)
+        # find the missing one
+        for i in range(1, n + 1):
+            if i not in n_set:
+                result.append(i)
+                break
+        
+        return result
+    
+# T : O(N)
+# S : O(N)
+
+#Input: nums = [1,2,2,4]
+#Output: [2,3]
