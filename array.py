@@ -1803,3 +1803,32 @@ class Solution:
 
 #Input: nums = [1,2,2,4]
 #Output: [2,3]
+    def nthUglyNumber(self, n: int) -> int:
+        #Initializing to keep track of ith number
+        arr = [0 for i in range(n)]
+        arr[0] = 1
+        #first number whose 2-multiplication is still not created
+        p2 = 0
+        #first number whose 3-multiplication is still not created
+        p3 = 0 
+        #first number whose 5-multiplication is still not created
+        p5 = 0 
+        for i in range(1,n):
+            val = min(arr[p2]*2,arr[p3]*3,arr[p5]*5)
+            arr[i] = val
+            if arr[p2]*2 == val:
+                p2+=1
+            if arr[p3]*3 == val:
+                p3+=1
+            if arr[p5]*5 == val:
+                p5+=1
+
+        return arr[-1]
+
+    
+# T : O(N)
+# S : O(N)
+
+#Input: n = 10
+#Output: 12
+#Explanation: [1, 2, 3, 4, 5, 6, 8, 9, 10, 12] is the sequence of the first 10 ugly numbers.
