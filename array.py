@@ -1832,3 +1832,22 @@ class Solution:
 #Input: n = 10
 #Output: 12
 #Explanation: [1, 2, 3, 4, 5, 6, 8, 9, 10, 12] is the sequence of the first 10 ugly numbers.
+    def isToeplitzMatrix(self, matrix: List[List[int]]) -> bool:
+        dp = matrix[0]
+        
+        for row in matrix[1:]:
+            dp.pop()
+            dp.insert(0,row[0])
+            if dp != row:
+                return False
+            
+        return True        
+    
+# T : O(N)
+# S : O(N)
+#Input: matrix = [[1,2,3,4],[5,1,2,3],[9,5,1,2]]
+#Output: true
+#Explanation:
+#In the above grid, the diagonals are:
+#"[9]", "[5, 5]", "[1, 1, 1]", "[2, 2, 2]", "[3, 3]", "[4]".
+#In each diagonal all elements are the same, so the answer is True.
