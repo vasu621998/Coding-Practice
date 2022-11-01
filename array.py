@@ -1894,3 +1894,29 @@ class Solution:
 # S : O(N)
 # Input: nums = [1,3,4,2,2]
 # Output: 2
+    def gameOfLife(self, board: List[List[int]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        prev_board = deepcopy(board)
+        m,n = len(board),len(board[0])
+        directions = [(1,0),(0,1),(-1,0),(0,-1),(1,-1),(-1,1),(1,1),(-1,-1)]
+        living_conditions = {(0,3),(1,2),(1,3)}
+
+        for x,row in enumerate(prev_board):
+            for y,cell in enumerate(row):
+                live_neighbours = 0
+                for dx,dy in directions:
+                    newx,newy = x+dx,y+dy
+                    if newx >= 0 and newx < m and newy >= 0 and newy < n and prev_board[newx][newy] == 1:
+                        live_neighbours += 1
+                        
+                if (cell,live_neighbours) in living_conditions:
+                    board[x][y] = 1
+                else:
+                    board[x][y] = 0        
+                    
+# T : O(M*N)
+# S : O(M*N)
+# Input: board = [[0,1,0],[0,0,1],[1,1,1],[0,0,0]]
+# Output: [[0,0,0],[1,0,1],[0,1,1],[0,1,0]]
