@@ -594,3 +594,37 @@ class Solution:
 
 #Input: s = "3+2*2"
 #Output: 7
+    def getHint(self, secret: str, guess: str) -> str:
+        # Dictionary for Lookup
+        lookup = Counter(secret)
+        
+        x, y = 0, 0
+        
+        # First finding numbers which are at correct position and updating x
+        for i in range(len(guess)):
+            if secret[i] == guess[i]:
+                x+=1
+                lookup[secret[i]]-=1
+        
+        # Finding numbers which are present in secret but not at correct position 
+        for i in range(len(guess)):
+            if guess[i] in lookup and secret[i] != guess[i] and lookup[guess[i]]>0:
+                y+=1
+                lookup[guess[i]]-=1
+        
+		# The reason for using two for loop is in this problem we have 
+		# to give first priority to number which are at correct position,
+		# Therefore we are first updating x value
+		
+        return "{}A{}B".format(x, y)        
+    
+# T : O(N)
+# S : O(1)
+
+
+# Input: secret = "1807", guess = "7810"
+# Output: "1A3B"
+# Explanation: Bulls are connected with a '|' and cows are underlined:
+# "1807"
+  |
+# "7810"
