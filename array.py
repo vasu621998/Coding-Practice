@@ -1880,3 +1880,17 @@ class Solution:
 #Input: n = 10
 #Output: 12
 #Explanation: [1, 2, 3, 4, 5, 6, 8, 9, 10, 12] is the sequence of the first 10 ugly numbers.
+    def findDuplicate(self, nums: List[int]) -> int:
+        n = len(nums)
+        bitmap = (1<<(n+1))-1
+        for num in nums:
+            bit = 1 << num
+            if bitmap & bit:
+                bitmap ^= bit
+            else:
+                return num
+            
+# T : O(N)
+# S : O(N)
+# Input: nums = [1,3,4,2,2]
+# Output: 2
