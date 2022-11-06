@@ -635,3 +635,30 @@ class Solution:
 #According to Wikipedia, every level, except possibly the last, is completely filled in a complete binary tree, and all nodes in the last level are as far left as possible. It can have between 1 and 2h nodes inclusive at the last level h.
 
 #Design an algorithm that runs in less than O(n) time complexity.
+    def findMinHeightTrees(self, n: int, edges: List[List[int]]) -> List[int]:
+        if n == 1:
+            return [0]
+        graph = {i:[] for i in range(n)}
+        for u, v in edges:
+            graph[u].append(v)
+            graph[v].append(u)
+        
+        leaves = []
+        for node in graph:
+            if len(graph[node]) == 1:
+                leaves.append(node)
+        
+        while len(graph) > 2:
+            new_leaves = []
+            for leaf in leaves:
+                nei = graph[leaf].pop()
+                del graph[leaf]
+                graph[nei].remove(leaf)
+                if len(graph[nei]) == 1:
+                    new_leaves.append(nei)
+            leaves = new_leaves
+        
+        return leaves 
+# Input: n = 4, edges = [[1,0],[1,2],[1,3]]
+# Output: [1]
+# Explanation: As shown, the height of the tree is 1 when the root is the node with label 1 which is the only MHT.
