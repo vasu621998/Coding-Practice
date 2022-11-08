@@ -628,3 +628,19 @@ class Solution:
 # "1807"
   |
 # "7810"
+    def makeGood(self, s: str) -> str:
+        stack=[]
+        for x in s:
+            stack.append(x)
+            if len(stack)>=2 and stack[-1].lower()==stack[-2].lower() and stack[-1]!=stack[-2]:
+                stack.pop()
+                stack.pop()
+        return "".join(stack)  
+    
+# T : O(N)
+# S : O(N)
+
+
+#Input: s = "leEeetcode"
+#Output: "leetcode"
+#Explanation: In the first step, either you choose i = 1 or i = 2, both will result "leEeetcode" to be reduced to "leetcode".
