@@ -1920,3 +1920,23 @@ class Solution:
 # S : O(M*N)
 # Input: board = [[0,1,0],[0,0,1],[1,1,1],[0,0,0]]
 # Output: [[0,0,0],[1,0,1],[0,1,1],[0,1,0]]
+    def countSmaller(self, nums: List[int]) -> List[int]:
+        right = SortedList()
+        res = []
+        for n in nums[::-1]:
+            i = right.bisect_left(n)
+            res.append(i)
+            right.add(n)
+        return res[::-1] 
+    
+# T : O(NlogN)
+# S : O(N)
+
+
+#Input: nums = [5,2,6,1]
+#Output: [2,1,1,0]
+#Explanation:
+#To the right of 5 there are 2 smaller elements (2 and 1).
+#To the right of 2 there is only 1 smaller element (1).
+#To the right of 6 there is 1 smaller element (1).
+#To the right of 1 there is 0 smaller element.
