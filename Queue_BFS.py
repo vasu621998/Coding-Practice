@@ -172,3 +172,21 @@ class MyCircularQueue:
                                 nxt_active.remove(i+1)
             active = nxt_active
         return "".join(dominoes) 
+    def guessNumber(self, n: int) -> int:
+        left, right = 0, n 
+        while left <= right:
+            mid = (left + right) // 2
+            ans = guess(mid)
+            if not ans:
+                return mid
+            elif ans == 1:
+                left = mid + 1
+            else:
+                right = mid - 1
+        return -1
+    
+    
+# T : O(logN)
+# S : O(1)
+# Input: n = 10, pick = 6
+# Output: 6
