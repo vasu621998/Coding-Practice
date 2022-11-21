@@ -1940,3 +1940,27 @@ class Solution:
 #To the right of 2 there is only 1 smaller element (1).
 #To the right of 6 there is 1 smaller element (1).
 #To the right of 1 there is 0 smaller element.
+    def maxProduct(self, words: List[str]) -> int:
+        n=len(words)
+        
+        bit_masks = [0] * n
+        lengths = [0] * n
+        
+        for i in range(n):             
+            for c in words[i]:
+                bit_masks[i]|=1<<(ord(c) - ord('a')) # set the character bit            
+            lengths[i]=len(words[i])
+                        
+        max_val = 0
+        for i in range(n):
+            for j in range(i+1, n):
+                if not (bit_masks[i] & bit_masks[j]):
+                    max_val=max(max_val, lengths[i] * lengths[j])
+        
+        return max_val
+    
+# T : O(N^2)
+
+# Input: words = ["abcw","baz","foo","bar","xtfn","abcdef"]
+# Output: 16
+# Explanation: The two words can be "abcw", "xtfn".
