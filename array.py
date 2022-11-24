@@ -1977,3 +1977,36 @@ class Solution:
 #After the second round, the three bulbs are [on, off, on].
 #After the third round, the three bulbs are [on, off, off]. 
 #So you should return 1 because there is only one bulb is on.
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        if amount ==0:
+            return 0
+        
+        coins = [x for x in coins if x <= amount]
+        coins.sort(reverse=True)
+
+        dp = {}
+        def rec(remaining):
+            if remaining in dp:
+                return dp[remaining]
+            
+            if remaining in coins:
+                dp[remaining] = 1
+                return 1
+            
+            mincoins = inf
+            for c in coins:
+                if remaining - c > 0:
+                    v = rec(remaining-c)
+                    mincoins = min(mincoins, v + 1)
+                    
+            dp[remaining] = mincoins
+            return mincoins
+        
+        return dp[amount] if rec(amount) != inf else -1 
+    
+# T : O(NlogN)
+# S : O(N)
+
+# Input: coins = [1,2,5], amount = 11
+# Output: 3
+# Explanation: 11 = 5 + 5 + 1
