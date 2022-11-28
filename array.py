@@ -2051,3 +2051,27 @@ class Solution:
 # Input: nums = [-2,5,-1], lower = -2, upper = 2
 # Output: 3
 # Explanation: The three ranges are: [0,0], [2,2], and [0,2] and their respective sums are: -2, -1, 2.
+    def minPatches(self, nums: List[int], n: int) -> int:
+        #cur:current index, total: sum numbers before cur, patch: patched sofar
+        #Algo: if sum before current index is greater that current keep going (O(len(nums)))
+        #else enter sum+1(O(log(n))) --> O(len(nums)+Log(n))
+        cur,total,patch,m=0,0,0,len(nums)
+        while total<n:
+            while total<n and cur<m and nums[cur]<=total+1:
+                total+=nums[cur]
+                cur+=1
+            if total<n:
+                patch+=1
+                total+=total+1
+        return patch
+    
+    
+# T : O(len(nums))
+# S : O(len(nums)+Log(n))
+
+#Input: nums = [1,3], n = 6
+#Output: 1
+#Explanation:
+#Combinations of nums are [1], [3], [1,3], which form possible sums of: 1, 3, 4.
+#Possible sums are 1, 2, 3, 4, 5, 6, which now covers the range [1, 6].
+#So we only need 1 patch.
