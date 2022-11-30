@@ -2075,3 +2075,32 @@ class Solution:
 #Combinations of nums are [1], [3], [1,3], which form possible sums of: 1, 3, 4.
 #Possible sums are 1, 2, 3, 4, 5, 6, which now covers the range [1, 6].
 #So we only need 1 patch.
+    def findItinerary(self, tickets: List[List[str]]) -> List[str]:
+        adj={u: collections.deque() for u,v in tickets}
+        res=["JFK"]
+        tickets.sort()
+        for u,v in tickets:
+            adj[u].append(v)
+        def dfs(cur):
+            if len(res)==len(tickets)+1:
+                return True
+            if cur not in adj:
+                return False
+            temp= list(adj[cur])
+            for v in temp:
+                adj[cur].popleft()
+                res.append(v)
+                if dfs(v):
+                    return res
+                res.pop()
+                adj[cur].append(v)
+            return False
+        dfs("JFK")
+        return res
+        
+        
+# T : O(N^2)
+# S : O(N)
+
+#Input: tickets = [["MUC","LHR"],["JFK","MUC"],["SFO","SJC"],["LHR","SFO"]]
+#Output: ["JFK","MUC","LHR","SFO","SJC"]
