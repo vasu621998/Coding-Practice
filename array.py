@@ -2104,3 +2104,21 @@ class Solution:
 
 #Input: tickets = [["MUC","LHR"],["JFK","MUC"],["SFO","SJC"],["LHR","SFO"]]
 #Output: ["JFK","MUC","LHR","SFO","SJC"]
+    def halvesAreAlike(self, s: str) -> bool:
+        vowels = {"A", "E", "I", "O", "U", "a", "e", "i", "o", "u"}
+        count = 0
+        i = 0
+        while(i < len(s) - 1 - i):
+            if s[i] in vowels:
+                count += 1
+            if s[len(s) - 1 - i] in vowels:
+                count -= 1
+            i += 1
+        return True if count == 0 else False 
+    
+# T : O(N)
+# S : O(1)
+
+# Input: s = "book"
+# Output: true
+# Explanation: a = "bo" and b = "ok". a has 1 vowel and b has 1 vowel. Therefore, they are alike.
