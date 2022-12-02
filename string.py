@@ -675,3 +675,22 @@ class Solution:
 
 #Input: s = "bcabc"
 #Output: "abc"
+    def closeStrings(self, word1: str, word2: str) -> bool:
+        c1=Counter(word1)
+        c2=Counter(word2)
+        if c1.keys()!=c2.keys():
+            return False
+        v1=list(c1.values())
+        v2=list(c2.values())
+        v1.sort()
+        v2.sort()
+        return v1==v2
+    
+# T : O(NlogN)
+# S  : O(1)
+
+#Input: word1 = "abc", word2 = "bca"
+#Output: true
+#Explanation: You can attain word2 from word1 in 2 operations.
+#Apply Operation 1: "abc" -> "acb"
+#Apply Operation 1: "acb" -> "bca"
