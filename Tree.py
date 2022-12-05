@@ -662,3 +662,24 @@ class Solution:
 # Input: n = 4, edges = [[1,0],[1,2],[1,3]]
 # Output: [1]
 # Explanation: As shown, the height of the tree is 1 when the root is the node with label 1 which is the only MHT.
+
+    def rob(self, root: Optional[TreeNode]) -> int:
+        def rob_tree(root):
+            # return (x, y)
+            # where x is the max gain if root is available
+            # y is the max gain if the root is not available
+            if root is None:
+                return 0, 0
+            x1, y1 = rob_tree(root.left)
+            x2, y2 = rob_tree(root.right)
+            x = max(root.val + y1 + y2, x1 + x2)
+            y = x1 + x2
+            return (x, y)
+        return max(rob_tree(root))
+    
+# T : O(N)
+# S : O(N)
+
+# Input: root = [3,2,3,null,3,null,1]
+# Output: 7
+# Explanation: Maximum amount of money the thief can rob = 3 + 3 + 1 = 7.
