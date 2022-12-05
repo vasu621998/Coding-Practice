@@ -825,3 +825,23 @@ class DoublyLinkedList:
 #The above figure represents the given linked list. The indices of the nodes are #written below.
 #Since n = 7, node 3 with value 7 is the middle node, which is marked in red.
 #We return the new list after removing this node. 
+    def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if head == None:
+            return None
+        
+        slow = head
+        fast = head
+        
+        while fast!=None and fast.next!=None:
+            slow = slow.next
+            fast = fast.next.next
+            
+        
+        return slow
+
+# T : O(N)
+# S : O(N)
+
+#Input: head = [1,2,3,4,5]
+#Output: [3,4,5]
+#Explanation: The middle node of the list is node 3.
