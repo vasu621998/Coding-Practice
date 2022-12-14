@@ -694,3 +694,17 @@ class Solution:
 #Explanation: You can attain word2 from word1 in 2 operations.
 #Apply Operation 1: "abc" -> "acb"
 #Apply Operation 1: "acb" -> "bca"
+    def findTheDifference(self, s: str, t: str) -> str:
+        c = 0
+        for cs in s: 
+            c ^= ord(cs) #ord is ASCII value
+        for ct in t: 
+            c ^= ord(ct)
+        return chr(c) #chr = convert ASCII into character
+
+# T : O(N)
+# S : O(1)
+
+#Input: s = "abcd", t = "abcde"
+#Output: "e"
+#Explanation: 'e' is the letter that was added.
