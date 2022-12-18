@@ -2159,3 +2159,24 @@ class Solution:
 #Input: nums = [1,7,4,9,2,5]
 #Output: 6
 #Explanation: The entire sequence is a wiggle sequence with differences (6, -3, 5, #-7, 3).
+    def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
+        if len(temperatures) <= 1:
+            return [0]
+        stack = [len(temperatures)-1]
+        ans = [0]
+        for pos in range(len(temperatures)-2, -1, -1):
+            while len(stack) > 0 and temperatures[stack[-1]] <= temperatures[pos]:
+                stack.pop()
+            if len(stack) == 0:
+                ans.append(0)
+            else:
+                ans.append(stack[-1]-pos)
+            stack.append(pos)
+        ans.reverse()
+        return ans
+
+# T : O(N)
+# S : O(N)
+
+# Input: temperatures = [73,74,75,71,69,72,76,73]
+# Output: [1,1,4,2,1,1,0,0]
