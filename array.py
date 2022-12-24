@@ -2180,3 +2180,17 @@ class Solution:
 
 # Input: temperatures = [73,74,75,71,69,72,76,73]
 # Output: [1,1,4,2,1,1,0,0]
+    def numTilings(self, n: int) -> int:
+        ans = [1]*(n+1)
+        prefix = 2
+        for i in range(2, n+1): 
+            ans[i] = 2*prefix - ans[i-1] - ans[i-2]
+            prefix += ans[i]
+        return ans[-1] % 1_000_000_007
+
+# T : O(N)
+# S : O(1)
+
+# Input: n = 3
+# Output: 5
+# Explanation: The five different ways are show above.
