@@ -2206,3 +2206,19 @@ class Solution:
 #- The subsequence [2,1] has a sum less than or equal to 3. It can be proven that #2 is the maximum size of such a subsequence, so answer[0] = 2.
 #- The subsequence [4,5,1] has a sum less than or equal to 10. It can be proven #that 3 is the maximum size of such a subsequence, so answer[1] = 3.
 #- The subsequence [4,5,2,1] has a sum less than or equal to 21. It can be proven #that 4 is the maximum size of such a subsequence, so answer[2] = 4.
+    def maxIceCream(self, costs: List[int], coins: int) -> int:
+        costs.sort()
+        n=len(costs)
+        i=0
+        cnt=0
+        while i<n and coins-costs[i]>=0:
+            coins=coins-costs[i]
+            i=i+1
+            cnt=cnt+1
+        return cnt
+# T : O(nlogn)
+# S : O(1)
+
+# Input: costs = [1,3,2,4,1], coins = 7
+# Output: 4
+# Explanation: The boy can buy ice cream bars at indices 0,1,2,4 for a total price of 1 + 3 + 2 + 1 = 7.
