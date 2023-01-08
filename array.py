@@ -2222,3 +2222,18 @@ class Solution:
 # Input: costs = [1,3,2,4,1], coins = 7
 # Output: 4
 # Explanation: The boy can buy ice cream bars at indices 0,1,2,4 for a total price of 1 + 3 + 2 + 1 = 7.
+    def fizzBuzz(self, n: int) -> List[str]:
+        answer = []
+        
+        for num in range(1, n+1):
+            if num % 3 == 0 and num % 5 == 0:
+                answer.append("FizzBuzz")
+            elif num % 3 == 0:
+                answer.append("Fizz")
+            elif num % 5 == 0:
+                answer.append("Buzz")
+            else:
+                answer.append(str(num))
+        return answer
+# Input: n = 3
+# Output: ["1","2","Fizz"]
