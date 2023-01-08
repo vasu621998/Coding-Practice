@@ -683,3 +683,24 @@ class Solution:
 # Input: root = [3,2,3,null,3,null,1]
 # Output: 7
 # Explanation: Maximum amount of money the thief can rob = 3 + 3 + 1 = 7.
+    def sumOfLeftLeaves(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+
+        # does this node have a left child which is a leaf?
+        if root.left and not root.left.left and not root.left.right:
+			# gotcha
+            return root.left.val + self.sumOfLeftLeaves(root.right)
+
+        # no it does not have a left child or it's not a leaf
+        else:
+			# bummer
+            return self.sumOfLeftLeaves(root.left) + self.sumOfLeftLeaves(root.right)
+
+
+# T : O(N)
+# S : O(1)
+
+# Input: root = [3,9,20,null,null,15,7]
+#Output: 24
+#Explanation: There are two left leaves in the binary tree, with values 9 and 15 #respectively.
