@@ -2237,3 +2237,22 @@ class Solution:
         return answer
 # Input: n = 3
 # Output: ["1","2","Fizz"]
+    def numberOfArithmeticSlices(self, nums: List[int]) -> int:
+        n, subs = len(nums), 0
+        last_diff, count = None, 0
+        for i in range(1, n):
+            this_diff = nums[i] - nums[i - 1]
+            if this_diff == last_diff:
+                subs += count
+                count += 1
+            else:
+                last_diff = this_diff
+                count = 1
+        return subs
+
+# T : O(N)
+# S : O(1)
+
+# Input: nums = [1,2,3,4]
+# Output: 3
+# Explanation: We have 3 arithmetic slices in nums: [1, 2, 3], [2, 3, 4] and [1,2,3,# 4] itself.
