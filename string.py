@@ -719,3 +719,21 @@ class Solution:
 # Input: text1 = "abcde", text2 = "ace" 
 # Output: 3  
 # Explanation: The longest common subsequence is "ace" and its length is 3.
+    def minFlipsMonoIncr(self, s: str) -> int:
+        ones, ans, s = 0, 0, map(int, s)  # Example: s = "010110"
+                                            #
+        for num in s:                       #  num    ones   ans  
+                                            #  ––––   ––––   ––––  
+            if num: ones += 1               #    0      0     0
+                                            #    1      1     0
+            elif ones:                      #    0      0     1
+                ones -= 1                   #    1      1     1
+                ans += 1                    #    1      2     1
+                                            #    0      1     2
+        return ans
+
+# T : O(N)
+# S : O(N)
+# Input: s = "00110"
+# Output: 1
+# Explanation: We flip the last digit to get 00111.
