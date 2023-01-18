@@ -704,3 +704,27 @@ class Solution:
 # Input: root = [3,9,20,null,null,15,7]
 #Output: 24
 #Explanation: There are two left leaves in the binary tree, with values 9 and 15 #respectively.
+    def construct(self, grid: List[List[int]]) -> 'Node':
+        def dfs(x = 0, y = 0, n = len(grid)):               # <- (x,y) is the upper-left corner of the quad
+                                                            #    and n is the length of the side of the quad
+
+            if all (grid[i+x][j+y] == grid[x][y]            # <- check whether all elements in the quad are the  
+                    for i in range(n) for j in range(n)):   #    same, thenthe same. If so, then the quad is a leaf ... 
+    
+                return Node(grid[x][y] == 1, True)
+
+            n//= 2                                              
+            
+            return Node(False, False,                       # <- ... if not, then divide the quad in four and recuse.
+                        dfs(x,y,n),     dfs(x,y+n,n), 
+                        dfs(x+n,y,n), dfs(x+n,y+n,n))
+
+        return dfs()                                        # <- initial case is the entire grid
+
+# T : O(N^2)
+# S : O(1)
+
+# Input: grid = [[0,1],[1,0]]
+# Output: [[0,1],[1,0],[1,1],[1,1],[1,0]]
+# Explanation: The explanation of this example is shown below:
+# Notice that 0 represnts False and 1 represents True in the photo representing the #Quad-Tree.
