@@ -728,3 +728,32 @@ class Solution:
 # Output: [[0,1],[1,0],[1,1],[1,1],[1,0]]
 # Explanation: The explanation of this example is shown below:
 # Notice that 0 represnts False and 1 represents True in the photo representing the #Quad-Tree.
+    def pathSum(self, root: Optional[TreeNode], targetSum: int) -> int:
+        self.targetSum = targetSum
+        self.nums = 0
+        def accu_to_tar(root, curr_num=0):
+            if not root:
+                return 0
+
+            curr_num += root.val
+            if curr_num == self.targetSum:
+                self.nums += 1
+            accu_to_tar(root.left, curr_num)
+            accu_to_tar(root.right, curr_num)
+        
+        # BFS
+        nodes = [root]
+        while nodes:
+            curr_node = nodes.pop(0)
+            accu_to_tar(curr_node)
+            if curr_node:
+                nodes.append(curr_node.left)
+                nodes.append(curr_node.right)
+        return self.nums
+
+# T : O(N)
+# S : O(N)
+
+# Input: root = [10,5,-3,3,2,null,11,3,-2,null,1], targetSum = 8
+# Output: 3
+# Explanation: The paths that sum to 8 are shown.
