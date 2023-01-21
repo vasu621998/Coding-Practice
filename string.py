@@ -778,3 +778,27 @@ class Solution:
 # Input: s = "ABAB", k = 2
 # Output: 4
 # Explanation: Replace the two 'A's with two 'B's or vice versa.
+    def findAnagrams(self, s: str, p: str) -> List[int]:
+        n1,n2=len(s),len(p)
+        d1=Counter(p)
+        d2=Counter(s[:n2-1])
+        ans=[]
+        j=0
+        for i in range(n2-1,n1):
+            d2[s[i]]+=1
+            if d1==d2:
+                ans.append(j)
+            d2[s[j]]-=1
+            if d2[s[j]]==0:
+                del d2[s[j]]
+            j+=1
+        return ans
+    
+# T : O(N)
+# S : O(N)
+
+# Input: s = "cbaebabacd", p = "abc"
+# Output: [0,6]
+# Explanation:
+# The substring with start index = 0 is "cba", which is an anagram of "abc".
+# The substring with start index = 6 is "bac", which is an anagram of "abc".
