@@ -1637,3 +1637,25 @@ def count_substring(string,sub_string):
             head, prev = head.next, prev.next
 
         return True
+    def arrangeCoins(self, n: int) -> int:
+        first = 1
+        last = n
+        if n==1:
+            return 1
+        while first <= last:
+            mid = (first+last)//2
+
+            if mid*(mid+1) == 2*n:
+                return mid
+            elif mid*(mid+1) > 2*n:
+                last = mid-1
+            else:
+                first = mid+1
+        return last
+
+# T : O(logN)
+# S : O(1)
+
+# Input: n = 5
+# Output: 2
+# Explanation: Because the 3rd row is incomplete, we return 2.
