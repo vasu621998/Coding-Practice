@@ -1659,3 +1659,17 @@ def count_substring(string,sub_string):
 # Input: n = 5
 # Output: 2
 # Explanation: Because the 3rd row is incomplete, we return 2.
+    def hammingDistance(self, x: int, y: int) -> int:
+        diff = x^y
+        res = 0
+        while diff:
+            res+= diff&1
+            diff>>=1
+        return res
+ # Input: x = 1, y = 4
+# Output: 2
+# Explanation:
+#1   (0 0 0 1)
+#4   (0 1 0 0)
+#       ↑   ↑
+# The above arrows point to positions where the corresponding bits are different.
