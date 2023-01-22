@@ -2323,3 +2323,19 @@ class Solution:
 # Output: true
 # Explanation: The graph shows how the indices are connected. White nodes are jumping forward, while red is jumping backward.
 # We can see the cycle 0 --> 2 --> 3 --> 0 --> ..., and all of its nodes are white (jumping in the same direction).
+    def minMoves2(self, nums: List[int]) -> int:
+        res = 0
+        nums.sort()
+        med = nums[len(nums)//2]
+        for i in nums:
+            res += abs(med-i)
+        return res
+
+# T : O(NlogN)
+# S : O(1)
+
+# Input: nums = [1,2,3]
+# Output: 2
+# Explanation:
+#Only two moves are needed (remember each move increments or decrements one  #element):
+# [1,2,3]  =>  [2,2,3]  =>  [2,2,2]
