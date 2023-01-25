@@ -839,3 +839,14 @@ class Solution:
 
 # Input: s1 = "acb", n1 = 4, s2 = "ab", n2 = 2
 # Output: 2
+    def findMaxForm(self, strs: List[str], m: int, n: int) -> int:
+        dp = [[0] * (m + 1) for _ in range(n + 1)]
+        for s in strs:
+            x, y = s.count('1'), s.count('0')
+            for i in range(n - x, -1, -1):
+                for j in range(m - y, -1, -1):
+                    dp[i + x][j + y] = max(dp[i + x][j + y], dp[i][j] + 1)
+        return dp[-1][-1]
+
+# T: O(n∗m∗s.length)
+# S: O(n∗m)
