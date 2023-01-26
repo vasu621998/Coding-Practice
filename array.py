@@ -2357,3 +2357,14 @@ class Solution:
 # Input: grid = [[0,1,0,0],[1,1,1,0],[0,1,0,0],[1,1,0,0]]
 # Output: 16
 # Explanation: The perimeter is the 16 yellow stripes in the image above.
+    def totalHammingDistance(self, nums: List[int]) -> int:
+        return sum(b.count('0')*b.count('1') for b in zip(*map('{:032b}'.format,nums)))
+
+# T : O(N)
+# S : O(1)
+
+# Input: nums = [4,14,2]
+#Output: 6
+#Explanation: In binary representation, the 4 is 0100, 14 is 1110, and 2 is 0010 (just showing the four bits relevant in this case).
+#The answer will be:
+#HammingDistance(4, 14) + HammingDistance(4, 2) + HammingDistance(14, 2) = 2 + 2 + 2 = 6.
