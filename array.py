@@ -2368,3 +2368,69 @@ class Solution:
 #Explanation: In binary representation, the 4 is 0100, 14 is 1110, and 2 is 0010 (just showing the four bits relevant in this case).
 #The answer will be:
 #HammingDistance(4, 14) + HammingDistance(4, 2) + HammingDistance(14, 2) = 2 + 2 + 2 = 6.
+    def find_median(self, max_heap, min_heap, heap_size):
+        if heap_size % 2 == 1:
+            return -max_heap[0]
+        else:
+            return (-max_heap[0] + min_heap[0]) / 2
+
+    def medianSlidingWindow(self, nums: List[int], k: int) -> List[float]:
+        max_heap = []
+        min_heap = []
+        heap_dict = defaultdict(int)
+        result = []
+        
+        for i in range(k):
+            heappush(max_heap, -nums[i])
+            heappush(min_heap, -heappop(max_heap))
+            if len(min_heap) > len(max_heap):
+                heappush(max_heap, -heappop(min_heap))
+        
+        median = self.find_median(max_heap, min_heap, k)
+        result.append(median)
+        
+        for i in range(k, len(nums)):
+            prev_num = nums[i - k]
+            heap_dict[prev_num] += 1
+
+            balance = -1 if prev_num <= median else 1
+            
+            if nums[i] <= median:
+                balance += 1
+                heappush(max_heap, -nums[i])
+            else:
+                balance -= 1
+                heappush(min_heap, nums[i])
+            
+            if balance < 0:
+                heappush(max_heap, -heappop(min_heap))
+            elif balance > 0:
+                heappush(min_heap, -heappop(max_heap))
+
+            while max_heap and heap_dict[-max_heap[0]] > 0:
+                heap_dict[-max_heap[0]] -= 1
+                heappop(max_heap)
+            
+            while min_heap and heap_dict[min_heap[0]] > 0:
+                heap_dict[min_heap[0]] -= 1
+                heappop(min_heap)
+
+            median = self.find_median(max_heap, min_heap, k)
+            result.append(median)
+        
+        return result
+
+# T : O((n - k)*log(k))
+# S : O(k)
+
+#Input: nums = [1,3,-1,-3,5,3,6,7], k = 3
+#Output: [1.00000,-1.00000,-1.00000,3.00000,5.00000,6.00000]
+#Explanation: 
+#Window position                Median
+#---------------                -----
+#[1  3  -1] -3  5  3  6  7        1
+#1 [3  -1  -3] 5  3  6  7       -1
+#1  3 [-1  -3  5] 3  6  7       -1
+#1  3  -1 [-3  5  3] 6  7        3
+#1  3  -1  -3 [5  3  6] 7        5
+#1  3  -1  -3  5 [3  6  7]       6
