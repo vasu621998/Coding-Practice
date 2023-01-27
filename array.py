@@ -2434,3 +2434,19 @@ class Solution:
 #1  3  -1 [-3  5  3] 6  7        3
 #1  3  -1  -3 [5  3  6] 7        5
 #1  3  -1  -3  5 [3  6  7]       6
+    def magicalString(self, n: int) -> int:
+        if n == 0: return 0
+        if n <= 3: return 1
+        s = [1, 2, 2]
+        i = 2
+        while len(s) < n:
+            s += [3 - s[-1]] * s[i]
+            i += 1
+        return s[:n].count(1)
+
+# T : O(N)
+# S : O(N)
+
+# Input: n = 6
+# Output: 3
+# Explanation: The first 6 elements of magical string s is "122112" and it contains # three 1's, so return 3.
