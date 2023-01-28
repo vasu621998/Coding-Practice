@@ -2471,4 +2471,22 @@ class Solution:
 # Explanation: Initially, player 1 can choose between 1 and 2. 
 # If he chooses 2 (or 1), then player 2 can choose from 1 (or 2) and 5. If player 2 chooses 5, then player 1 will be left with 1 (or 2). 
 # So, final score of player 1 is 1 + 2 = 3, and player 2 is 5. 
-#Hence, player 1 will never be the winner and you need to return false.
+# Hence, player 1 will never be the winner and you need to return false.
+    def constructRectangle(self, area: int) -> List[int]:
+        answer_dict = {}
+        temp = [float('inf'),  float('-inf')]
+        for n in range(1, int(math.sqrt(area))+1):
+            if area%n == 0:
+                answer_dict[n] = area // n
+        for k, v in answer_dict.items():
+            if abs(temp[0] - temp[1]) > abs(k-v):
+                temp[0], temp[1] = max(k, v), min(k, v)
+        return temp
+
+# T : O(sqrt(N))
+# S : O(N)
+
+# Input: area = 4
+# Output: [2,2]
+# Explanation: The target area is 4, and all the possible ways to construct it are [1,4], [2,2], [4,1]. 
+# But according to requirement 2, [1,4] is illegal; according to requirement 3,  [4,1] is not optimal compared to [2,2]. So the length L is 2, and the width W is 2.
