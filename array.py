@@ -2490,3 +2490,29 @@ class Solution:
 # Output: [2,2]
 # Explanation: The target area is 4, and all the possible ways to construct it are [1,4], [2,2], [4,1]. 
 # But according to requirement 2, [1,4] is illegal; according to requirement 3,  [4,1] is not optimal compared to [2,2]. So the length L is 2, and the width W is 2.
+    def findTargetSumWays(self, nums: List[int], target: int) -> int:
+        n = len(nums)
+        cache = {}
+        
+        def dp(i, curr):
+            if (i, curr) in cache:
+                return cache[(i, curr)]
+            if i == n:
+                return int(curr == target)
+            
+            cache[(i,curr)] = dp(i+1, curr + nums[i]) + dp(i+1, curr - nums[i])
+            return cache[(i, curr)]
+    
+        return dp(0, 0)
+
+# T : O(M*N)
+# S : O(M*N)
+
+# Input: nums = [1,1,1,1,1], target = 3
+# Output: 5
+# Explanation: There are 5 ways to assign symbols to make the sum of nums be target 3.
+#-1 + 1 + 1 + 1 + 1 = 3
+#+1 - 1 + 1 + 1 + 1 = 3
+#+1 + 1 - 1 + 1 + 1 = 3
+#+1 + 1 + 1 - 1 + 1 = 3
+#+1 + 1 + 1 + 1 - 1 = 3
