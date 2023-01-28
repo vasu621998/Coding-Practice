@@ -2450,3 +2450,25 @@ class Solution:
 # Input: n = 6
 # Output: 3
 # Explanation: The first 6 elements of magical string s is "122112" and it contains # three 1's, so return 3.
+    def PredictTheWinner(self, nums: List[int]) -> bool:
+         n = len(nums)
+         dp = nums[:]
+       
+         for s in range(1, n):
+             newdp = [0] * n
+             for j in range(s, n):
+                 i = j - s
+                 newdp[j] = max(nums[i] - dp[j], nums[j] - dp[j-1])
+                
+             dp = newdp
+         return dp[-1] >= 0
+
+# T : O(N^2)
+# S : O(N)
+
+# Input: nums = [1,5,2]
+# Output: false
+# Explanation: Initially, player 1 can choose between 1 and 2. 
+# If he chooses 2 (or 1), then player 2 can choose from 1 (or 2) and 5. If player 2 chooses 5, then player 1 will be left with 1 (or 2). 
+# So, final score of player 1 is 1 + 2 = 3, and player 2 is 5. 
+#Hence, player 1 will never be the winner and you need to return false.
