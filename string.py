@@ -850,3 +850,14 @@ class Solution:
 
 # T: O(n∗m∗s.length)
 # S: O(n∗m)
+    def gcdOfStrings(self, str1: str, str2: str) -> str:
+        if str1 + str2 != str2 + str1:
+            return ""
+        max_length = gcd(len(str1), len(str2))
+        return str1[:max_length]
+
+# T : O(M+N)
+# S : O(M+N)
+
+# Input: str1 = "ABCABC", str2 = "ABC"
+# Output: "ABC"
