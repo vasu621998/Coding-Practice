@@ -2516,3 +2516,28 @@ class Solution:
 #+1 + 1 - 1 + 1 + 1 = 3
 #+1 + 1 + 1 - 1 + 1 = 3
 #+1 + 1 + 1 + 1 - 1 = 3
+    def nextGreaterElements(self, nums: List[int]) -> List[int]:
+        result = [-1] * len(nums)
+
+        stack = list()
+
+        for i in range(2*len(nums)):
+
+            circularIdx = i % len(nums)
+
+            while len(stack) > 0 and nums[stack[len(stack)-1]] < nums[circularIdx]:
+                top = stack.pop()
+                result[top] = nums[circularIdx]
+
+            stack.append(circularIdx)
+
+        return result
+    
+# T : O(N)
+# S : O(N)
+
+# Input: nums = [1,2,1]
+# Output: [2,-1,2]
+# Explanation: The first 1's next greater number is 2; 
+# The number 2 can't find next greater number. 
+# The second 1's next greater number needs to search circularly, which is also 2.
