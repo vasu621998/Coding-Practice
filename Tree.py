@@ -757,3 +757,36 @@ class Solution:
 # Input: root = [10,5,-3,3,2,null,11,3,-2,null,1], targetSum = 8
 # Output: 3
 # Explanation: The paths that sum to 8 are shown.
+    def findFrequentTreeSum(self, root: Optional[TreeNode]) -> List[int]:
+
+        res = []
+
+        def dfs(root):
+            if not root:
+                return 0
+
+            tot = root.val+dfs(root.left)+dfs(root.right)
+            res.append(tot)
+            return tot
+
+        dfs(root)
+
+        count = {}
+        res2=[]
+
+        for i in res:
+            count[i] = 1 + count.get(i,0)
+
+        maxi = max(count.values())        
+
+        for j in count:
+            if count[j]==maxi:
+                res2.append(j)
+
+        return res2
+
+# T : O(N)
+# S : O(N + D)
+
+# Input: root = [5,2,-3]
+# Output: [2,-3,4]
