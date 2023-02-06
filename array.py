@@ -2541,3 +2541,18 @@ class Solution:
 # Explanation: The first 1's next greater number is 2; 
 # The number 2 can't find next greater number. 
 # The second 1's next greater number needs to search circularly, which is also 2.
+    def shuffle(self, nums: List[int], n: int) -> List[int]:
+                                                        #  Example: [2,5,1,3,4,7      n = 3
+        
+        return list(chain(*zip(nums[:n],nums[n:])))     # list(chain(*zip([2,5,1],nums[3,4,7])))
+                                                        # list(chain(*[(2,3), (5,4), (1,7)])
+                                                        # list(chain((2,3), (5,4), (1,7))
+                                                        # list(2,3, 5,4, 1,7)
+                                                        # [2,3,5,4,1,7]
+
+# T : O(N)
+# S : O(N)
+
+# Input: nums = [2,5,1,3,4,7], n = 3
+# Output: [2,3,5,4,1,7] 
+# Explanation: Since x1=2, x2=5, x3=1, y1=3, y2=4, y3=7 then the answer is [2,3,5,4,1,7].
