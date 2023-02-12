@@ -147,3 +147,37 @@ class Node:
                     seen[nei] = True # mark that we've entered the room
                     stack.append(nei) # add the key to the todo list
         return all(seen) # Return true iff we've visited every room     
+    def minimumFuelCost(self, roads: List[List[int]], seats: int) -> int:
+        ans = 0
+        graph = [[] for _ in range(len(roads) + 1)]
+
+        for u, v in roads:
+            graph[u].append(v)
+            graph[v].append(u)
+
+        def dfs(u: int, prev: int) -> int:
+            nonlocal ans
+            people = 1
+            for v in graph[u]:
+                if v == prev:
+                    continue
+                people += dfs(v, u)
+            if u > 0:
+            # # of cars needed.
+                ans += int(math.ceil(people / seats))
+            return people
+
+        dfs(0, -1)
+        return ans
+
+# T : O(N)
+# S : O(N)
+
+# Input: roads = [[0,1],[0,2],[0,3]], seats = 5
+# Output: 3
+# Explanation: 
+#- Representative1 goes directly to the capital with 1 liter of fuel.
+#- Representative2 goes directly to the capital with 1 liter of fuel.
+#- Representative3 goes directly to the capital with 1 liter of fuel.
+# It costs 3 liters of fuel at minimum. 
+# It can be proven that 3 is the minimum number of liters of fuel needed.
