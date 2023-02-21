@@ -2556,3 +2556,21 @@ class Solution:
 # Input: nums = [2,5,1,3,4,7], n = 3
 # Output: [2,3,5,4,1,7] 
 # Explanation: Since x1=2, x2=5, x3=1, y1=3, y2=4, y3=7 then the answer is [2,3,5,4,1,7].
+    def singleNonDuplicate(self, nums: List[int]) -> int:
+        l, r = 0, len(nums) // 2
+        ans = -1
+        while l <= r:
+            mid = (l + r) // 2
+            idx = mid * 2
+            if idx + 1 >= len(nums) or nums[idx] != nums[idx + 1]:
+                r = mid - 1
+                ans = nums[idx]
+            else:
+                l = mid + 1
+        return ans
+    
+# T : O(logN)
+# S : O(1)
+
+# Input: nums = [1,1,2,3,3,4,4,8,8]
+# Output: 2
