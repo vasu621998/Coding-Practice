@@ -810,3 +810,31 @@ class Solution:
 
 # Input: root = [1,2,3,4,null,5,6,null,null,7]
 # Output: 7
+    def largestValues(self, root: Optional[TreeNode]) -> List[int]:
+        if not root:
+            return []
+        
+        queue = [root]
+        result = []
+        
+        while queue:
+            maximumNum = float('-inf')
+            
+            for i in range(len(queue)):
+                node = queue.pop(0)
+                maximumNum = max(maximumNum, node.val)
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+                    
+            
+            result.append(maximumNum)
+            
+        return result
+
+# T : O(N)
+# S : O(N)
+
+#Input: root = [1,3,2,5,3,null,9]
+#Output: [1,3,9]
