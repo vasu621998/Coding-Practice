@@ -790,3 +790,23 @@ class Solution:
 
 # Input: root = [5,2,-3]
 # Output: [2,-3,4]
+    def findBottomLeftValue(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+        ans = 0
+        q = deque() 
+        q.append((root,0)) 
+        while q:
+            node,level = q.popleft() 
+            ans = node.val
+            if node.right:
+                q.append((node.right,level+1)) 
+            if node.left:
+                q.append((node.left,level+1)) 
+        return ans 
+
+# T : O(N)
+# S : O(1)
+
+# Input: root = [1,2,3,4,null,5,6,null,null,7]
+# Output: 7
