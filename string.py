@@ -881,3 +881,28 @@ class Solution:
 # Input: s1 = "ab", s2 = "eidbaooo"
 # Output: true
 # Explanation: s2 contains one permutation of s1 ("ba").
+    def longestPalindromeSubseq(self, s: str) -> int:
+        n=len(s)
+        prev=[0]*n
+        # for i in range(n):
+        prev[n-1]=1
+        for i in range(n-2,-1,-1):
+            curr=[0]*n
+            curr[i]=1
+            for j in range(i+1,n):
+                x=0
+                if s[i]==s[j]:
+                    x=prev[j-1]+2
+                y=max(prev[j],curr[j-1])
+                curr[j]=max(x,y)
+            prev=curr
+        # print(prev)
+        return prev[-1]
+    
+   
+# T : O(N^2)
+# S : O(N^2)
+
+# Input: s = "bbbab"
+# Output: 4
+# Explanation: One possible longest palindromic subsequence is "bbbb".
